@@ -18,12 +18,14 @@
   --texto:#1a1a1a;--texto-s:#5F5E5A;
   --bg:#f2f4f0;--branco:#fff;--borda:rgba(0,0,0,0.09);
   --sombra:0 2px 8px rgba(0,0,0,0.07);
+  --bronze:#CD7F32;--bronze-c:#F9EDDF;--bronze-e:#7D4C1A;
+  --prata:#A8A9AD;--prata-c:#F0F0F2;--prata-e:#4A4A52;
+  --ouro:#D4AF37;--ouro-c:#FBF4D6;--ouro-e:#8B6914;
+  --diamante:#5B8FD4;--diamante-c:#E8F0FB;--diamante-e:#1A3A6E;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--texto);min-height:100vh;font-size:16px}
-
-/* HEADER */
 header{background:linear-gradient(135deg,var(--verde-m) 0%,var(--verde-e) 60%,#1D9E75 100%);color:#fff;padding:2rem 1.5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
 header::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;background:rgba(255,255,255,0.04);border-radius:50%}
 header::after{content:'';position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;background:rgba(255,255,255,0.03);border-radius:50%}
@@ -32,8 +34,6 @@ header h1{font-family:'Sora',sans-serif;font-size:clamp(1.4rem,4vw,2.1rem);font-
 header>p{opacity:.75;font-size:.9rem;max-width:460px;margin:0 auto .5rem}
 .mod-count{display:inline-flex;gap:1rem;background:rgba(0,0,0,0.15);border-radius:20px;padding:6px 18px;font-size:12px;font-family:'Sora',sans-serif;font-weight:600;margin-top:.5rem}
 .mod-count span{opacity:.7;font-weight:400}
-
-/* NIVEL SISTEMA */
 .nivel-row{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
 .nivel-badge{background:rgba(255,255,255,0.18);backdrop-filter:blur(4px);border-radius:20px;padding:5px 16px;font-family:'Sora',sans-serif;font-size:.82rem;font-weight:700;border:1px solid rgba(255,255,255,0.15)}
 .nivel-badge span{opacity:.65;font-weight:400;margin-right:5px}
@@ -41,8 +41,13 @@ header>p{opacity:.75;font-size:.9rem;max-width:460px;margin:0 auto .5rem}
 .xp-bar-c{width:min(360px,90%);background:rgba(255,255,255,0.18);border-radius:20px;height:10px;overflow:hidden}
 .xp-bar-f{height:100%;background:linear-gradient(90deg,var(--laranja),#FFD166);border-radius:20px;width:0%;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .xp-txt{font-size:11px;opacity:.6;margin-top:6px}
-
-/* NAV */
+.cert-badges-row{display:flex;justify-content:center;gap:8px;margin-top:.85rem;flex-wrap:wrap}
+.cert-badge-mini{padding:4px 12px;border-radius:20px;font-size:11px;font-family:'Sora',sans-serif;font-weight:700;opacity:.4;transition:opacity .3s,transform .3s;border:1.5px solid rgba(255,255,255,0.2)}
+.cert-badge-mini.earned{opacity:1;transform:scale(1.08);border-color:rgba(255,255,255,0.5)}
+.cb-bronze{background:rgba(205,127,50,0.3);color:#F9EDDF}
+.cb-prata{background:rgba(168,169,173,0.3);color:#F0F0F2}
+.cb-ouro{background:rgba(212,175,55,0.3);color:#FBF4D6}
+.cb-diamante{background:rgba(91,143,212,0.3);color:#E8F0FB}
 nav{background:var(--branco);border-bottom:2px solid var(--verde-c);padding:0 .5rem;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
 nav::-webkit-scrollbar{display:none}
 .nb{flex-shrink:0;padding:.7rem .65rem;font-family:'Sora',sans-serif;font-size:11px;font-weight:600;color:var(--cinza-e);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:4px}
@@ -50,35 +55,23 @@ nav::-webkit-scrollbar{display:none}
 .nb.active{color:var(--verde-e);border-bottom-color:var(--verde)}
 .nb .ck{display:none;color:var(--verde);font-size:10px}
 .nb.ok .ck{display:inline}
-.nb.locked{opacity:.35;cursor:default;pointer-events:none}
-
-/* MAIN */
 main{max-width:820px;margin:0 auto;padding:1.75rem 1rem 5rem}
-
-/* SECAO */
 .sec{display:none}
 .sec.ativa{display:block;animation:fi .3s ease}
 @keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
 .sec-hd{display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem}
 .sec-ic{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;box-shadow:var(--sombra)}
 .sec-hd h2{font-family:'Sora',sans-serif;font-size:1.35rem;font-weight:800;line-height:1.25;margin-bottom:4px}
 .sec-hd p{font-size:.88rem;color:var(--texto-s);line-height:1.5}
 .nivel-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-family:'Sora',sans-serif;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px}
-
-/* CARD */
 .card{background:var(--branco);border:1px solid var(--borda);border-radius:14px;padding:1.35rem;margin-bottom:.9rem;box-shadow:var(--sombra)}
 .card h3{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;margin-bottom:.75rem;color:var(--texto)}
 .card p,.card li{font-size:.88rem;color:var(--texto-s);line-height:1.7}
 .card ul,.card ol{padding-left:1.2rem}
 .card li{margin-bottom:4px}
 code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83rem;font-family:'Courier New',monospace;color:var(--verde-e)}
-
-/* CARD DESTAQUE */
 .card-destaque{border-left:4px solid var(--verde);background:var(--verde-c)}
 .card-destaque h3{color:var(--verde-e)}
-
-/* PASSOS */
 .passos{display:flex;flex-direction:column;gap:0}
 .passo{display:flex;gap:1rem;position:relative}
 .passo:not(:last-child)::after{content:'';position:absolute;left:19px;top:42px;bottom:0;width:2px;background:var(--cinza-c)}
@@ -86,8 +79,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .pc{padding-bottom:1.35rem;flex:1;min-width:0}
 .pc h4{font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;margin-bottom:4px;color:var(--texto)}
 .pc p{font-size:.85rem;color:var(--texto-s);line-height:1.65}
-
-/* CHIPS */
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:.75rem}
 .chip{padding:4px 12px;border-radius:20px;font-size:11.5px;font-family:'Sora',sans-serif;font-weight:600}
 .cv{background:var(--verde-c);color:var(--verde-e)}
@@ -96,16 +87,12 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .cr{background:var(--roxo-c);color:var(--roxo-e)}
 .cc{background:var(--coral-c);color:var(--coral-e)}
 .cg{background:var(--cinza-c);color:var(--cinza-e)}
-
-/* ALERTAS */
 .al{display:flex;gap:10px;padding:.8rem 1rem;border-radius:10px;font-size:.85rem;line-height:1.6;margin-top:.75rem}
 .al-d{background:var(--azul-c);color:var(--azul-e)}
 .al-a{background:var(--laranja-c);color:var(--laranja-e)}
 .al-r{background:var(--coral-c);color:var(--coral-e)}
 .al-v{background:var(--verde-c);color:var(--verde-e)}
 .al i{font-size:1.1rem;flex-shrink:0;margin-top:1px}
-
-/* TABELA */
 .tbl{width:100%;border-collapse:collapse;font-size:.83rem;margin-top:.6rem}
 .tbl th{background:var(--verde-e);color:#fff;padding:8px 10px;text-align:left;font-family:'Sora',sans-serif;font-weight:600;font-size:.78rem}
 .tbl th:first-child{border-radius:6px 0 0 0}
@@ -114,13 +101,135 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:nth-child(even) td{background:#fafaf8}
 .tbl tr:hover td{background:var(--verde-c)}
-
-/* QUIZ */
+.mk{background:#fff;border:1px solid #ccc;border-radius:10px;overflow:hidden;margin:.85rem 0;font-size:12px;color:#333;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.mk-top{background:#5a7a65;color:#fff;padding:5px 12px;font-size:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.mk-top-btns{display:flex;gap:5px;flex-wrap:wrap}
+.mk-top-btn{background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:3px;font-size:10px}
+.mk-tabs{background:#4a6a56;display:flex;padding:0 12px;overflow-x:auto}
+.mk-tab{padding:5px 14px;font-size:10px;color:#fff;border-radius:5px 5px 0 0;background:rgba(255,255,255,0.12);cursor:default;margin-right:3px;white-space:nowrap}
+.mk-tab.on{background:#f4f5f2;color:#1a1a1a;font-weight:700}
+.mk-body{padding:12px;background:#f4f5f2}
+.mk-section{background:#5a7a65;color:#fff;text-align:center;padding:5px;border-radius:4px;font-size:10px;font-weight:700;margin-bottom:8px}
+.ml{font-size:9.5px;color:#555;margin-bottom:2px;font-weight:500}
+.mi{width:100%;padding:5px 8px;border:1px solid #ccc;border-radius:4px;font-size:10px;background:#fff;display:block;height:24px}
+.mi-active{border-color:#e67e22;background:#fff8f0}
+.mr{display:flex;gap:8px}
+.mr .mf{flex:1}
+.mf{margin-bottom:8px}
+.mbtn{background:#e67e22;color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:10px;cursor:default;font-weight:700}
+.quiz-bloco-sep{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 1rem}
+.quiz-bloco-sep .sep-linha{flex:1;height:1.5px;background:var(--cinza-c)}
+.quiz-bloco-sep .sep-badge{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
+.gls-search{width:100%;padding:.7rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem;font-family:'DM Sans',sans-serif}
+.gls-search:focus{border-color:var(--verde)}
+.gi{border-bottom:1px solid var(--cinza-c);padding:.85rem 0}
+.gi:last-child{border-bottom:none}
+.gt{font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;color:var(--verde-e);margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.gt-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.gd{font-size:.85rem;color:var(--texto-s);line-height:1.6}
+.gi.hidden{display:none}
+.btn-ok{display:block;width:100%;padding:1rem;background:var(--verde);color:#fff;border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:1.35rem;transition:all .2s;text-align:center;letter-spacing:.01em}
+.btn-ok:hover{background:var(--verde-e);transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,110,86,0.3)}
+.btn-ok:active{transform:scale(.98)}
+.btn-ok:disabled{background:#9FE1CB;cursor:default;transform:none;box-shadow:none}
+.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:1.5rem}
+.prog-c{background:var(--branco);border:1.5px solid var(--borda);border-radius:12px;padding:.75rem .4rem;text-align:center;transition:all .2s}
+.prog-c.done{border-color:var(--verde);background:var(--verde-c)}
+.prog-c .pi{font-size:1.4rem;margin-bottom:4px}
+.prog-c .pn2{font-size:10.5px;font-family:'Sora',sans-serif;font-weight:700;color:var(--texto-s)}
+.prog-c.done .pn2{color:var(--verde-e)}
+.prog-c .ps{font-size:9.5px;color:var(--cinza);margin-top:2px}
+.prog-c.done .ps{color:var(--verde)}
+.popup{position:fixed;bottom:1.5rem;right:1.5rem;color:#fff;padding:1rem 1.25rem;border-radius:14px;display:none;z-index:999;max-width:260px;box-shadow:0 8px 24px rgba(0,0,0,0.25);cursor:pointer}
+.popup.show{display:block;animation:si .4s cubic-bezier(.34,1.56,.64,1)}
+@keyframes si{from{opacity:0;transform:translateX(20px) scale(.9)}to{opacity:1;transform:translateX(0) scale(1)}}
+.pop-t{font-family:'Sora',sans-serif;font-weight:700;margin-bottom:3px;font-size:.9rem}
+.pop-m{font-size:.8rem;opacity:.85}
+.pop-xp{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;color:#FFD166;margin-top:4px}
+.pop-dismiss{font-size:.72rem;opacity:.5;margin-top:6px;text-align:right}
+.fluxo-card{display:flex;align-items:center;overflow-x:auto;padding:.5rem 0;scrollbar-width:thin;gap:0}
+.fluxo-item{display:flex;align-items:center;flex-shrink:0}
+.fluxo-box{background:var(--branco);border:1.5px solid var(--borda);border-radius:10px;padding:.65rem .9rem;text-align:center;min-width:88px;max-width:108px}
+.fluxo-box .fb-icon{font-size:1.3rem;margin-bottom:4px}
+.fluxo-box .fb-txt{font-size:10px;font-family:'Sora',sans-serif;font-weight:700;color:var(--texto);line-height:1.3}
+.fluxo-box.ativo{border-color:var(--verde);background:var(--verde-c)}
+.fluxo-box.ativo .fb-txt{color:var(--verde-e)}
+.fluxo-seta{color:var(--cinza);font-size:1.2rem;margin:0 .3rem;flex-shrink:0}
+.cert-secao{margin-bottom:2rem}
+.cert-nivel-titulo{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding:.65rem 1rem;border-radius:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem}
+.cert-nivel-titulo .cnt-icon{font-size:1.6rem}
+.cert-nivel-titulo .cnt-txt{flex:1}
+.cnt-sub{font-size:.78rem;font-weight:400;opacity:.75;display:block;margin-top:1px}
+.cnt-status{font-size:.8rem;padding:3px 12px;border-radius:20px;font-weight:700;white-space:nowrap}
+.cnt-locked{background:var(--cinza-c);color:var(--cinza-e)}
+.cnt-earned{background:var(--verde-c);color:var(--verde-e)}
+.cert-card{border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.12);margin-bottom:1.25rem;position:relative}
+.cert-card.locked-card{opacity:.55;filter:grayscale(.6);pointer-events:none}
+.cert-topo{padding:1.5rem 1.5rem 1rem;text-align:center;position:relative}
+.cert-medalha{font-size:3rem;margin-bottom:.4rem;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15))}
+.cert-titulo-card{font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+.cert-subtitulo{font-size:.82rem;opacity:.75;line-height:1.5;max-width:320px;margin:0 auto}
+.cert-corpo{background:rgba(255,255,255,0.92);padding:1.35rem 1.5rem;border-top:1px solid rgba(0,0,0,0.06)}
+.cert-label-nome{font-size:.75rem;font-family:'Sora',sans-serif;color:var(--cinza-e);margin-bottom:.3rem;text-transform:uppercase;letter-spacing:.06em}
+.cert-nome-display{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--texto);padding-bottom:6px;border-bottom:2.5px solid;display:inline-block;min-width:200px;margin-bottom:1rem}
+.cert-modulos{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.cert-mod-chip{padding:4px 11px;border-radius:20px;font-size:.78rem;font-family:'Sora',sans-serif;font-weight:600}
+.cert-selos-mini{display:flex;gap:1rem;justify-content:center;padding:.85rem 0;border-top:1px solid rgba(0,0,0,0.06);flex-wrap:wrap}
+.csm{text-align:center}
+.csm-num{font-family:'Sora',sans-serif;font-weight:800;font-size:1.15rem}
+.csm-l{font-size:10px;color:var(--cinza);text-transform:uppercase;letter-spacing:.06em;margin-top:1px}
+.cert-rodape{display:flex;justify-content:space-between;align-items:flex-end;padding:.85rem 1.5rem;border-top:1px solid rgba(0,0,0,0.06);font-size:.75rem;color:var(--cinza-e);background:rgba(0,0,0,0.02)}
+.cert-ass-bloco{text-align:center}
+.cert-ass-bloco .linha-ass{width:110px;height:1px;background:currentColor;opacity:.3;margin:0 auto .3rem}
+.cert-ass-bloco .nome-ass{font-family:'Sora',sans-serif;font-size:.73rem;font-weight:700;color:var(--texto)}
+.cert-ass-bloco .cargo-ass{font-size:.68rem;color:var(--cinza-e)}
+.cert-data-rod{font-size:.72rem;color:var(--cinza)}
+.cert-bronze .cert-topo{background:linear-gradient(135deg,#8B4513,var(--bronze),#E8A860)}
+.cert-bronze .cert-nome-display{border-color:var(--bronze-e)}
+.cert-bronze .cert-mod-chip{background:var(--bronze-c);color:var(--bronze-e)}
+.cert-bronze .csm-num{color:var(--bronze-e)}
+.cert-bronze .cert-topo *{color:#fff}
+.cert-prata .cert-topo{background:linear-gradient(135deg,#4A4A52,var(--prata),#D0D0D5)}
+.cert-prata .cert-nome-display{border-color:var(--prata-e)}
+.cert-prata .cert-mod-chip{background:var(--prata-c);color:var(--prata-e)}
+.cert-prata .csm-num{color:var(--prata-e)}
+.cert-prata .cert-topo *{color:#fff}
+.cert-ouro .cert-topo{background:linear-gradient(135deg,#5C4500,var(--ouro),#F0D060)}
+.cert-ouro .cert-nome-display{border-color:var(--ouro-e)}
+.cert-ouro .cert-mod-chip{background:var(--ouro-c);color:var(--ouro-e)}
+.cert-ouro .csm-num{color:var(--ouro-e)}
+.cert-ouro .cert-topo *{color:#fff}
+.cert-diamante .cert-topo{background:linear-gradient(135deg,#0D2147,var(--diamante),#8ABFFF)}
+.cert-diamante .cert-nome-display{border-color:var(--diamante-e)}
+.cert-diamante .cert-mod-chip{background:var(--diamante-c);color:var(--diamante-e)}
+.cert-diamante .csm-num{color:var(--diamante-e)}
+.cert-diamante .cert-topo *{color:#fff}
+.cert-diamante-borda{height:5px;background:linear-gradient(90deg,#CD7F32,#A8A9AD,#D4AF37,var(--diamante));margin-bottom:0}
+.locked-overlay{text-align:center;padding:1.25rem;background:var(--cinza-c);border-radius:12px;margin-bottom:1.25rem}
+.locked-overlay .lo-icon{font-size:2rem;margin-bottom:.4rem}
+.locked-overlay p{font-size:.85rem;color:var(--texto-s);line-height:1.6}
+.locked-overlay strong{color:var(--texto)}
+.btn-cert-print{display:inline-flex;align-items:center;gap:7px;padding:.65rem 1.25rem;border-radius:10px;font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;border:none;cursor:pointer;margin-top:.85rem;transition:all .2s}
+.btn-cert-print:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,0.12)}
+.nome-input-wrap{margin:1.1rem 0}
+.nome-input-wrap label{font-size:.88rem;font-family:'Sora',sans-serif;font-weight:600;display:block;margin-bottom:.4rem;color:var(--texto-s)}
+.nome-input-wrap input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:1rem;font-family:'Sora',sans-serif;font-weight:700;outline:none;transition:border-color .2s;color:var(--texto)}
+.nome-input-wrap input:focus{border-color:var(--verde)}
+.cert-prog-panel{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.25rem 0}
+.cpp{border-radius:14px;padding:1rem .75rem;text-align:center;border:2px solid transparent;transition:all .3s}
+.cpp.active{border-color:currentColor;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
+.cpp .cpp-icon{font-size:2rem;margin-bottom:.4rem}
+.cpp .cpp-nome{font-family:'Sora',sans-serif;font-weight:700;font-size:.82rem;margin-bottom:.2rem}
+.cpp .cpp-status{font-size:.72rem;font-family:'Sora',sans-serif}
+.cpp-b{background:var(--bronze-c);color:var(--bronze-e)}
+.cpp-s{background:var(--prata-c);color:var(--prata-e)}
+.cpp-o{background:var(--ouro-c);color:var(--ouro-e)}
+.cpp-d{background:var(--diamante-c);color:var(--diamante-e)}
 .qp{font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;color:var(--texto);margin-bottom:.9rem;line-height:1.45}
 .q-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--verde-e);color:#fff;border-radius:50%;font-size:12px;font-weight:700;margin-right:7px;flex-shrink:0}
 .qopts{display:flex;flex-direction:column;gap:8px}
 .qopt{padding:.75rem 1rem;border-radius:10px;border:1.5px solid var(--borda);background:var(--branco);font-size:.88rem;cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif;line-height:1.5}
-.qopt:hover{border-color:var(--verde);background:var(--verde-c)}
+.qopt:hover:not(:disabled){border-color:var(--verde);background:var(--verde-c)}
 .qopt.certa{border-color:var(--verde);background:var(--verde-c);color:var(--verde-e);font-weight:500}
 .qopt.errada{border-color:#E24B4A;background:#FCEBEB;color:#A32D2D}
 .qopt:disabled{cursor:default}
@@ -132,143 +241,16 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .q-dot{width:28px;height:6px;border-radius:3px;background:var(--cinza-c);transition:background .3s}
 .q-dot.feita{background:var(--verde)}
 .q-dot.errada-d{background:#E24B4A}
-
-/* GLOSSÁRIO */
-.gls-search{width:100%;padding:.7rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem;font-family:'DM Sans',sans-serif}
-.gls-search:focus{border-color:var(--verde)}
-.gi{border-bottom:1px solid var(--cinza-c);padding:.85rem 0;transition:background .15s;cursor:default}
-.gi:last-child{border-bottom:none}
-.gt{font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;color:var(--verde-e);margin-bottom:3px;display:flex;align-items:center;gap:7px}
-.gt-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
-.gd{font-size:.85rem;color:var(--texto-s);line-height:1.6}
-.gi.hidden{display:none}
-
-/* MOCKUP real DOL */
-.mk{background:#fff;border:1px solid #ccc;border-radius:10px;overflow:hidden;margin:.85rem 0;font-size:12px;color:#333;box-shadow:0 2px 8px rgba(0,0,0,0.08)}
-.mk-top{background:#5a7a65;color:#fff;padding:5px 12px;font-size:10px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.mk-top-btns{display:flex;gap:5px}
-.mk-top-btn{background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:3px;font-size:10px}
-.mk-logo{font-size:13px;font-weight:700;letter-spacing:.02em}<br>
-.mk-logo span{font-weight:400;opacity:.8}
-.mk-tabs{background:#4a6a56;display:flex;padding:0 12px}
-.mk-tab{padding:5px 14px;font-size:10px;color:#fff;border-radius:5px 5px 0 0;background:rgba(255,255,255,0.12);cursor:default;margin-right:3px}
-.mk-tab.on{background:#f4f5f2;color:#1a1a1a;font-weight:700}
-.mk-body{padding:12px;background:#f4f5f2}
-.mk-section{background:#5a7a65;color:#fff;text-align:center;padding:5px;border-radius:4px;font-size:10px;font-weight:700;margin-bottom:8px}
-.ml{font-size:9.5px;color:#555;margin-bottom:2px;font-weight:500}
-.mi{width:100%;padding:5px 8px;border:1px solid #ccc;border-radius:4px;font-size:10px;background:#fff;display:block;height:24px}
-.mi-active{border-color:#e67e22;background:#fff8f0}
-.mr{display:flex;gap:8px}
-.mr .mf{flex:1}
-.mf{margin-bottom:8px}
-.mbtn{background:#e67e22;color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:10px;cursor:default;font-weight:700}
-.mk-alert{background:#fff8dc;border:1px solid #ddd;padding:7px 10px;border-radius:4px;margin-bottom:8px;font-size:9.5px;line-height:1.5;color:#555}
-
-/* BTN CONCLUIR */
-.btn-ok{display:block;width:100%;padding:1rem;background:var(--verde);color:#fff;border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:1.35rem;transition:all .2s;text-align:center;letter-spacing:.01em}
-.btn-ok:hover{background:var(--verde-e);transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,110,86,0.3)}
-.btn-ok:active{transform:scale(.98)}
-.btn-ok:disabled{background:#9FE1CB;cursor:default;transform:none;box-shadow:none}
-
-/* PROGRESS OVERVIEW */
-.prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:1.5rem}
-.prog-c{background:var(--branco);border:1.5px solid var(--borda);border-radius:12px;padding:.75rem .4rem;text-align:center;transition:all .2s}
-.prog-c.done{border-color:var(--verde);background:var(--verde-c)}
-.prog-c .pi{font-size:1.4rem;margin-bottom:4px}
-.prog-c .pn2{font-size:10.5px;font-family:'Sora',sans-serif;font-weight:700;color:var(--texto-s)}
-.prog-c.done .pn2{color:var(--verde-e)}
-.prog-c .ps{font-size:9.5px;color:var(--cinza);margin-top:2px}
-.prog-c.done .ps{color:var(--verde)}
-
-/* CONQUISTA POPUP */
-.popup{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--verde-e);color:#fff;padding:1rem 1.25rem;border-radius:14px;display:none;z-index:999;max-width:240px;box-shadow:0 8px 24px rgba(0,0,0,0.2)}
-.popup.show{display:block;animation:si .4s cubic-bezier(.34,1.56,.64,1)}
-@keyframes si{from{opacity:0;transform:translateX(20px) scale(.9)}to{opacity:1;transform:translateX(0) scale(1)}}
-.pop-t{font-family:'Sora',sans-serif;font-weight:700;margin-bottom:3px;font-size:.9rem}
-.pop-m{font-size:.8rem;opacity:.85}
-.pop-xp{font-family:'Sora',sans-serif;font-size:1.1rem;font-weight:800;color:var(--laranja);margin-top:4px}
-
-/* CERTIFICADO */
-.cert-wrap{background:var(--branco);border:2px solid var(--verde-e);border-radius:18px;padding:2.5rem 2rem;text-align:center;position:relative;overflow:hidden;margin-top:1rem}
-.cert-borda-top{position:absolute;top:0;left:0;right:0;height:7px;background:linear-gradient(90deg,var(--verde-e),var(--laranja),var(--azul),var(--roxo))}
-.cert-borda-bottom{position:absolute;bottom:0;left:0;right:0;height:7px;background:linear-gradient(90deg,var(--roxo),var(--azul),var(--laranja),var(--verde-e))}
-.cert-corner{position:absolute;width:80px;height:80px;opacity:.06}
-.cert-corner.tl{top:20px;left:20px;border-top:3px solid var(--verde-e);border-left:3px solid var(--verde-e)}
-.cert-corner.tr{top:20px;right:20px;border-top:3px solid var(--verde-e);border-right:3px solid var(--verde-e)}
-.cert-corner.bl{bottom:20px;left:20px;border-bottom:3px solid var(--verde-e);border-left:3px solid var(--verde-e)}
-.cert-corner.br{bottom:20px;right:20px;border-bottom:3px solid var(--verde-e);border-right:3px solid var(--verde-e)}
-.cert-logo{font-family:'Sora',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cinza);margin-bottom:1rem;margin-top:.5rem}
-.cert-titulo{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:800;color:var(--verde-e);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.6rem}
-.cert-nome-label{font-size:.8rem;color:var(--cinza);margin-bottom:.3rem}
-.cert-nome{font-family:'Sora',sans-serif;font-size:1.55rem;font-weight:800;color:var(--texto);border-bottom:2.5px solid var(--verde-e);display:inline-block;padding-bottom:5px;margin-bottom:.85rem;min-width:200px}
-.cert-desc{font-size:.85rem;color:var(--texto-s);line-height:1.7;max-width:400px;margin:0 auto 1rem}
-.cert-selos{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin:.85rem 0;padding:.85rem 0;border-top:1px solid var(--cinza-c);border-bottom:1px solid var(--cinza-c)}
-.cert-selo{text-align:center}
-.cert-selo .cs-num{font-family:'Sora',sans-serif;font-size:1.3rem;font-weight:800;color:var(--verde-e)}
-.cert-selo .cs-l{font-size:10px;color:var(--cinza);text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
-.cert-nivel{display:inline-flex;align-items:center;gap:8px;background:var(--verde-c);border-radius:20px;padding:6px 18px;font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;color:var(--verde-e);margin-bottom:.85rem}
-.cert-data{font-size:.78rem;color:var(--cinza);margin-top:.75rem}
-.cert-assinatura{display:flex;justify-content:center;gap:3rem;margin-top:1.5rem;flex-wrap:wrap}
-.cert-ass-item{text-align:center}
-.cert-ass-item .linha{width:130px;height:1px;background:var(--texto);margin:0 auto .35rem}
-.cert-ass-item .nome-ass{font-size:.78rem;font-family:'Sora',sans-serif;font-weight:700}
-.cert-ass-item .cargo{font-size:.72rem;color:var(--cinza)}
-
-/* FINAL / TELA CELEBRAÇÃO */
-.final-wrap{text-align:center;padding:1.5rem 0}
-.final-wrap .trofeu{font-size:4rem;margin-bottom:1rem;animation:bounce 1s ease infinite alternate}
-@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-8px)}}
-.final-wrap h2{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.5rem}
-.final-wrap>p{font-size:.92rem;color:var(--texto-s);max-width:420px;margin:0 auto;line-height:1.6}
-.stats-f{display:flex;justify-content:center;gap:.85rem;margin:1.5rem 0;flex-wrap:wrap}
-.sf{background:var(--branco);border:1px solid var(--borda);border-radius:12px;padding:.9rem 1.3rem;text-align:center;box-shadow:var(--sombra)}
-.sf .sn{font-family:'Sora',sans-serif;font-size:1.7rem;font-weight:800;color:var(--verde)}
-.sf .sl{font-size:11px;color:var(--texto-s);margin-top:2px;font-family:'Sora',sans-serif}
-
-/* NOME INPUT */
-.nome-input-wrap{margin:1.1rem 0}
-.nome-input-wrap label{font-size:.88rem;font-family:'Sora',sans-serif;font-weight:600;display:block;margin-bottom:.4rem;color:var(--texto-s)}
-.nome-input-wrap input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:1rem;font-family:'Sora',sans-serif;font-weight:700;outline:none;transition:border-color .2s}
-.nome-input-wrap input:focus{border-color:var(--verde)}
-
-/* NIVEL DISPLAY INLINE */
-.nivel-display{display:flex;align-items:center;gap:.75rem;background:var(--cinza-c);border-radius:11px;padding:.7rem 1rem;margin-bottom:.85rem}
-.nivel-icon{font-size:1.6rem}
-.nivel-info .ni-label{font-size:.75rem;color:var(--cinza);font-family:'Sora',sans-serif}
-.nivel-info .ni-nome{font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;color:var(--texto)}
-.nivel-info .ni-desc{font-size:.8rem;color:var(--texto-s)}
-
-/* DESTAQUE NUMERO */
-.num-destaque{display:inline-flex;align-items:center;justify-content:center;background:var(--verde-e);color:#fff;border-radius:8px;font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;width:50px;height:50px;margin-right:10px;flex-shrink:0;vertical-align:middle}
-
-/* MODULO NOMEACAO - extras */
-.fluxo-card{display:flex;gap:0;overflow-x:auto;padding:.5rem 0;scrollbar-width:thin}
-.fluxo-item{display:flex;align-items:center;flex-shrink:0}
-.fluxo-box{background:var(--branco);border:1.5px solid var(--borda);border-radius:10px;padding:.65rem .9rem;text-align:center;min-width:90px;max-width:110px}
-.fluxo-box .fb-icon{font-size:1.3rem;margin-bottom:4px}
-.fluxo-box .fb-txt{font-size:10px;font-family:'Sora',sans-serif;font-weight:700;color:var(--texto);line-height:1.3}
-.fluxo-box.ativo{border-color:var(--verde);background:var(--verde-c)}
-.fluxo-box.ativo .fb-txt{color:var(--verde-e)}
-.fluxo-seta{color:var(--cinza);font-size:1.2rem;margin:0 .35rem;flex-shrink:0}
-
-/* AVALIACAO FINANCEIRA */
-.av-tabela{width:100%;border-collapse:collapse;font-size:.82rem}
-.av-tabela thead tr{background:var(--verde-e);color:#fff}
-.av-tabela th{padding:7px 10px;font-family:'Sora',sans-serif;font-weight:600;font-size:.78rem;text-align:left}
-.av-tabela td{padding:7px 10px;border-bottom:1px solid var(--cinza-c);color:var(--texto-s)}
-.av-concedido{background:var(--verde-c);color:var(--verde-e);padding:2px 9px;border-radius:10px;font-size:.78rem;font-weight:600;font-family:'Sora',sans-serif}
-.av-negado{background:var(--coral-c);color:var(--coral-e);padding:2px 9px;border-radius:10px;font-size:.78rem;font-weight:600;font-family:'Sora',sans-serif}
-
-/* PRINT */
+.linha-ass-branca{width:110px;height:28px;border-bottom:1.5px solid rgba(255,255,255,0.5);margin:0 auto .3rem}
+.no-print{display:block}
 @media print{
-  nav,header,.btn-ok,.nome-input-wrap,#btnGerarCert,.cert-actions,.popup{display:none!important}
+  nav,header,.btn-ok,.no-print,.popup,.locked-overlay,.btn-cert-print,
+  .cert-nivel-titulo,.cert-prog-panel,.al{display:none!important}
   .sec{display:block!important}
-  .cert-wrap{border-color:#000;page-break-inside:avoid}
+  .cert-card{box-shadow:none;page-break-inside:avoid}
   body{background:#fff}
   main{padding:0}
 }
-
-/* MOBILE */
 @media(max-width:600px){
   header{padding:1.35rem .9rem 1.15rem}
   nav{padding:0 .2rem}
@@ -278,29 +260,22 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   .sec-ic{width:42px;height:42px;font-size:1.25rem}
   .sec-hd h2{font-size:1.15rem}
   .card{padding:1rem}
-  .prog-grid{grid-template-columns:repeat(4,1fr);gap:6px}
-  .prog-c{padding:.6rem .3rem}
-  .stats-f{gap:.6rem}
-  .sf{padding:.75rem 1rem}
-  .sf .sn{font-size:1.35rem}
-  .mk{font-size:10px}
+  .cert-prog-panel{grid-template-columns:repeat(2,1fr)}
   .mr{flex-direction:column;gap:4px}
   .chips{gap:5px}
   .chip{font-size:10px;padding:3px 8px}
   .popup{right:.75rem;left:.75rem;max-width:none}
-  .cert-wrap{padding:1.75rem 1rem}
-  .cert-nome{font-size:1.2rem}
-  .cert-assinatura{gap:1.5rem}
-  .fluxo-card{gap:0}
+  .cert-rodape{flex-direction:column;gap:.75rem;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="popup" id="pop">
+<div class="popup" id="pop" onclick="document.getElementById('pop').classList.remove('show')">
   <div class="pop-t" id="popT">🏆 Módulo concluído!</div>
   <div class="pop-m" id="popM"></div>
   <div class="pop-xp" id="popXP"></div>
+  <div class="pop-dismiss">toque para fechar</div>
 </div>
 
 <header>
@@ -308,7 +283,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <h1>Sistema DOL — Guia Completo</h1>
   <p>Do zero ao especialista: login, cadastro, pesquisa, nomeação, avaliação financeira e mais</p>
   <div class="mod-count">
-    <span>12 módulos</span> · <span>certificado oficial</span> · <span>quiz interativo</span>
+    <span>12 módulos</span> · <span>4 certificados</span> · <span>quiz interativo</span>
   </div>
   <div class="nivel-row">
     <div class="nivel-badge" id="hNivel"><span>Nível:</span><span id="hNivelNome">🌱 Iniciante</span></div>
@@ -317,6 +292,12 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <div class="xp-wrap">
     <div class="xp-bar-c"><div class="xp-bar-f" id="xpBar"></div></div>
     <div class="xp-txt" id="xpTxt">0 / 12 módulos concluídos</div>
+  </div>
+  <div class="cert-badges-row">
+    <div class="cert-badge-mini cb-bronze" id="hb-bronze">🥉 Bronze</div>
+    <div class="cert-badge-mini cb-prata" id="hb-prata">🥈 Prata</div>
+    <div class="cert-badge-mini cb-ouro" id="hb-ouro">🥇 Ouro</div>
+    <div class="cert-badge-mini cb-diamante" id="hb-diamante">💎 Diamante</div>
   </div>
 </header>
 
@@ -333,19 +314,19 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <button class="nb" onclick="ir(9,this)"><span class="ck">✓</span>🚨 Situações</button>
   <button class="nb" onclick="ir(10,this)"><span class="ck">✓</span>❓ Quiz</button>
   <button class="nb" onclick="ir(11,this)"><span class="ck">✓</span>📖 Glossário</button>
-  <button class="nb" onclick="ir(12,this)"><span class="ck">✓</span>🏆 Certificado</button>
+  <button class="nb" onclick="ir(12,this)"><span class="ck">✓</span>🏆 Certificados</button>
 </nav>
 
 <main>
 
-<!-- ===================== 0: INÍCIO ===================== -->
+<!-- 0: INÍCIO -->
 <section class="sec ativa" id="s0">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#E1F5EE">🎯</div>
     <div>
       <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Apresentação · Pré-leitura obrigatória</div>
       <h2>Bem-vindo ao Guia DOL da 247ª</h2>
-      <p>12 módulos progressivos sobre o sistema Defensoria Online. Aprenda do zero ao avançado, acumule XP e conquiste seu certificado.</p>
+      <p>12 módulos progressivos. Conclua cada etapa, faça os quizzes e conquiste seus certificados Bronze, Prata, Ouro e Diamante.</p>
     </div>
   </div>
 
@@ -378,28 +359,40 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   </div>
 
   <div class="card">
-    <h3>Seus níveis neste treinamento</h3>
+    <h3>Sistema de certificados — 4 níveis</h3>
     <table class="tbl">
-      <tr><th>Módulos concluídos</th><th>Nível</th><th>XP</th><th>O que domina</th></tr>
-      <tr><td>0</td><td>🌱 Iniciante</td><td>0</td><td>Ainda por aprender</td></tr>
-      <tr><td>1–2</td><td>🔍 Observador</td><td>até 30</td><td>Acesso e navegação básica</td></tr>
-      <tr><td>3–4</td><td>📋 Assistente</td><td>até 60</td><td>Pesquisa e cadastro de assistidos</td></tr>
-      <tr><td>5–6</td><td>⚖️ Operador</td><td>até 100</td><td>Histórico e avaliação financeira</td></tr>
-      <tr><td>7–9</td><td>🏅 Analista</td><td>até 150</td><td>Nomeação, LGPD, situações especiais</td></tr>
-      <tr><td>10–11</td><td>🎓 Especialista</td><td>até 185</td><td>Quiz aprovado e glossário completo</td></tr>
-      <tr><td>12</td><td>🏆 Mestre DOL</td><td>200</td><td>Tudo — certificado emitido!</td></tr>
+      <tr><th>Certificado</th><th>Módulos cobertos</th><th>Quiz</th><th>O que comprova</th></tr>
+      <tr><td>🥉 Bronze</td><td>1 a 4 · Login, Home, Pesquisa, Cadastro</td><td>4 perguntas</td><td>Domínio do acesso e operação básica</td></tr>
+      <tr><td>🥈 Prata</td><td>5 a 8 · Histórico, Av. Financeira, Nomeação, LGPD</td><td>4 perguntas</td><td>Gestão de casos e conformidade</td></tr>
+      <tr><td>🥇 Ouro</td><td>9 a 11 · Situações especiais, Quiz geral, Glossário</td><td>4 perguntas</td><td>Protocolos de urgência e vocabulário completo</td></tr>
+      <tr><td>💎 Diamante</td><td>Mistão — todos os módulos</td><td>12 perguntas</td><td>Maestria completa do sistema DOL</td></tr>
+    </table>
+    <div class="al al-d"><i>💡</i><span>O Diamante só é liberado após Bronze + Prata + Ouro. As perguntas do mistão são embaralhadas — cada tentativa é diferente!</span></div>
+  </div>
+
+  <div class="card">
+    <h3>Níveis de progresso</h3>
+    <table class="tbl">
+      <tr><th>Módulos</th><th>Nível</th><th>XP</th></tr>
+      <tr><td>0</td><td>🌱 Iniciante</td><td>0</td></tr>
+      <tr><td>1–2</td><td>🔍 Observador</td><td>até 30</td></tr>
+      <tr><td>3–4</td><td>📋 Assistente</td><td>até 60</td></tr>
+      <tr><td>5–6</td><td>⚖️ Operador</td><td>até 100</td></tr>
+      <tr><td>7–9</td><td>🏅 Analista</td><td>até 150</td></tr>
+      <tr><td>10–11</td><td>🎓 Especialista</td><td>até 185</td></tr>
+      <tr><td>12</td><td>🏆 Mestre DOL</td><td>200</td></tr>
     </table>
   </div>
 
-  <button class="btn-ok" onclick="ok(0,'pc0'); ir(1,nav.querySelectorAll('.nb')[1])">▶ Começar treinamento</button>
+  <button class="btn-ok" onclick="ir(1,nav.querySelectorAll('.nb')[1])">▶ Começar treinamento</button>
 </section>
 
-<!-- ===================== 1: LOGIN ===================== -->
+<!-- 1: LOGIN -->
 <section class="sec" id="s1">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#E1F5EE">🔑</div>
     <div>
-      <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Módulo 1 · +15 XP</div>
+      <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Módulo 1 · +15 XP · 🥉 Bronze</div>
       <h2>Acesso ao sistema DOL</h2>
       <p>Endereço, credenciais SSO, versões do sistema e boas práticas de segurança.</p>
     </div>
@@ -408,7 +401,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <div class="card">
     <h3>Endereço do sistema</h3>
     <p>Cole no navegador: <code>online.defensoria.sp.def.br</code></p>
-    <div class="al al-d"><i>💡</i><span>Salva nos favoritos do navegador — você entra todo dia de trabalho. Use sempre Chrome ou Edge atualizado.</span></div>
+    <div class="al al-d"><i>💡</i><span>Salve nos favoritos — você entra todo dia de trabalho. Use sempre Chrome ou Edge atualizado.</span></div>
   </div>
 
   <div class="card">
@@ -418,13 +411,12 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <span style="font-size:11px;font-weight:700">DEFENSORIA <span style="font-weight:400">ONLINE</span></span>
         <div class="mk-top-btns">
           <div class="mk-top-btn">❓</div>
-          <div class="mk-top-btn">📱 Atendimento Virtual</div>
+          <div class="mk-top-btn">📱 Atend. Virtual</div>
           <div class="mk-top-btn">🤖 Defensor.IA</div>
-          <div class="mk-top-btn">👤 Cassia Kelly Lins Reis</div>
-          <div class="mk-top-btn">👥</div>
+          <div class="mk-top-btn">👤 Cassia Kelly</div>
         </div>
       </div>
-      <div class="mk-tabs"><div class="mk-tab on">Cadastro</div><div class="mk-tab">Busca Atendimentos em Plantões Judiciários</div></div>
+      <div class="mk-tabs"><div class="mk-tab on">Cadastro</div><div class="mk-tab">Busca Plantões</div></div>
       <div class="mk-body">
         <div class="mk-section">Pesquisa de usuários</div>
         <div class="mr">
@@ -441,51 +433,38 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div style="text-align:right;margin-top:8px"><button class="mbtn">Pesquisar</button></div>
       </div>
     </div>
-    <p style="font-size:.82rem;color:var(--cinza)">⬆ Versão real conforme print: v.4.403.0 (68) · Cassia Kelly Lins Reis logada no canto superior direito</p>
+    <p style="font-size:.8rem;color:var(--cinza);margin-top:.4rem">⬆ Interface real — v.4.403.0 (68)</p>
   </div>
 
   <div class="card">
     <h3>Passo a passo do login</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">1</div><div class="pc"><h4>Abra o endereço no navegador</h4><p>Digite <code>online.defensoria.sp.def.br</code> e pressione Enter. A tela de login SSO aparecerá.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">2</div><div class="pc"><h4>Insira as credenciais SSO</h4><p>SSO = Single Sign-On. Uma única conta dá acesso a todos os módulos. Use o usuário e senha fornecidos pela Cássia. Nunca compartilhe sua senha.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">3</div><div class="pc"><h4>Confirme seu nome no topo direito</h4><p>Após entrar, seu nome aparece no canto superior direito (ex: <em>Cassia Kelly Lins Reis</em>). Isso confirma o login correto no perfil certo.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">4</div><div class="pc"><h4>Ao terminar: SEMPRE faça logout</h4><p>Clique no seu nome → <strong>Sair</strong>. Nunca feche a aba sem sair — a sessão fica aberta e qualquer pessoa pode usar no seu nome.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">1</div><div class="pc"><h4>Abra o endereço no navegador</h4><p>Digite <code>online.defensoria.sp.def.br</code> e pressione Enter.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">2</div><div class="pc"><h4>Insira as credenciais SSO</h4><p>Uma única conta dá acesso a todos os módulos. Nunca compartilhe sua senha.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">3</div><div class="pc"><h4>Confirme seu nome no topo direito</h4><p>Após entrar, seu nome aparece no canto superior direito. Confirma o login correto.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">4</div><div class="pc"><h4>Ao terminar: SEMPRE faça logout</h4><p>Clique no seu nome → Sair. Nunca feche a aba sem sair — a sessão fica aberta.</p></div></div>
     </div>
-    <div class="al al-r"><i>🔴</i><span>Em computadores compartilhados, logout é obrigatório. Todo acesso fica registrado com seu login, data e hora. Dados de assistidos são sigilosos por lei.</span></div>
+    <div class="al al-r"><i>🔴</i><span>Em computadores compartilhados, logout é obrigatório. Todo acesso fica registrado com seu login, data e hora.</span></div>
   </div>
 
   <div class="card">
-    <h3>Versões do sistema — o que cada número significa</h3>
+    <h3>Versões do sistema</h3>
     <table class="tbl">
       <tr><th>Versão</th><th>Módulo</th><th>Para que serve</th></tr>
       <tr><td><code>v.3.x.x</code></td><td>Portal SSO (Home)</td><td>Tela inicial pós-login, calendário, acesso aos sistemas</td></tr>
-      <tr><td><code>v.4.403.0 (68)</code></td><td>DOL Atividade Fim</td><td>Cadastros, atendimentos, pesquisa de usuários — é aqui que você mais trabalha</td></tr>
-    </table>
-    <div class="al al-d"><i>💡</i><span>São módulos do mesmo sistema. Você navega entre eles pelo menu "Sistemas" na Home, sem precisar fazer login novamente (SSO cuida disso).</span></div>
-  </div>
-
-  <div class="card">
-    <h3>Botões do menu superior (v.4)</h3>
-    <table class="tbl">
-      <tr><th>Botão</th><th>Função</th><th>Você usa?</th></tr>
-      <tr><td>❓</td><td>Documentação e suporte do sistema</td><td>Raramente</td></tr>
-      <tr><td>📱 Atendimento Virtual</td><td>Módulo de atendimento remoto por videochamada</td><td>Quando houver atendimento digital</td></tr>
-      <tr><td>🤖 Defensor.IA</td><td>Assistente de IA integrado da DPESP para pesquisas jurídicas</td><td>Pode explorar</td></tr>
-      <tr><td>Seu nome</td><td>Configurações de conta e <strong>logout</strong></td><td>Todo dia ao sair</td></tr>
-      <tr><td>👥 (grupo)</td><td>Trocar de unidade / perfil de acesso</td><td>Se precisar trocar de unidade</td></tr>
+      <tr><td><code>v.4.403.0 (68)</code></td><td>DOL Atividade Fim</td><td>Cadastros, atendimentos, pesquisa — onde você mais trabalha</td></tr>
     </table>
   </div>
 
   <button class="btn-ok" onclick="ok(1,'pc1'); ir(2,nav.querySelectorAll('.nb')[2])">✅ Módulo concluído → Home</button>
 </section>
 
-<!-- ===================== 2: HOME ===================== -->
+<!-- 2: HOME -->
 <section class="sec" id="s2">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#E6F1FB">🏠</div>
     <div>
-      <div class="nivel-tag" style="background:var(--azul-c);color:var(--azul-e)">Módulo 2 · +15 XP</div>
+      <div class="nivel-tag" style="background:var(--azul-c);color:var(--azul-e)">Módulo 2 · +15 XP · 🥉 Bronze</div>
       <h2>A tela inicial (Home)</h2>
       <p>Mapa completo da interface pós-login: sistemas disponíveis, calendário e navegação.</p>
     </div>
@@ -494,75 +473,41 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <div class="card">
     <h3>Menu "Sistemas" — lado esquerdo da Home</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">A</div><div class="pc"><h4>DOL – Atividade Fim (v.4)</h4><p>Módulo principal. Cadastro e atendimento de assistidos. Pesquisa, prontuários, histórico jurídico, avaliação financeira. É onde você passa a maior parte do tempo.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">B</div><div class="pc"><h4>Sistema de Indicação OAB</h4><p>Específico para a 247ª. Usado para indicar advogados dativos pelo convênio OAB/DPESP. Quando a Defensoria não tem defensor disponível, a OAB indica um advogado parceiro pelo sistema.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">A</div><div class="pc"><h4>DOL – Atividade Fim (v.4)</h4><p>Módulo principal. Cadastro e atendimento de assistidos. Pesquisa, prontuários, histórico jurídico, avaliação financeira.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">B</div><div class="pc"><h4>Sistema de Indicação OAB</h4><p>Específico para a 247ª. Indica advogados dativos pelo convênio OAB/DPESP.</p></div></div>
     </div>
   </div>
 
   <div class="card">
-    <h3>Calendário de compromissos (lado direito)</h3>
+    <h3>Calendário de compromissos</h3>
     <ul>
       <li>Dia atual marcado com destaque visual</li>
-      <li>Clique no <strong>+</strong> verde para adicionar compromisso novo</li>
+      <li>Clique no <strong>+</strong> verde para adicionar compromisso</li>
       <li>Setas ◀ ▶ para navegar entre meses</li>
       <li>Botões <strong>mês / semana / dia</strong> mudam a visualização</li>
-      <li>Clique em uma data com evento para ver os detalhes</li>
     </ul>
-    <div class="al al-d"><i>💡</i><span>Use o calendário para anotar audiências, prazos e nomeações urgentes que chegarem no dia. Facilita a gestão da agenda da subseção.</span></div>
   </div>
 
   <div class="card">
     <h3>Como entrar no DOL Atividade Fim</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">1</div><div class="pc"><h4>Na Home, clique em "DOL – Atividade Fim"</h4><p>No menu Sistemas, à esquerda. O sistema carrega em nova aba ou na mesma janela.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">2</div><div class="pc"><h4>Confirme a versão no topo esquerdo</h4><p>Deve aparecer: <code>Versão: v.4.403.0 (68)</code>. Isso confirma que você está no módulo certo.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>A aba "Cadastro" já fica selecionada</h4><p>A tela de Pesquisa de Usuários abre automaticamente — é a função que você mais usa.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">1</div><div class="pc"><h4>Clique em "DOL – Atividade Fim"</h4><p>No menu Sistemas, à esquerda da Home.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">2</div><div class="pc"><h4>Confirme a versão no topo esquerdo</h4><p>Deve aparecer: <code>Versão: v.4.403.0 (68)</code></p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>A aba "Cadastro" já fica selecionada</h4><p>A tela de Pesquisa de Usuários abre automaticamente.</p></div></div>
     </div>
   </div>
 
   <button class="btn-ok" onclick="ok(2,'pc2'); ir(3,nav.querySelectorAll('.nb')[3])">✅ Módulo concluído → Pesquisa</button>
 </section>
 
-<!-- ===================== 3: PESQUISA ===================== -->
+<!-- 3: PESQUISA -->
 <section class="sec" id="s3">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAEEDA">🔍</div>
     <div>
-      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 3 · +15 XP</div>
+      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 3 · +15 XP · 🥉 Bronze</div>
       <h2>Pesquisar usuários</h2>
       <p>A função mais usada todo dia. Aprenda a encontrar qualquer assistido com precisão.</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Campos disponíveis na pesquisa (exatamente como na tela)</h3>
-    <div class="mk">
-      <div class="mk-top"><span style="font-size:11px;font-weight:700">DEFENSORIA <span style="font-weight:400">ONLINE</span></span><span style="font-size:10px;opacity:.8">Versão: v.4.403.0 (68)</span></div>
-      <div class="mk-tabs"><div class="mk-tab on">Cadastro</div><div class="mk-tab">Busca Atendimentos em Plantões Judiciários</div></div>
-      <div class="mk-body">
-        <div class="mk-section">Pesquisa de usuários</div>
-        <div class="mr">
-          <div class="mf"><div class="ml">Número de identificação</div><div class="mi mi-active"></div></div>
-          <div class="mf"><div class="ml">Número processo</div><div class="mi"></div></div>
-          <div class="mf"><div class="ml">Número PA</div><div class="mi"></div></div>
-        </div>
-        <div style="font-size:9.5px;margin:5px 0;color:#444;font-weight:500">⦿ Pessoa física &nbsp;&nbsp;○ Pessoa jurídica</div>
-        <div class="mr">
-          <div class="mf"><div class="ml">CPF</div><div class="mi"></div></div>
-          <div class="mf"><div class="ml">RG/RNE</div><div class="mi"></div><div class="mi" style="margin-top:2px;width:40px"></div></div>
-          <div class="mf"><div class="ml">SAP</div><div class="mi"></div></div>
-        </div>
-        <div class="mr" style="margin-top:5px">
-          <div class="mf" style="flex:2"><div class="ml">Nome</div><div class="mi"></div></div>
-          <div class="mf" style="flex:2"><div class="ml">Nome social</div><div class="mi"></div></div>
-        </div>
-        <div class="mr" style="margin-top:5px">
-          <div class="mf"><div class="ml">Nascimento</div><div class="mi" style="width:110px"></div></div>
-        </div>
-        <div class="mf" style="margin-top:5px"><div class="ml">Nome da mãe</div><div class="mi"></div></div>
-        <div class="mf"><div class="ml">Unidade</div><div class="mi">- - -</div></div>
-        <div style="text-align:right;margin-top:8px"><button class="mbtn">Pesquisar</button></div>
-      </div>
     </div>
   </div>
 
@@ -575,184 +520,124 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>🥉 3ª</td><td>RG/RNE</td><td>Bom para estrangeiros ou quem não tem CPF</td></tr>
       <tr><td>4ª</td><td>Nome + Nascimento</td><td>Combine os dois para filtrar nomes comuns</td></tr>
       <tr><td>5ª</td><td>Nome + Nome da mãe</td><td>Quando não tem data de nascimento disponível</td></tr>
-      <tr><td>6ª</td><td>SAP</td><td>Para assistidos que estão ou estiveram no sistema prisional</td></tr>
+      <tr><td>6ª</td><td>SAP</td><td>Para assistidos do sistema prisional</td></tr>
       <tr><td>7ª</td><td>Nº processo / PA</td><td>Quando você já tem o número do caso específico</td></tr>
     </table>
   </div>
 
   <div class="card">
-    <h3>Dicas práticas do dia a dia</h3>
+    <h3>Dicas práticas</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">💚</div><div class="pc"><h4>Sempre peça o CPF primeiro</h4><p>Antes de qualquer atendimento, peça o CPF do assistido. Evita cadastros duplicados e traz o histórico completo da pessoa.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">⚠️</div><div class="pc"><h4>Nome sozinho retorna muitos resultados</h4><p>"Maria Silva" pode trazer dezenas de pessoas. Sempre combine com mais um campo — data de nascimento, nome da mãe ou CPF.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">🔵</div><div class="pc"><h4>Campo Unidade — filtra por regional</h4><p>Na 247ª, geralmente busque em toda a base (deixe "- - -"). Use Unidade só quando precisar filtrar por núcleo específico da Defensoria.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--roxo-c);color:var(--roxo-e)">🟣</div><div class="pc"><h4>Aba "Busca Atendimentos em Plantões Judiciários"</h4><p>Segunda aba — campos diferentes. Use especificamente para localizar atendimentos de urgência: prisão em flagrante, audiências de custódia. Tem campos específicos para esses casos.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">💚</div><div class="pc"><h4>Sempre peça o CPF primeiro</h4><p>Evita cadastros duplicados e traz o histórico completo.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">⚠️</div><div class="pc"><h4>Nome sozinho retorna muitos resultados</h4><p>"Maria Silva" pode trazer dezenas de pessoas. Combine com data de nascimento ou nome da mãe.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--roxo-c);color:var(--roxo-e)">🟣</div><div class="pc"><h4>Aba "Busca Atendimentos em Plantões Judiciários"</h4><p>Segunda aba — use para prisão em flagrante e audiências de custódia. Tem campos específicos para esses casos.</p></div></div>
     </div>
-    <div class="al al-r"><i>🔴</i><span>NUNCA faça pesquisa por curiosidade. Cada consulta fica registrada com seu login, data e hora. Use somente em atendimentos reais e autorizados.</span></div>
+    <div class="al al-r"><i>🔴</i><span>NUNCA pesquise por curiosidade. Cada consulta fica registrada com seu login, data e hora.</span></div>
   </div>
 
   <button class="btn-ok" onclick="ok(3,'pc3'); ir(4,nav.querySelectorAll('.nb')[4])">✅ Módulo concluído → Cadastro</button>
 </section>
 
-<!-- ===================== 4: CADASTRO ===================== -->
+<!-- 4: CADASTRO -->
 <section class="sec" id="s4">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#EEEDFE">📋</div>
     <div>
-      <div class="nivel-tag" style="background:var(--roxo-c);color:var(--roxo-e)">Módulo 4 · +15 XP</div>
+      <div class="nivel-tag" style="background:var(--roxo-c);color:var(--roxo-e)">Módulo 4 · +15 XP · 🥉 Bronze</div>
       <h2>Cadastro do assistido</h2>
       <p>Abas, campos, alertas obrigatórios, dados criminais, endereço e como salvar corretamente.</p>
     </div>
   </div>
 
   <div class="card">
-    <h3>As 3 abas do prontuário</h3>
-    <div class="mk">
-      <div class="mk-top"><span style="font-size:10px;font-weight:700">Usuário: Cassia Kelly Lins Reis</span></div>
-      <div class="mk-tabs"><div class="mk-tab on">Cadastro</div><div class="mk-tab">Portal DEFi</div><div class="mk-tab">Histórico DPESP</div></div>
-      <div class="mk-body">
-        <div class="mk-alert">ℹ️ Informações sigilosas — uso restrito ao benefício do assistido.<br>ℹ️ Este usuário possui pelo menos um autoatendimento solicitado.<br>ℹ️ Cadastro vinculado com outros módulos — alguns campos não serão habilitados.</div>
-        <div style="display:flex;gap:7px;margin-bottom:7px;flex-wrap:wrap;align-items:center">
-          <button style="background:#e67e22;color:#fff;border:none;padding:5px 12px;border-radius:4px;font-size:10px;font-weight:700;cursor:default">Nova avaliação financeira</button>
-          <input style="flex:1;min-width:100px;padding:4px 8px;border:1px solid #ddd;border-radius:3px;font-size:10px" placeholder="Lembrete..." readonly>
-          <label style="font-size:10px;display:flex;align-items:center;gap:3px"><input type="checkbox" disabled> Curadoria</label>
-          <label style="font-size:10px;display:flex;align-items:center;gap:3px"><input type="checkbox" disabled> Mãe em cárcere</label>
-        </div>
-        <div style="font-size:9px;color:#888">⬇ Role para ver: dados pessoais → dados criminais → endereço → telefone → botão Salvar</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Seções da aba Cadastro — de cima para baixo</h3>
+    <h3>Seções da aba Cadastro</h3>
     <table class="tbl">
       <tr><th>Seção</th><th>Campos principais</th><th>Obrigatórios</th></tr>
       <tr><td><strong>Dados pessoais</strong></td><td>Nome, CPF, nascimento, estado civil, nacionalidade, sexo, deficiência, raça/cor, gênero, nome da mãe, SAP, RG/RNE</td><td>Nome*, CPF*</td></tr>
-      <tr><td><strong>Dados criminais</strong></td><td>RG Criminal — clique no + para adicionar. Para assistidos com passagem pelo sistema prisional.</td><td>Só se aplicável</td></tr>
+      <tr><td><strong>Dados criminais</strong></td><td>RG Criminal — clique no + para adicionar</td><td>Só se aplicável</td></tr>
       <tr><td><strong>Endereço</strong></td><td>CEP, logradouro, número, complemento, bairro, cidade, estado. Flags: "em situação de rua" e "não possui endereço"</td><td>CEP*, número*</td></tr>
       <tr><td><strong>Contato</strong></td><td>E-mail e telefone com DDD. Flag "não possui e-mail"</td><td>Telefone* (se preencher)</td></tr>
     </table>
-    <div class="al al-d"><i>💡</i><span>Campos com * são obrigatórios. O sistema não deixa salvar se estiverem vazios. O CEP preenche cidade e estado automaticamente.</span></div>
   </div>
 
   <div class="card">
-    <h3>O que são os 3 alertas amarelos</h3>
+    <h3>Os 3 alertas amarelos</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Informações só podem ser usadas em benefício do assistido"</h4><p>Aviso legal padrão. Aparece em <em>todos</em> os cadastros. Confirma o sigilo dos dados (LGPD + Lei Complementar 988/2006).</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Possui pelo menos um autoatendimento solicitado"</h4><p>A pessoa já fez contato pelo portal digital ou quiosque e tem um PA (Pedido de Atendimento) registrado. <strong>Verifique o histórico antes de abrir novo atendimento</strong> para evitar duplicidade.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Cadastro vinculado com outros módulos"</h4><p>Campos cinza não editáveis — gerenciados por outro módulo da Defensoria. Não tente forçar edição. Se precisar alterar, acione a defensora responsável.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Informações só para benefício do assistido"</h4><p>Aviso legal padrão em todos os cadastros. Confirma o sigilo (LGPD + LC 988/2006).</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Possui pelo menos um autoatendimento"</h4><p>A pessoa já fez contato pelo portal digital e tem um PA. <strong>Verifique o histórico antes de abrir novo atendimento.</strong></p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Cadastro vinculado com outros módulos"</h4><p>Campos cinza não editáveis — gerenciados por outro módulo. Não tente forçar edição.</p></div></div>
     </div>
   </div>
 
   <div class="card">
-    <h3>Campos especiais — quando e como usar</h3>
+    <h3>Campos especiais</h3>
     <table class="tbl">
       <tr><th>Campo</th><th>Quando preencher</th></tr>
-      <tr><td>Nome social</td><td>Nome pelo qual a pessoa prefere ser chamada. Obrigatório respeitar por lei.</td></tr>
-      <tr><td>Curadoria ☑</td><td>Quando o assistido precisa de representante legal (incapaz civil ou deficiência mental grave).</td></tr>
-      <tr><td>Mãe em cárcere ☑</td><td>Quando o assistido é filho(a) de mulher presa. Aciona protocolos especiais de atendimento.</td></tr>
-      <tr><td>Matrícula SAP</td><td>Para quem está ou esteve no sistema penitenciário. Se não tiver, marque "Não possui matrícula SAP".</td></tr>
-      <tr><td>RG Criminal</td><td>Seção separada. Clique no + verde para adicionar. Casos criminais com passagem pela polícia.</td></tr>
-      <tr><td>Lembrete</td><td>Campo livre para anotações internas. Só aparece para quem acessou o cadastro — não é campo oficial.</td></tr>
-      <tr><td>Não possui RG/RNE ☑</td><td>Marque quando a pessoa não tem documento de identidade. Libera o campo para salvar sem RG.</td></tr>
+      <tr><td>Nome social</td><td>Nome pelo qual a pessoa prefere ser chamada — obrigatório respeitar por lei</td></tr>
+      <tr><td>Curadoria ☑</td><td>Quando o assistido precisa de representante legal</td></tr>
+      <tr><td>Mãe em cárcere ☑</td><td>Quando o assistido é filho(a) de mulher presa</td></tr>
+      <tr><td>Matrícula SAP</td><td>Para quem está ou esteve no sistema penitenciário</td></tr>
+      <tr><td>Lembrete</td><td>Anotações internas — não é campo oficial</td></tr>
     </table>
-  </div>
-
-  <div class="card">
-    <h3>Como salvar alterações</h3>
-    <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">1</div><div class="pc"><h4>Role até o final do cadastro</h4><p>O botão laranja <strong>Salvar</strong> fica no fim da página, após a seção de contato.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--verde-c);color:var(--verde-e)">2</div><div class="pc"><h4>Clique em Salvar</h4><p>O sistema registra automaticamente: o que foi mudado, quem mudou e quando. Esse log é auditável — fica no Histórico de Alterações Cadastrais.</p></div></div>
-    </div>
-    <div class="al al-a"><i>⚠️</i><span>O log de alterações é permanente e auditável. Edite somente o que for necessário e correto. Cada mudança fica com seu nome para sempre.</span></div>
+    <div class="al al-a"><i>⚠️</i><span>O log de alterações é permanente e auditável. Cada mudança fica com seu nome, data e campo alterado.</span></div>
   </div>
 
   <button class="btn-ok" onclick="ok(4,'pc4'); ir(5,nav.querySelectorAll('.nb')[5])">✅ Módulo concluído → Histórico</button>
 </section>
 
-<!-- ===================== 5: HISTÓRICO ===================== -->
+<!-- 5: HISTÓRICO -->
 <section class="sec" id="s5">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAEEDA">📁</div>
     <div>
-      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 5 · +15 XP</div>
+      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 5 · +15 XP · 🥈 Prata</div>
       <h2>Histórico DPESP e abas avançadas</h2>
       <p>Tudo que fica registrado sobre o assistido: casos jurídicos, histórico de alterações, Portal DEFi.</p>
     </div>
   </div>
 
   <div class="card">
-    <h3>Aba "Histórico DPESP" — a mais importante</h3>
-    <div class="mk">
-      <div class="mk-top"><span style="font-size:10px;font-weight:700">Usuário: Cassia Kelly Lins Reis</span></div>
-      <div class="mk-tabs"><div class="mk-tab">Cadastro</div><div class="mk-tab">Portal DEFi</div><div class="mk-tab on">Histórico DPESP</div></div>
-      <div class="mk-body">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;flex-wrap:wrap;gap:5px">
-          <button style="background:#fff;border:1px solid #4a9070;color:#4a9070;padding:4px 10px;border-radius:4px;font-size:9.5px;cursor:default">✛ Inserir novo problema</button>
-          <div style="font-size:9.5px;color:#666">Ordenação: <span style="border:1px solid #ddd;padding:2px 7px;border-radius:3px;background:#fff">Data da entrada ▾</span></div>
-        </div>
-        <input style="width:100%;padding:4px 8px;border:1px solid #ddd;border-radius:3px;font-size:9.5px;margin-bottom:6px" placeholder="Filtrar dados..." readonly>
-        <table style="width:100%;border-collapse:collapse;font-size:9px">
-          <tr style="background:#4a9070;color:#fff"><td style="padding:4px 6px">Área</td><td>Problema</td><td>Tipo entrada</td><td>Data</td><td>Últ. mov.</td><td>CAM</td><td>Situação</td><td>Nº Processo</td><td></td></tr>
-          <tr><td style="padding:4px 6px;border-bottom:1px solid #eee;color:#555">Cível – Juizado Especial</td><td style="border-bottom:1px solid #eee;color:#555">Cumprimento de Sentença</td><td style="border-bottom:1px solid #eee;color:#555">Atendimento ini-cial subsecção</td><td style="border-bottom:1px solid #eee;color:#555">11/07/2024</td><td style="border-bottom:1px solid #eee;color:#555">11/07/2024</td><td style="border-bottom:1px solid #eee;color:#555">Não</td><td style="border-bottom:1px solid #eee;color:#555">Av. financeira Concedido</td><td style="border-bottom:1px solid #eee;color:#555"></td><td style="border-bottom:1px solid #eee"><button style="border:1px solid #ddd;padding:2px 7px;border-radius:3px;font-size:9px;cursor:default">▶</button></td></tr>
-          <tr><td style="padding:4px 6px;color:#555">Cível – Família</td><td style="color:#555">Ação declaratória</td><td style="color:#555">Atendimento ini-cial subsecção</td><td style="color:#555">19/09/2022</td><td style="color:#555">19/09/2022</td><td style="color:#555">Não</td><td style="color:#555">Av. financeira Concedido</td><td style="color:#555"></td><td><button style="border:1px solid #ddd;padding:2px 7px;border-radius:3px;font-size:9px;cursor:default">▶</button></td></tr>
-        </table>
-        <div style="font-size:9px;color:#888;margin-top:5px">Mostrando 1 - 2 de 2 registros encontrados</div>
-        <div style="background:#4a9070;color:#fff;text-align:center;padding:4px;border-radius:3px;font-size:10px;font-weight:700;margin-top:8px">Histórico Plantão</div>
-        <div style="background:#fff;text-align:center;padding:5px;font-size:9.5px;color:#888;border:1px solid #ddd;margin-top:2px">Nenhum registro encontrado</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Colunas da tabela de histórico — o que cada uma significa</h3>
+    <h3>Colunas da tabela de histórico</h3>
     <table class="tbl">
       <tr><th>Coluna</th><th>Significado</th></tr>
-      <tr><td>Área</td><td>Ramo do direito: Cível, Criminal, Família, Juizado Especial, etc.</td></tr>
-      <tr><td>Problema</td><td>Tipo do caso: "Ação declaratória", "Cumprimento de Sentença em Causas ABAIXO..."</td></tr>
-      <tr><td>Tipo de entrada</td><td>Como o atendimento começou: "Atendimento inicial subsecção" (presencial), autoatendimento (digital)</td></tr>
+      <tr><td>Área</td><td>Ramo do direito: Cível, Criminal, Família, Juizado Especial</td></tr>
+      <tr><td>Problema</td><td>Tipo do caso: "Ação declaratória", "Cumprimento de Sentença"</td></tr>
+      <tr><td>Tipo de entrada</td><td>Como o atendimento começou: presencial ou autoatendimento digital</td></tr>
       <tr><td>Data da entrada</td><td>Quando o caso foi registrado no sistema</td></tr>
-      <tr><td>Data última movimentação</td><td>Última ação registrada no processo</td></tr>
-      <tr><td>Envolvidos</td><td>Outras partes vinculadas ao caso (+)</td></tr>
       <tr><td>CAM</td><td>Se o caso foi para mediação na Câmara Municipal</td></tr>
-      <tr><td>Situação</td><td>Status atual: "Avaliação financeira Concedido — Cassia Kelly Lins Reis"</td></tr>
-      <tr><td>▶ (seta)</td><td>Clique para ver detalhes completos daquele caso específico</td></tr>
+      <tr><td>Situação</td><td>"Avaliação financeira Concedido" — com nome de quem registrou</td></tr>
+      <tr><td>▶ (seta)</td><td>Clique para ver detalhes completos daquele caso</td></tr>
     </table>
   </div>
 
   <div class="card">
-    <h3>Seções embaixo do cadastro (role para baixo)</h3>
+    <h3>Seções embaixo do cadastro</h3>
     <table class="tbl">
       <tr><th>Seção</th><th>O que mostra</th></tr>
-      <tr><td>Histórico de avaliações financeiras</td><td>Tabela com todas as avaliações de renda: data, quem fez, local de atendimento, situação (Concedido/Negado)</td></tr>
-      <tr><td>Histórico de renda familiar</td><td>Renda declarada pelo assistido no autoatendimento (ex: R$ 0,00 com 0 membros = dado não preenchido)</td></tr>
-      <tr><td>Histórico de alterações cadastrais</td><td>Log auditável: data, quem editou, qual campo foi mudado e o novo valor</td></tr>
+      <tr><td>Histórico de avaliações financeiras</td><td>Todas as avaliações: data, quem fez, situação (Concedido/Negado)</td></tr>
+      <tr><td>Histórico de renda familiar</td><td>Renda declarada no autoatendimento</td></tr>
+      <tr><td>Histórico de alterações cadastrais</td><td>Log auditável: data, quem editou, qual campo e o novo valor</td></tr>
     </table>
-    <div class="al al-a"><i>⚠️</i><span>O log de alterações fica permanentemente registrado. Você pode ver no exemplo real: "25/07/2023 — Cassia Kelly Lins Reis alterou Cidade → Pirapora do Bom Jesus".</span></div>
-  </div>
-
-  <div class="card">
-    <h3>Aba "Portal DEFi"</h3>
-    <p>Controla o acesso digital do assistido ao portal de autoatendimento. Geralmente você não altera nada aqui — é administrado pela Defensoria. Serve para consultar se o assistido tem login ativo no portal digital ou não.</p>
+    <div class="al al-a"><i>⚠️</i><span>O log de alterações é permanente. Você pode ver: "25/07/2023 — Cassia Kelly Lins Reis alterou Cidade → Pirapora do Bom Jesus".</span></div>
   </div>
 
   <button class="btn-ok" onclick="ok(5,'pc5'); ir(6,nav.querySelectorAll('.nb')[6])">✅ Módulo concluído → Avaliação Financeira</button>
 </section>
 
-<!-- ===================== 6: AVALIAÇÃO FINANCEIRA ===================== -->
+<!-- 6: AV. FINANCEIRA -->
 <section class="sec" id="s6">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAEEDA">💰</div>
     <div>
-      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 6 · +20 XP</div>
+      <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo 6 · +20 XP · 🥈 Prata</div>
       <h2>Avaliação financeira</h2>
       <p>Como registrar, quando usar e interpretar o histórico de avaliações de hipossuficiência.</p>
     </div>
   </div>
 
   <div class="card card-destaque">
-    <h3>O que é avaliação financeira e por que existe?</h3>
-    <p>A Defensoria Pública só pode atender pessoas <strong>hipossuficientes</strong> — quem não tem renda para pagar advogado. A avaliação financeira é o registro formal dessa comprovação. Sem ela, o assistido não tem direito ao serviço.</p>
+    <h3>O que é avaliação financeira?</h3>
+    <p>A Defensoria só atende <strong>hipossuficientes</strong> — quem não tem renda para pagar advogado. A avaliação é o registro formal dessa comprovação.</p>
     <div class="chips">
       <span class="chip cv">Concedido = tem direito</span>
       <span class="chip cc">Negado = renda acima do limite</span>
@@ -760,32 +645,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   </div>
 
   <div class="card">
-    <h3>O botão laranja "Nova avaliação financeira"</h3>
-    <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">1</div><div class="pc"><h4>Fica no topo do cadastro do assistido</h4><p>Botão laranja visível assim que você abre qualquer prontuário. Clique nele quando for necessário registrar uma nova avaliação de renda.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">2</div><div class="pc"><h4>Preencha os dados de renda</h4><p>O formulário pede: renda familiar, número de membros na família, local de atendimento. Preencha com base no que o assistido declarar presencialmente.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">3</div><div class="pc"><h4>Confirme e salve</h4><p>O resultado (Concedido ou Negado) fica registrado com seu nome, data e horário no histórico de avaliações.</p></div></div>
-    </div>
-    <div class="al al-r"><i>🔴</i><span>Somente use quando orientado pela defensora responsável. Nunca registre avaliações falsas ou sem o assistido presente. Isso é auditável e tem consequências jurídicas.</span></div>
-  </div>
-
-  <div class="card">
-    <h3>Exemplo real do histórico de avaliações financeiras</h3>
-    <p>Com base nos prints reais do sistema:</p>
-    <table class="av-tabela" style="margin-top:.6rem">
-      <thead><tr><th>Última Data Salva</th><th>Inserido por</th><th>Data Final.</th><th>Situação</th><th>Local</th></tr></thead>
-      <tbody>
-        <tr><td>16/09/2025</td><td>Cassia Kelly Lins Reis</td><td>16/09/2025</td><td><span class="av-concedido">Concedido</span></td><td>REGIONAL OSASCO</td></tr>
-        <tr><td>11/07/2024</td><td>Cassia Kelly Lins Reis</td><td>11/07/2024</td><td><span class="av-concedido">Concedido</span></td><td>REGIONAL OSASCO</td></tr>
-        <tr><td>04/04/2023</td><td>MARIA PÁSCOA DE SENA</td><td>04/04/2023</td><td><span class="av-concedido">Concedido</span></td><td>REGIONAL OSASCO</td></tr>
-        <tr><td>19/09/2022</td><td>Cassia Kelly Lins Reis</td><td>19/09/2022</td><td><span class="av-concedido">Concedido</span></td><td>REGIONAL OSASCO</td></tr>
-      </tbody>
-    </table>
-    <div class="al al-d"><i>💡</i><span>O histórico mostra quem fez cada avaliação. É possível ver que Maria Páscoa de Sena (outra funcionária) também registrou avaliações no mesmo assistido — totalmente normal quando há mais de uma funcionária.</span></div>
-  </div>
-
-  <div class="card">
-    <h3>Quando reavaliar financeiramente?</h3>
+    <h3>Quando reavaliar?</h3>
     <table class="tbl">
       <tr><th>Situação</th><th>Precisa de nova avaliação?</th></tr>
       <tr><td>Mesmo assistido, novo caso jurídico</td><td>Sim — cada caso exige avaliação própria</td></tr>
@@ -793,17 +653,18 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>Situação financeira mudou</td><td>Sim — pode resultar em negado</td></tr>
       <tr><td>Continuidade do mesmo processo</td><td>Não — a avaliação já feita vale</td></tr>
     </table>
+    <div class="al al-r"><i>🔴</i><span>Somente registre avaliações quando orientada pela defensora. Nunca registre sem o assistido presente. Isso é auditável e tem consequências jurídicas.</span></div>
   </div>
 
   <button class="btn-ok" onclick="ok(6,'pc6'); ir(7,nav.querySelectorAll('.nb')[7])">✅ Módulo concluído → Nomeação</button>
 </section>
 
-<!-- ===================== 7: NOMEAÇÃO ===================== -->
+<!-- 7: NOMEAÇÃO -->
 <section class="sec" id="s7">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAECE7">⚖️</div>
     <div>
-      <div class="nivel-tag" style="background:var(--coral-c);color:var(--coral-e)">Módulo 7 · +20 XP</div>
+      <div class="nivel-tag" style="background:var(--coral-c);color:var(--coral-e)">Módulo 7 · +20 XP · 🥈 Prata</div>
       <h2>Sistema de Nomeação OAB/DPESP</h2>
       <p>O trabalho central da 247ª: indicação de advogados dativos para o Fórum de Santana de Parnaíba.</p>
     </div>
@@ -811,14 +672,10 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 
   <div class="card card-destaque">
     <h3>O que é o convênio OAB/DPESP?</h3>
-    <p>Quando a Defensoria Pública não tem defensor público disponível para um caso, ela aciona a OAB. A <strong>247ª Subseção OAB-SP</strong> indica um advogado privado — chamado <strong>defensor dativo</strong> — que atua pelo convênio e é remunerado pelo Estado.</p>
+    <p>Quando a Defensoria não tem defensor disponível, ela aciona a OAB. A 247ª indica um advogado — o <strong>defensor dativo</strong> — que atua pelo convênio e é remunerado pelo Estado.</p>
     <div class="chips">
-      <span class="chip cv">Vara Criminal</span>
-      <span class="chip ca">Vara Cível</span>
-      <span class="chip co">Juizado Especial</span>
-      <span class="chip cr">Família e Sucessões</span>
-      <span class="chip cc">Execução Penal</span>
-      <span class="chip cg">Infância e Juventude</span>
+      <span class="chip cv">Vara Criminal</span><span class="chip ca">Vara Cível</span><span class="chip co">Juizado Especial</span>
+      <span class="chip cr">Família e Sucessões</span><span class="chip cc">Execução Penal</span><span class="chip cg">Infância e Juventude</span>
     </div>
   </div>
 
@@ -838,57 +695,34 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   </div>
 
   <div class="card">
-    <h3>Passo a passo detalhado</h3>
-    <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">1</div><div class="pc"><h4>Fórum envia a solicitação</h4><p>O cartório ou vara encaminha para a OAB: pode chegar por e-mail, ofício físico, WhatsApp da vara ou diretamente pelo sistema DOL (módulo de indicação OAB).</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">2</div><div class="pc"><h4>247ª verifica os dados</h4><p>Confira: nome do réu/parte, número do processo (formato CNJ), vara, comarca, tipo de ação e ato processual. Confirme se é Santana de Parnaíba ou município do convênio.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">3</div><div class="pc"><h4>Selecionar o advogado dativo</h4><p>No sistema de indicação OAB, o advogado é selecionado seguindo critérios: lista de plantão, especialidade, disponibilidade, regras do Provimento OAB-SP. A escolha não é aleatória.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">4</div><div class="pc"><h4>Registrar no DOL</h4><p>A nomeação é registrada com: processo, advogado indicado, vara, data. O sistema gera o documento oficial de nomeação.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">5</div><div class="pc"><h4>Comunicar advogado e Fórum</h4><p>O advogado indicado é notificado (e-mail ou WhatsApp). O Fórum recebe confirmação da nomeação para dar andamento ao processo.</p></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Dados que você precisa ter para nomear</h3>
+    <h3>Dados necessários para nomear</h3>
     <table class="tbl">
       <tr><th>Dado</th><th>Onde encontrar</th></tr>
       <tr><td>Nome completo do réu/parte</td><td>No ofício ou e-mail do Fórum</td></tr>
       <tr><td>Número do processo (CNJ)</td><td>No ofício — formato: 0000000-00.0000.0.00.0000</td></tr>
-      <tr><td>Vara e comarca</td><td>No ofício: ex. "1ª Vara Criminal de Santana de Parnaíba"</td></tr>
-      <tr><td>Tipo de crime/ação</td><td>No ofício: ex. "furto qualificado" ou "ação de alimentos"</td></tr>
-      <tr><td>Ato processual</td><td>Próxima audiência ou prazo: ex. "audiência instrução em 15 dias"</td></tr>
-      <tr><td>CPF do assistido</td><td>Peça ao Fórum ou verifique no DOL</td></tr>
+      <tr><td>Vara e comarca</td><td>Ex: "1ª Vara Criminal de Santana de Parnaíba"</td></tr>
+      <tr><td>Tipo de crime/ação</td><td>Ex: "furto qualificado" ou "ação de alimentos"</td></tr>
+      <tr><td>Ato processual</td><td>Ex: "audiência instrução em 15 dias"</td></tr>
     </table>
+    <div class="al al-r"><i>🔴</i><span>Toda nomeação é ato oficial com consequências jurídicas. Em caso de dúvida, consulte a Cássia antes de confirmar.</span></div>
   </div>
 
-  <div class="card">
-    <h3>Situações especiais na nomeação</h3>
-    <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">🚨</div><div class="pc"><h4>Prazo urgente — flagrante ou custódia</h4><p>Quando alguém é preso, a audiência de custódia é em <strong>até 24 horas</strong>. Nomeação com prioridade máxima — comunique imediatamente a Cássia ou a defensora de plantão.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>Advogado recusa a nomeação</h4><p>Advogados podem recusar por impedimento, conflito de interesses ou doença. Registre a recusa no sistema e faça nova indicação. Não é motivo para pânico — é procedimento normal.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>Assistido já tem advogado constituído</h4><p>Se a parte tiver advogado particular, <strong>não pode receber dativo</strong>. Verifique no processo antes de nomear — pode estar desatualizado no sistema.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--roxo-c);color:var(--roxo-e)">📋</div><div class="pc"><h4>Lei 13.431/2017 — crianças e adolescentes vítimas</h4><p>Casos de violência contra crianças/adolescentes seguem protocolo especial. A 247ª tem o sistema <strong>Demandas do Fórum</strong> separado do DOL principal. Sempre comunique a Cássia antes de agir.</p></div></div>
-    </div>
-    <div class="al al-r"><i>🔴</i><span>Toda nomeação é ato oficial com consequências jurídicas. Nunca registre sem ter certeza dos dados. Em caso de dúvida, consulte a Cássia antes de confirmar.</span></div>
-  </div>
-
-  <button class="btn-ok" onclick="ok(7,'pc7'); ir(8,nav.querySelectorAll('.nb')[8])">✅ Módulo concluído → LGPD e Sigilo</button>
+  <button class="btn-ok" onclick="ok(7,'pc7'); ir(8,nav.querySelectorAll('.nb')[8])">✅ Módulo concluído → LGPD</button>
 </section>
 
-<!-- ===================== 8: LGPD ===================== -->
+<!-- 8: LGPD -->
 <section class="sec" id="s8">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#EEEDFE">🔐</div>
     <div>
-      <div class="nivel-tag" style="background:var(--roxo-c);color:var(--roxo-e)">Módulo 8 · +20 XP</div>
+      <div class="nivel-tag" style="background:var(--roxo-c);color:var(--roxo-e)">Módulo 8 · +20 XP · 🥈 Prata</div>
       <h2>LGPD e Sigilo no DOL</h2>
-      <p>Por que dados de assistidos são sigilosos, o que você pode e não pode fazer e quais leis se aplicam.</p>
+      <p>Por que dados de assistidos são sigilosos e o que você pode e não pode fazer.</p>
     </div>
   </div>
 
   <div class="card card-destaque">
-    <h3>Por que dados de assistidos são ultra-sigilosos?</h3>
-    <p>Assistidos da Defensoria compartilham situações extremamente vulneráveis: processos criminais, problemas de família, dívidas, saúde mental, histórico prisional. Esses dados são protegidos por <strong>3 camadas legais</strong> simultâneas.</p>
+    <h3>3 camadas de proteção simultâneas</h3>
     <div class="chips">
       <span class="chip cr">LGPD — Lei 13.709/2018</span>
       <span class="chip ca">LC 988/2006 — Lei Orgânica DPESP</span>
@@ -897,33 +731,21 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   </div>
 
   <div class="card">
-    <h3>O que você PODE fazer</h3>
-    <ul>
-      <li>Pesquisar e acessar cadastros de assistidos em atendimentos reais</li>
-      <li>Editar dados quando autorizado e com assistido presente</li>
-      <li>Registrar avaliações financeiras quando solicitado pela defensora</li>
-      <li>Consultar histórico para preparar nomeações</li>
-      <li>Usar os dados para cumprir as obrigações do convênio OAB/DPESP</li>
-    </ul>
-  </div>
-
-  <div class="card">
     <h3>O que você NUNCA pode fazer</h3>
     <div class="al al-r" style="margin-top:0"><i>🚫</i><span>Acessar cadastros por curiosidade, mesmo que a pessoa seja conhecida</span></div>
     <div class="al al-r"><i>🚫</i><span>Compartilhar dados de assistidos com terceiros, incluindo familiares</span></div>
-    <div class="al al-r"><i>🚫</i><span>Fazer capturas de tela do sistema e enviar fora do ambiente de trabalho</span></div>
+    <div class="al al-r"><i>🚫</i><span>Fazer capturas de tela e enviar fora do ambiente de trabalho</span></div>
     <div class="al al-r"><i>🚫</i><span>Deixar a sessão aberta e sair do computador sem logout</span></div>
     <div class="al al-r"><i>🚫</i><span>Registrar avaliações financeiras sem o assistido presente</span></div>
   </div>
 
   <div class="card">
     <h3>Rastreabilidade — você sempre deixa rastro</h3>
-    <p>Cada ação no DOL gera um log com seu login, data e hora:</p>
-    <table class="tbl" style="margin-top:.5rem">
+    <table class="tbl">
       <tr><th>Ação</th><th>O que fica registrado</th></tr>
-      <tr><td>Pesquisa de usuário</td><td>Login, data, hora, campos usados, resultado</td></tr>
+      <tr><td>Pesquisa de usuário</td><td>Login, data, hora, campos usados</td></tr>
       <tr><td>Edição de cadastro</td><td>Campo alterado, valor anterior, valor novo, data, quem editou</td></tr>
-      <tr><td>Avaliação financeira</td><td>Resultado, data, quem registrou, local de atendimento</td></tr>
+      <tr><td>Avaliação financeira</td><td>Resultado, data, quem registrou, local</td></tr>
       <tr><td>Nomeação</td><td>Processo, advogado, data, quem registrou</td></tr>
     </table>
     <div class="al al-a"><i>⚠️</i><span>O log é permanente e auditável pela Defensoria e pela OAB. Uma consulta indevida pode gerar processo administrativo disciplinar.</span></div>
@@ -932,14 +754,14 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <button class="btn-ok" onclick="ok(8,'pc8'); ir(9,nav.querySelectorAll('.nb')[9])">✅ Módulo concluído → Situações Especiais</button>
 </section>
 
-<!-- ===================== 9: SITUAÇÕES ESPECIAIS ===================== -->
+<!-- 9: SITUAÇÕES -->
 <section class="sec" id="s9">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAECE7">🚨</div>
     <div>
-      <div class="nivel-tag" style="background:var(--coral-c);color:var(--coral-e)">Módulo 9 · +20 XP</div>
+      <div class="nivel-tag" style="background:var(--coral-c);color:var(--coral-e)">Módulo 9 · +20 XP · 🥇 Ouro</div>
       <h2>Situações especiais e protocolos</h2>
-      <p>O que fazer em casos urgentes, erros no sistema, cadastros duplicados e outras situações que exigem atenção.</p>
+      <p>Urgências, erros no sistema, cadastros duplicados e outras situações críticas.</p>
     </div>
   </div>
 
@@ -948,337 +770,579 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     <div class="al al-r"><i>🚨</i><span>Prazo de 24 horas para audiência de custódia. Ação imediata obrigatória.</span></div>
     <div class="passos" style="margin-top:.85rem">
       <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">1</div><div class="pc"><h4>Receba a solicitação do Fórum</h4><p>Geralmente chega por telefone ou e-mail urgente da delegacia ou vara criminal.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">2</div><div class="pc"><h4>Comunique IMEDIATAMENTE a Cássia</h4><p>Não tente resolver sozinho(a). Preso em flagrante tem prioridade absoluta — interrompa o que estiver fazendo.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">3</div><div class="pc"><h4>A nomeação é feita com prioridade máxima</h4><p>O advogado de plantão é indicado imediatamente e comunicado para estar na audiência de custódia.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">2</div><div class="pc"><h4>Comunique IMEDIATAMENTE a Cássia</h4><p>Não tente resolver sozinha. Preso em flagrante tem prioridade absoluta.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">3</div><div class="pc"><h4>Nomeação com prioridade máxima</h4><p>O advogado de plantão é indicado imediatamente e comunicado para a audiência de custódia.</p></div></div>
     </div>
-  </div>
-
-  <div class="card">
-    <h3>Cadastro duplicado — o que fazer</h3>
-    <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>Identifique a duplicata</h4><p>Pesquise pelo CPF — se aparecerem dois registros para a mesma pessoa, há duplicata. Anote os dois números de identificação.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>NÃO delete nem edite por conta própria</h4><p>Exclusão de cadastro pode apagar histórico jurídico importante. Comunique a Cássia e a Defensoria para que o processo de unificação seja feito corretamente.</p></div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Erro ao salvar — campo obrigatório não preenchido</h3>
-    <div class="al al-d"><i>💡</i><span>O DOL bloqueia o salvamento e destaca em vermelho o campo que falta. Role a página até o campo marcado, preencha e tente salvar novamente. Os campos mais esquecidos: número do telefone (DDD obrigatório) e CEP.</span></div>
   </div>
 
   <div class="card">
     <h3>Situações que exigem sempre consultar a Cássia</h3>
     <table class="tbl">
-      <tr><th>Situação</th><th>Por quê não agir sozinho(a)</th></tr>
+      <tr><th>Situação</th><th>Por quê não agir sozinha</th></tr>
       <tr><td>Preso em flagrante</td><td>Prazo de 24h — qualquer atraso pode ser ilegal</td></tr>
       <tr><td>Lei 13.431/2017 (criança/adolescente vítima)</td><td>Protocolo especial com sistema próprio</td></tr>
       <tr><td>Advogado recusa nomeação</td><td>Há regras específicas para nova indicação</td></tr>
       <tr><td>Assistido já tem advogado constituído</td><td>Não se nomeia dativo nesse caso</td></tr>
       <tr><td>Cadastro duplicado</td><td>Risco de apagar histórico jurídico</td></tr>
-      <tr><td>Campo bloqueado que precisa ser alterado</td><td>Gerenciado por outro módulo — só a Defensoria altera</td></tr>
-      <tr><td>Solicitação de outro município/comarca</td><td>Pode não ser do convênio da 247ª</td></tr>
+      <tr><td>Solicitação de outro município</td><td>Pode não ser do convênio da 247ª</td></tr>
     </table>
   </div>
 
   <div class="card">
-    <h3>Sistema fora do ar — o que fazer</h3>
+    <h3>Sistema fora do ar</h3>
     <div class="passos">
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">1</div><div class="pc"><h4>Tente recarregar a página</h4><p>F5 ou Ctrl+R. Muitas vezes resolve instabilidade temporária.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">2</div><div class="pc"><h4>Espere 5 minutos e tente novamente</h4><p>O DOL tem manutenção periódica. Se voltar em minutos, era instabilidade normal.</p></div></div>
-      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>Comunique a Cássia</h4><p>Se persistir, informe. Para casos urgentes (flagrante), o contato direto com a Defensoria de plantão substitui temporariamente o sistema.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">1</div><div class="pc"><h4>Recarregue a página</h4><p>F5 ou Ctrl+R. Resolve a maioria das instabilidades temporárias.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">2</div><div class="pc"><h4>Espere 5 minutos e tente novamente</h4><p>O DOL tem manutenção periódica.</p></div></div>
+      <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>Comunique a Cássia</h4><p>Se persistir. Para urgências (flagrante), o contato direto com a Defensoria de plantão substitui temporariamente.</p></div></div>
     </div>
   </div>
 
-  <button class="btn-ok" onclick="ok(9,'pc9'); ir(10,nav.querySelectorAll('.nb')[10])">✅ Módulo concluído → Quiz</button>
+  <button class="btn-ok" onclick="ok(9,'pc9'); ir(10,nav.querySelectorAll('.nb')[10])">✅ Módulo concluído → Quiz por Nível</button>
 </section>
 
-<!-- ===================== 10: QUIZ ===================== -->
+<!-- 10: QUIZ -->
 <section class="sec" id="s10">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FCEBEB">❓</div>
     <div>
-      <div class="nivel-tag" style="background:#FCEBEB;color:#A32D2D">Módulo 10 · +25 XP</div>
-      <h2>Quiz — teste seu conhecimento</h2>
-      <p>12 perguntas cobrindo todos os módulos. Prove que você domina o DOL!</p>
+      <div class="nivel-tag" style="background:#FCEBEB;color:#A32D2D">Módulo 10 · +25 XP · 🥇 Ouro</div>
+      <h2>Quiz por nível de certificado</h2>
+      <p>4 perguntas por bloco + mistão Diamante ao final. Responda tudo para liberar seu certificado máximo!</p>
     </div>
   </div>
-  <div id="quizC"></div>
-  <div id="quizR" style="display:none">
-    <div class="card" style="text-align:center;padding:2rem">
-      <div style="font-size:3.5rem;margin-bottom:.85rem" id="qEmoji">🏆</div>
-      <h3 id="qPlacar" style="font-family:Sora;font-size:1.3rem;margin-bottom:.5rem"></h3>
-      <p id="qMsg" style="color:var(--texto-s);line-height:1.6;max-width:400px;margin:0 auto"></p>
-      <button class="btn-ok" onclick="ok(10,'pc10'); ir(11,nav.querySelectorAll('.nb')[11])" style="margin-top:1.25rem">📖 Ver Glossário</button>
+
+  <div id="quizBronzeC">
+    <div class="quiz-bloco-sep">
+      <div class="sep-linha"></div>
+      <div class="sep-badge" style="background:var(--bronze-c);color:var(--bronze-e)">🥉 Quiz Bronze · Módulos 1–4</div>
+      <div class="sep-linha"></div>
     </div>
+    <div id="qBronzeWrap"></div>
   </div>
+
+  <div id="quizPrataC" style="margin-top:1.5rem">
+    <div class="quiz-bloco-sep">
+      <div class="sep-linha"></div>
+      <div class="sep-badge" style="background:var(--prata-c);color:var(--prata-e)">🥈 Quiz Prata · Módulos 5–8</div>
+      <div class="sep-linha"></div>
+    </div>
+    <div id="qPrataWrap"></div>
+  </div>
+
+  <div id="quizOuroC" style="margin-top:1.5rem">
+    <div class="quiz-bloco-sep">
+      <div class="sep-linha"></div>
+      <div class="sep-badge" style="background:var(--ouro-c);color:var(--ouro-e)">🥇 Quiz Ouro · Módulos 9–11</div>
+      <div class="sep-linha"></div>
+    </div>
+    <div id="qOuroWrap"></div>
+  </div>
+
+  <div id="quizDiamanteC" style="margin-top:2rem">
+    <div class="quiz-bloco-sep">
+      <div class="sep-linha"></div>
+      <div class="sep-badge" style="background:var(--diamante-c);color:var(--diamante-e)">💎 Mistão Diamante · Todos os módulos</div>
+      <div class="sep-linha"></div>
+    </div>
+    <div id="qDiaLocked">
+      <div class="locked-overlay">
+        <div class="lo-icon">🔒</div>
+        <p>O Mistão Diamante é liberado após você completar os quizzes <strong>Bronze, Prata e Ouro</strong>.<br>Responda os blocos acima para desbloquear!</p>
+      </div>
+    </div>
+    <div id="qDiaWrap" style="display:none"></div>
+  </div>
+
+  <button class="btn-ok" id="btnConcluirQuiz" onclick="ok(10,'pc10'); ir(11,nav.querySelectorAll('.nb')[11])" style="display:none">📖 Ver Glossário →</button>
 </section>
 
-<!-- ===================== 11: GLOSSÁRIO ===================== -->
+<!-- 11: GLOSSÁRIO -->
 <section class="sec" id="s11">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#E1F5EE">📖</div>
     <div>
-      <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Módulo 11 · +10 XP</div>
+      <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Módulo 11 · +10 XP · 🥇 Ouro</div>
       <h2>Glossário DOL completo</h2>
-      <p>Todos os termos que você vai ouvir toda semana. Use o campo de busca para encontrar qualquer termo.</p>
+      <p>Todos os termos que você vai ouvir toda semana. Use o campo de busca para encontrar qualquer um.</p>
     </div>
   </div>
   <div class="card">
-    <input class="gls-search" type="text" placeholder="🔍 Buscar termo no glossário..." oninput="filtrarGls(this.value)" id="glsInput">
-    <div id="glsItens">
-      <!-- gerado por JS -->
-    </div>
+    <input class="gls-search" type="text" placeholder="🔍 Buscar termo no glossário..." oninput="filtrarGls(this.value)">
+    <div id="glsItens"></div>
   </div>
-  <button class="btn-ok" onclick="ok(11,'pc11'); ir(12,nav.querySelectorAll('.nb')[12])">✅ Módulo concluído → Gerar Certificado!</button>
+  <button class="btn-ok" onclick="ok(11,'pc11'); ir(12,nav.querySelectorAll('.nb')[12])">✅ Módulo concluído → Certificados →</button>
 </section>
 
-<!-- ===================== 12: CERTIFICADO ===================== -->
+<!-- 12: CERTIFICADOS -->
 <section class="sec" id="s12">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FAEEDA">🏆</div>
     <div>
       <div class="nivel-tag" style="background:var(--laranja-c);color:var(--laranja-e)">Módulo Final</div>
-      <h2>Certificado de conclusão</h2>
-      <p>Insira seu nome completo para gerar o certificado oficial do treinamento.</p>
+      <h2>Seus certificados</h2>
+      <p>Insira seu nome e imprima cada certificado que você conquistou.</p>
     </div>
   </div>
 
-  <div class="final-wrap">
-    <div class="trofeu">🏆</div>
-    <h2>Treinamento concluído!</h2>
-    <p>Você completou os 12 módulos do Guia DOL da 247ª Subseção OAB-SP. Você está pronto(a) para operar o sistema com segurança e eficiência.</p>
-    <div class="stats-f">
-      <div class="sf"><div class="sn">12</div><div class="sl">módulos</div></div>
-      <div class="sf"><div class="sn" id="finalXP">0</div><div class="sl">XP total</div></div>
-      <div class="sf"><div class="sn">25</div><div class="sl">termos</div></div>
-      <div class="sf"><div class="sn" id="finalNivel">Mestre</div><div class="sl">nível</div></div>
-    </div>
+  <div class="cert-prog-panel">
+    <div class="cpp cpp-b" id="cpp-bronze"><div class="cpp-icon">🥉</div><div class="cpp-nome">Bronze</div><div class="cpp-status" id="cps-bronze">Pendente</div></div>
+    <div class="cpp cpp-s" id="cpp-prata"><div class="cpp-icon">🥈</div><div class="cpp-nome">Prata</div><div class="cpp-status" id="cps-prata">Pendente</div></div>
+    <div class="cpp cpp-o" id="cpp-ouro"><div class="cpp-icon">🥇</div><div class="cpp-nome">Ouro</div><div class="cpp-status" id="cps-ouro">Pendente</div></div>
+    <div class="cpp cpp-d" id="cpp-dia"><div class="cpp-icon">💎</div><div class="cpp-nome">Diamante</div><div class="cpp-status" id="cps-dia">Bloqueado</div></div>
   </div>
 
-  <div class="nome-input-wrap">
-    <label>Seu nome completo para o certificado:</label>
-    <input type="text" id="nomeInput" placeholder="Ex: Felipe Souza da Silva" oninput="atualizarCert(this.value)">
+  <div class="al al-d" style="margin-bottom:1.25rem"><i>ℹ️</i><span>Preencha o nome do aluno em cada certificado separadamente e imprima. A linha de assinatura fica em branco para você assinar à mão.</span></div>
+
+  <div id="certArea">
+
+    <!-- BRONZE -->
+    <div class="cert-secao">
+      <div class="cert-nivel-titulo" style="background:var(--bronze-c);color:var(--bronze-e)">
+        <span class="cnt-icon">🥉</span>
+        <div class="cnt-txt">Certificado Bronze<span class="cnt-sub">Módulos 1–4 · Acesso, Navegação, Pesquisa e Cadastro</span></div>
+        <span class="cnt-status cnt-locked" id="stat-bronze">Pendente</span>
+      </div>
+      <div id="locked-bronze" class="locked-overlay">
+        <div class="lo-icon">🔒</div>
+        <p>Complete os módulos <strong>1 a 4</strong> e o <strong>Quiz Bronze</strong> para desbloquear este certificado.</p>
+      </div>
+      <div id="cert-wrapper-bronze" style="display:none">
+        <div class="nome-input-wrap no-print">
+          <label>Nome do aluno — Certificado Bronze:</label>
+          <input type="text" id="nomeInput-bronze" placeholder="Ex: Ana Clara Souza" oninput="document.getElementById('cn-bronze').textContent=this.value.trim()||'____________'" maxlength="60">
+        </div>
+        <div class="cert-card cert-bronze" id="card-bronze">
+          <div class="cert-topo">
+            <span class="cert-medalha">🥉</span>
+            <div class="cert-titulo-card">Certificado Bronze</div>
+            <div class="cert-subtitulo">247ª Subseção OAB-SP · Santana de Parnaíba · Convênio OAB/DPESP</div>
+          </div>
+          <div class="cert-corpo">
+            <div class="cert-label-nome">Certificamos que</div>
+            <div class="cert-nome-display" id="cn-bronze">____________</div>
+            <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com êxito os <strong>Módulos 1 a 4</strong> do Treinamento DOL — Defensoria Online, demonstrando domínio em: acesso e segurança de login (SSO), navegação na interface v.4.403.0, pesquisa de usuários e cadastro de assistidos.</p>
+            <div class="cert-modulos">
+              <span class="cert-mod-chip">🔑 Login e SSO</span>
+              <span class="cert-mod-chip">🏠 Home e Sistemas</span>
+              <span class="cert-mod-chip">🔍 Pesquisa de usuários</span>
+              <span class="cert-mod-chip">📋 Cadastro do assistido</span>
+            </div>
+            <div class="cert-selos-mini">
+              <div class="csm"><div class="csm-num">4</div><div class="csm-l">Módulos</div></div>
+              <div class="csm"><div class="csm-num">60</div><div class="csm-l">XP obtidos</div></div>
+              <div class="csm"><div class="csm-num">🥉</div><div class="csm-l">Nível Bronze</div></div>
+            </div>
+          </div>
+          <div class="cert-rodape">
+            <div class="cert-data-rod" id="cert-data-bronze"></div>
+            <div style="display:flex;gap:2.5rem;align-items:flex-end">
+              <div class="cert-ass-bloco">
+                <div class="linha-ass-branca"></div>
+                <div class="nome-ass">Cássia Kelly Lins Reis</div>
+                <div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div>
+              </div>
+              <div class="cert-ass-bloco">
+                <div class="linha-ass" style="opacity:.2"></div>
+                <div class="nome-ass">247ª Subseção OAB-SP</div>
+                <div class="cargo-ass">Santana de Parnaíba · SP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-cert-print" id="btn-print-bronze" style="background:var(--bronze-c);color:var(--bronze-e)" onclick="imprimirCert('bronze')">🖨️ Imprimir Certificado Bronze</button>
+      </div>
+    </div>
+
+    <!-- PRATA -->
+    <div class="cert-secao">
+      <div class="cert-nivel-titulo" style="background:var(--prata-c);color:var(--prata-e)">
+        <span class="cnt-icon">🥈</span>
+        <div class="cnt-txt">Certificado Prata<span class="cnt-sub">Módulos 5–8 · Histórico, Av. Financeira, Nomeação e LGPD</span></div>
+        <span class="cnt-status cnt-locked" id="stat-prata">Pendente</span>
+      </div>
+      <div id="locked-prata" class="locked-overlay">
+        <div class="lo-icon">🔒</div>
+        <p>Complete os módulos <strong>5 a 8</strong> e o <strong>Quiz Prata</strong> para desbloquear.</p>
+      </div>
+      <div id="cert-wrapper-prata" style="display:none">
+        <div class="nome-input-wrap no-print">
+          <label>Nome do aluno — Certificado Prata:</label>
+          <input type="text" id="nomeInput-prata" placeholder="Ex: Ana Clara Souza" oninput="document.getElementById('cn-prata').textContent=this.value.trim()||'____________'" maxlength="60">
+        </div>
+        <div class="cert-card cert-prata" id="card-prata">
+          <div class="cert-topo">
+            <span class="cert-medalha">🥈</span>
+            <div class="cert-titulo-card">Certificado Prata</div>
+            <div class="cert-subtitulo">247ª Subseção OAB-SP · Santana de Parnaíba · Convênio OAB/DPESP</div>
+          </div>
+          <div class="cert-corpo">
+            <div class="cert-label-nome">Certificamos que</div>
+            <div class="cert-nome-display" id="cn-prata">____________</div>
+            <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com êxito os <strong>Módulos 5 a 8</strong> do Treinamento DOL, demonstrando domínio em: histórico DPESP e prontuários, avaliação financeira de hipossuficiência, fluxo de nomeação de advogados dativos (convênio OAB/DPESP) e conformidade com LGPD e sigilo profissional.</p>
+            <div class="cert-modulos">
+              <span class="cert-mod-chip">📁 Histórico DPESP</span>
+              <span class="cert-mod-chip">💰 Av. Financeira</span>
+              <span class="cert-mod-chip">⚖️ Nomeação OAB/DPESP</span>
+              <span class="cert-mod-chip">🔐 LGPD e Sigilo</span>
+            </div>
+            <div class="cert-selos-mini">
+              <div class="csm"><div class="csm-num">8</div><div class="csm-l">Módulos</div></div>
+              <div class="csm"><div class="csm-num">130</div><div class="csm-l">XP obtidos</div></div>
+              <div class="csm"><div class="csm-num">🥈</div><div class="csm-l">Nível Prata</div></div>
+            </div>
+          </div>
+          <div class="cert-rodape">
+            <div class="cert-data-rod" id="cert-data-prata"></div>
+            <div style="display:flex;gap:2.5rem;align-items:flex-end">
+              <div class="cert-ass-bloco">
+                <div class="linha-ass-branca"></div>
+                <div class="nome-ass">Cássia Kelly Lins Reis</div>
+                <div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div>
+              </div>
+              <div class="cert-ass-bloco">
+                <div class="linha-ass" style="opacity:.2"></div>
+                <div class="nome-ass">247ª Subseção OAB-SP</div>
+                <div class="cargo-ass">Santana de Parnaíba · SP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-cert-print" id="btn-print-prata" style="background:var(--prata-c);color:var(--prata-e)" onclick="imprimirCert('prata')">🖨️ Imprimir Certificado Prata</button>
+      </div>
+    </div>
+
+    <!-- OURO -->
+    <div class="cert-secao">
+      <div class="cert-nivel-titulo" style="background:var(--ouro-c);color:var(--ouro-e)">
+        <span class="cnt-icon">🥇</span>
+        <div class="cnt-txt">Certificado Ouro<span class="cnt-sub">Módulos 9–11 · Situações Especiais, Quiz e Glossário</span></div>
+        <span class="cnt-status cnt-locked" id="stat-ouro">Pendente</span>
+      </div>
+      <div id="locked-ouro" class="locked-overlay">
+        <div class="lo-icon">🔒</div>
+        <p>Complete os módulos <strong>9 a 11</strong> e o <strong>Quiz Ouro</strong> para desbloquear.</p>
+      </div>
+      <div id="cert-wrapper-ouro" style="display:none">
+        <div class="nome-input-wrap no-print">
+          <label>Nome do aluno — Certificado Ouro:</label>
+          <input type="text" id="nomeInput-ouro" placeholder="Ex: Ana Clara Souza" oninput="document.getElementById('cn-ouro').textContent=this.value.trim()||'____________'" maxlength="60">
+        </div>
+        <div class="cert-card cert-ouro" id="card-ouro">
+          <div class="cert-topo">
+            <span class="cert-medalha">🥇</span>
+            <div class="cert-titulo-card">Certificado Ouro</div>
+            <div class="cert-subtitulo">247ª Subseção OAB-SP · Santana de Parnaíba · Convênio OAB/DPESP</div>
+          </div>
+          <div class="cert-corpo">
+            <div class="cert-label-nome">Certificamos que</div>
+            <div class="cert-nome-display" id="cn-ouro">____________</div>
+            <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com êxito os <strong>Módulos 9 a 11</strong> do Treinamento DOL, demonstrando domínio em: protocolos de situações especiais e urgências (prisão em flagrante, Lei 13.431/2017), aprovação no quiz geral do sistema e vocabulário completo do glossário DOL.</p>
+            <div class="cert-modulos">
+              <span class="cert-mod-chip">🚨 Situações especiais</span>
+              <span class="cert-mod-chip">❓ Quiz aprovado</span>
+              <span class="cert-mod-chip">📖 Glossário completo</span>
+            </div>
+            <div class="cert-selos-mini">
+              <div class="csm"><div class="csm-num">11</div><div class="csm-l">Módulos</div></div>
+              <div class="csm"><div class="csm-num">185</div><div class="csm-l">XP obtidos</div></div>
+              <div class="csm"><div class="csm-num">🥇</div><div class="csm-l">Nível Ouro</div></div>
+            </div>
+          </div>
+          <div class="cert-rodape">
+            <div class="cert-data-rod" id="cert-data-ouro"></div>
+            <div style="display:flex;gap:2.5rem;align-items:flex-end">
+              <div class="cert-ass-bloco">
+                <div class="linha-ass-branca"></div>
+                <div class="nome-ass">Cássia Kelly Lins Reis</div>
+                <div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div>
+              </div>
+              <div class="cert-ass-bloco">
+                <div class="linha-ass" style="opacity:.2"></div>
+                <div class="nome-ass">247ª Subseção OAB-SP</div>
+                <div class="cargo-ass">Santana de Parnaíba · SP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-cert-print" id="btn-print-ouro" style="background:var(--ouro-c);color:var(--ouro-e)" onclick="imprimirCert('ouro')">🖨️ Imprimir Certificado Ouro</button>
+      </div>
+    </div>
+
+    <!-- DIAMANTE -->
+    <div class="cert-secao">
+      <div class="cert-nivel-titulo" style="background:var(--diamante-c);color:var(--diamante-e)">
+        <span class="cnt-icon">💎</span>
+        <div class="cnt-txt">Certificado Diamante<span class="cnt-sub">Mestria completa — todos os 12 módulos + Mistão</span></div>
+        <span class="cnt-status cnt-locked" id="stat-dia">Bloqueado</span>
+      </div>
+      <div id="locked-dia" class="locked-overlay">
+        <div class="lo-icon">💎</div>
+        <p>Conquiste os certificados <strong>Bronze, Prata e Ouro</strong> e complete o <strong>Mistão Diamante</strong> para receber o certificado máximo!</p>
+      </div>
+      <div id="cert-wrapper-dia" style="display:none">
+        <div class="nome-input-wrap no-print">
+          <label>Nome do aluno — Certificado Diamante:</label>
+          <input type="text" id="nomeInput-dia" placeholder="Ex: Ana Clara Souza" oninput="document.getElementById('cn-dia').textContent=this.value.trim()||'____________'" maxlength="60">
+        </div>
+        <div class="cert-diamante-borda"></div>
+        <div class="cert-card cert-diamante" id="card-dia">
+          <div class="cert-topo">
+            <span class="cert-medalha">💎</span>
+            <div class="cert-titulo-card">Certificado Diamante</div>
+            <div class="cert-subtitulo">247ª Subseção OAB-SP · Santana de Parnaíba · Convênio OAB/DPESP</div>
+          </div>
+          <div class="cert-corpo">
+            <div class="cert-label-nome">Certificamos que</div>
+            <div class="cert-nome-display" id="cn-dia">____________</div>
+            <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com excelência o <strong>Treinamento Completo do Sistema DOL</strong> — todos os 12 módulos e o Mistão Diamante — demonstrando maestria em: segurança de acesso e LGPD, pesquisa e cadastro de assistidos, avaliação de hipossuficiência, fluxo completo de nomeação dativa, protocolos de urgência (flagrante, Lei 13.431/2017) e vocabulário especializado.</p>
+            <div class="cert-modulos">
+              <span class="cert-mod-chip">🥉 Bronze concluído</span>
+              <span class="cert-mod-chip">🥈 Prata concluído</span>
+              <span class="cert-mod-chip">🥇 Ouro concluído</span>
+              <span class="cert-mod-chip">💎 Mistão aprovado</span>
+              <span class="cert-mod-chip">🏆 Mestre DOL</span>
+            </div>
+            <div class="cert-selos-mini">
+              <div class="csm"><div class="csm-num">12</div><div class="csm-l">Módulos</div></div>
+              <div class="csm"><div class="csm-num">200</div><div class="csm-l">XP total</div></div>
+              <div class="csm"><div class="csm-num">25</div><div class="csm-l">Termos</div></div>
+              <div class="csm"><div class="csm-num">💎</div><div class="csm-l">Mestre DOL</div></div>
+            </div>
+          </div>
+          <div class="cert-rodape">
+            <div class="cert-data-rod" id="cert-data-dia"></div>
+            <div style="display:flex;gap:2.5rem;align-items:flex-end">
+              <div class="cert-ass-bloco">
+                <div class="linha-ass-branca"></div>
+                <div class="nome-ass">Cássia Kelly Lins Reis</div>
+                <div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div>
+              </div>
+              <div class="cert-ass-bloco">
+                <div class="linha-ass" style="opacity:.2"></div>
+                <div class="nome-ass">247ª Subseção OAB-SP</div>
+                <div class="cargo-ass">Santana de Parnaíba · SP</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-cert-print" id="btn-print-dia" style="background:var(--diamante-c);color:var(--diamante-e)" onclick="imprimirCert('dia')">🖨️ Imprimir Certificado Diamante</button>
+      </div>
+    </div>
+
   </div>
 
-  <div class="cert-wrap" id="certWrap">
-    <div class="cert-borda-top"></div>
-    <div class="cert-corner tl"></div>
-    <div class="cert-corner tr"></div>
-    <div class="cert-corner bl"></div>
-    <div class="cert-corner br"></div>
-    <div class="cert-logo">247ª Subseção OAB-SP · Santana de Parnaíba · Convênio OAB/DPESP</div>
-    <div class="cert-titulo">Certificado de Conclusão</div>
-    <p style="font-size:.8rem;color:var(--cinza);margin-bottom:.35rem">Certificamos que</p>
-    <div class="cert-nome" id="certNome">____________</div>
-    <div class="cert-nivel" id="certNivel">🏆 Mestre DOL</div>
-    <p class="cert-desc">concluiu com êxito o <strong>Treinamento Completo do Sistema DOL (Defensoria Online)</strong>, abrangendo: acesso SSO e segurança, navegação da interface v.4.403.0, pesquisa de usuários, cadastro e prontuário de assistidos, histórico DPESP, avaliações financeiras, sigilo e LGPD, fluxo completo de nomeação de advogados dativos pelo convênio OAB/DPESP, situações especiais e protocolos de urgência.</p>
-    <div class="cert-selos">
-      <div class="cert-selo"><div class="cs-num">12</div><div class="cs-l">Módulos concluídos</div></div>
-      <div class="cert-selo"><div class="cs-num" id="cs-xp">200</div><div class="cs-l">XP obtidos</div></div>
-      <div class="cert-selo"><div class="cs-num">25</div><div class="cs-l">Termos no glossário</div></div>
-      <div class="cert-selo"><div class="cs-num">🏆</div><div class="cs-l">Nível Mestre DOL</div></div>
-    </div>
-    <div class="cert-data" id="certData"></div>
-    <div class="cert-assinatura">
-      <div class="cert-ass-item"><div class="linha"></div><div class="nome-ass">Cássia Kelly Lins Reis</div><div class="cargo">Auxiliar Administrativo · 247ª OAB-SP</div></div>
-      <div class="cert-ass-item"><div class="linha"></div><div class="nome-ass">247ª Subseção OAB-SP</div><div class="cargo">Santana de Parnaíba · SP</div></div>
-    </div>
-    <div class="cert-borda-bottom"></div>
-  </div>
-
-  <div class="cert-actions" style="display:flex;gap:.85rem;margin-top:1.1rem;flex-wrap:wrap">
-    <button class="btn-ok" style="flex:1;margin:0" onclick="window.print()">🖨️ Imprimir certificado</button>
-    <button class="btn-ok" style="flex:1;margin:0;background:var(--azul)" onclick="ok(12,'pc12'); showPop('🏆 PARABÉNS! Você é Mestre DOL!')">✅ Finalizar treinamento</button>
-  </div>
+  <button class="btn-ok" onclick="ok(12,'pc12')">✅ Finalizar treinamento</button>
 </section>
 
 </main>
 
 <script>
-const nav = document.getElementById('nav');
+const navEl = document.getElementById('nav');
 let xp = 0, concl = 0;
 const TOTAL = 12;
 const concSet = new Set();
-
+const certStatus = {bronze:false,prata:false,ouro:false,dia:false};
+const quizStatus = {bronze:false,prata:false,ouro:false,dia:false};
+const xpMap = {pc1:15,pc2:15,pc3:15,pc4:15,pc5:15,pc6:20,pc7:20,pc8:20,pc9:20,pc10:25,pc11:10,pc12:10};
 const niveis = [
-  {min:0,nome:'🌱 Iniciante'},
-  {min:1,nome:'🔍 Observador'},
-  {min:3,nome:'📋 Assistente'},
-  {min:5,nome:'⚖️ Operador'},
-  {min:7,nome:'🏅 Analista'},
-  {min:10,nome:'🎓 Especialista'},
+  {min:0,nome:'🌱 Iniciante'},{min:1,nome:'🔍 Observador'},
+  {min:3,nome:'📋 Assistente'},{min:5,nome:'⚖️ Operador'},
+  {min:7,nome:'🏅 Analista'},{min:10,nome:'🎓 Especialista'},
   {min:12,nome:'🏆 Mestre DOL'}
 ];
-
-const xpMap = {pc1:15,pc2:15,pc3:15,pc4:15,pc5:15,pc6:20,pc7:20,pc8:20,pc9:20,pc10:25,pc11:10,pc12:10};
-
-function getNivel(n){
-  let cur = niveis[0];
-  for(let nv of niveis){ if(n >= nv.min) cur = nv; }
-  return cur;
-}
-
+function getNivel(n){let c=niveis[0];for(let nv of niveis){if(n>=nv.min)c=nv;}return c;}
 function atualizarXP(){
-  const pct = Math.round((concl/TOTAL)*100);
-  document.getElementById('xpBar').style.width = pct+'%';
-  document.getElementById('xpTxt').textContent = concl+' / '+TOTAL+' módulos concluídos';
-  document.getElementById('hXpBadge').textContent = xp+' XP';
-  const nv = getNivel(concl);
-  document.getElementById('hNivelNome').textContent = nv.nome;
-  document.getElementById('finalXP').textContent = xp;
-  document.getElementById('finalNivel').textContent = nv.nome.replace(/^[^ ]+ /,'');
-  document.getElementById('cs-xp').textContent = xp;
-  document.getElementById('certNivel').textContent = nv.nome;
+  const pct=Math.round((concl/TOTAL)*100);
+  document.getElementById('xpBar').style.width=pct+'%';
+  document.getElementById('xpTxt').textContent=concl+' / '+TOTAL+' módulos concluídos';
+  document.getElementById('hXpBadge').textContent=xp+' XP';
+  document.getElementById('hNivelNome').textContent=getNivel(concl).nome;
 }
-
-function ok(secIdx, pcId){
-  if(concSet.has(pcId)) return;
-  concSet.add(pcId);
-  concl++;
-  const gain = xpMap[pcId] || 15;
-  xp += gain;
-  const pc = document.getElementById(pcId);
-  if(pc){ pc.classList.add('done'); pc.querySelector('.ps').textContent = '✓ Feito'; }
-  const nbs = nav.querySelectorAll('.nb');
-  if(secIdx>=1 && secIdx<=12) nbs[secIdx].classList.add('ok');
-  atualizarXP();
-  const nv = getNivel(concl);
-  showPop('Módulo '+concl+'/'+TOTAL+' concluído!', nv.nome, '+'+gain+' XP');
+function ok(secIdx,pcId){
+  if(pcId && concSet.has(pcId)) return;
+  if(pcId){
+    concSet.add(pcId);
+    concl++;
+    const gain=xpMap[pcId]||10;
+    xp+=gain;
+    const pc=document.getElementById(pcId);
+    if(pc){pc.classList.add('done');pc.querySelector('.ps').textContent='✓ Feito';}
+    const nbs=navEl.querySelectorAll('.nb');
+    if(secIdx>=1&&secIdx<=12) nbs[secIdx].classList.add('ok');
+    atualizarXP();
+    const nv=getNivel(concl);
+    showPop('Módulo '+concl+'/'+TOTAL+' concluído!',nv.nome,'+'+gain+' XP','var(--verde-e)');
+  }
 }
-
-function showPop(t, m, xpStr){
-  const p = document.getElementById('pop');
-  document.getElementById('popT').textContent = t;
-  document.getElementById('popM').textContent = m;
-  document.getElementById('popXP').textContent = xpStr;
+function showPop(t,m,xpStr,bg){
+  const p=document.getElementById('pop');
+  p.style.background=bg||'var(--verde-e)';
+  document.getElementById('popT').textContent=t;
+  document.getElementById('popM').textContent=m||'';
+  document.getElementById('popXP').textContent=xpStr||'';
   p.classList.add('show');
-  setTimeout(()=>p.classList.remove('show'),3500);
+  clearTimeout(p._timer);
+  p._timer=setTimeout(()=>p.classList.remove('show'),5000);
 }
-
-function ir(idx, btn){
+function ir(idx,btn){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('ativa'));
   document.getElementById('s'+idx).classList.add('ativa');
-  nav.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  navEl.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+const meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+function dataHoje(){const d=new Date();return'Santana de Parnaíba, '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();}
+['bronze','prata','ouro','dia'].forEach(n=>{
+  const el=document.getElementById('cert-data-'+n);
+  if(el) el.textContent=dataHoje();
+});
 
-// ===== QUIZ =====
-const qs = [
-  {p:"O que significa a sigla DOL?",
-   o:["Documento Online Legal","Defensoria Online","Diário Oficial Legal","Dados Operacionais Locais"],c:1,
-   fb:"DOL = Defensoria Online — sistema oficial de gestão da DPESP."},
-  {p:"Qual campo de busca garante resultado único e sem duplicatas ao pesquisar um assistido?",
-   o:["Nome completo","Data de nascimento","CPF","Número PA"],c:2,
-   fb:"O CPF é único por pessoa no Brasil — resultado exato, sem ambiguidade."},
-  {p:"Qual versão do DOL é usada para cadastros e atendimentos de assistidos?",
-   o:["v.3.x — Portal SSO","v.4.403.0 — DOL Atividade Fim","v.2.x — Portal DEFi","v.5.x — Indicação OAB"],c:1,
-   fb:"A versão v.4.x (DOL Atividade Fim) é onde ficam cadastros, pesquisa e histórico de assistidos."},
-  {p:"O que significa o alerta 'Este usuário possui pelo menos um autoatendimento solicitado'?",
-   o:["O usuário é funcionário da Defensoria","A pessoa já usou o portal digital e tem um PA registrado","O CPF está duplicado","O cadastro foi bloqueado"],c:1,
-   fb:"Autoatendimento = a pessoa já fez contato pelo portal ou quiosque e tem um PA gerado. Verifique o histórico antes de abrir novo atendimento."},
-  {p:"O que é um 'defensor dativo'?",
-   o:["Um defensor público contratado","Um advogado privado indicado pela OAB quando a Defensoria não tem defensor disponível","Um juiz que defende o réu","Um assistente social da Defensoria"],c:1,
-   fb:"Dativo = advogado privado indicado pela OAB pelo convênio OAB/DPESP, remunerado pelo Estado."},
-  {p:"Ao encerrar o uso do DOL, o que você NUNCA deve fazer?",
-   o:["Salvar o cadastro antes de fechar","Anotar o número do PA","Fechar a aba sem fazer logout","Verificar os alertas amarelos"],c:2,
-   fb:"Fechar sem logout deixa a sessão aberta. Em sistema com dados sigilosos, isso é falha grave de segurança."},
-  {p:"Qual aba do cadastro mostra todos os casos jurídicos anteriores do assistido?",
-   o:["Cadastro","Portal DEFi","Histórico DPESP","Avaliação financeira"],c:2,
-   fb:"A aba Histórico DPESP mostra todos os problemas jurídicos: área, problema, situação e data."},
-  {p:"Em caso de prisão em flagrante, qual é o prazo para a audiência de custódia?",
-   o:["72 horas","48 horas","Até 24 horas","7 dias"],c:2,
-   fb:"Audiência de custódia = até 24 horas após a prisão. Nomeação tem prioridade máxima."},
-  {p:"O que é hipossuficiência no contexto da Defensoria?",
-   o:["Ter deficiência física","Não ter renda suficiente para pagar advogado","Não ter documentos","Ser menor de 18 anos"],c:1,
-   fb:"Hipossuficiente = pessoa com renda insuficiente para arcar com custas e honorários. É requisito para ser atendido pela Defensoria."},
-  {p:"O histórico de alterações cadastrais registra:",
-   o:["Apenas o nome de quem criou o cadastro","Somente edições de endereço","Data, quem editou, qual campo foi mudado e o novo valor","Apenas avaliações financeiras negadas"],c:2,
-   fb:"O log de alterações é auditável e permanente: data, login do editor, campo alterado e valor novo."},
-  {p:"Quando você identifica um cadastro duplicado no DOL, o que deve fazer?",
-   o:["Deletar o mais antigo imediatamente","Editar ambos para deixar os dados iguais","Comunicar a Cássia — não agir sozinho(a)","Ignorar, pois duplicatas são normais"],c:2,
-   fb:"Exclusão de cadastro pode apagar histórico jurídico importante. Sempre comunique a Cássia para o processo correto."},
-  {p:"O botão 'Nova avaliação financeira' (laranja) deve ser usado:",
-   o:["Sempre que um assistido chegar","Somente quando orientado pela defensora responsável","Para verificar o histórico do assistido","Para abrir um novo processo judicial"],c:1,
-   fb:"A avaliação financeira é um ato formal que comprova hipossuficiência. Use somente com autorização e com o assistido presente."}
+const qBronze=[
+  {p:"Qual é o endereço correto do sistema DOL?",o:["dol.oabsp.org.br","online.defensoria.sp.def.br","defensoria.sp.gov.br/dol","portal.dpesp.sp.gov.br"],c:1,fb:"O endereço correto é online.defensoria.sp.def.br — salve nos favoritos!"},
+  {p:"O que significa a sigla SSO no contexto do login?",o:["Sistema de Segurança Online","Sistema de Suporte Operacional","Single Sign-On — uma conta para todos os módulos","Senha Segura Oficial"],c:2,fb:"SSO = Single Sign-On. Uma única conta dá acesso a todos os módulos do DOL sem novo login."},
+  {p:"Qual campo de busca garante resultado único ao pesquisar um assistido?",o:["Nome completo","Data de nascimento","CPF","Número PA"],c:2,fb:"O CPF é único por pessoa no Brasil — traz resultado exato, sem duplicatas."},
+  {p:"Ao encerrar o uso do DOL, o que você NUNCA deve fazer?",o:["Salvar o cadastro antes de fechar","Anotar o número do PA","Fechar a aba sem fazer logout","Verificar os alertas amarelos"],c:2,fb:"Fechar sem logout deixa a sessão aberta — em sistema com dados sigilosos, isso é falha grave de segurança."},
 ];
+const qPrata=[
+  {p:"O que é um 'defensor dativo'?",o:["Um defensor público contratado","Um advogado privado indicado pela OAB quando a Defensoria não tem defensor disponível","Um juiz que defende o réu","Um assistente social da Defensoria"],c:1,fb:"Dativo = advogado privado indicado pela OAB pelo convênio OAB/DPESP, remunerado pelo Estado."},
+  {p:"Qual aba do cadastro mostra todos os casos jurídicos anteriores do assistido?",o:["Cadastro","Portal DEFi","Histórico DPESP","Avaliação financeira"],c:2,fb:"A aba Histórico DPESP mostra todos os problemas jurídicos: área, problema, situação e data."},
+  {p:"O que é hipossuficiência no contexto da Defensoria?",o:["Ter deficiência física","Não ter renda suficiente para pagar advogado","Não ter documentos","Ser menor de 18 anos"],c:1,fb:"Hipossuficiente = pessoa com renda insuficiente para arcar com custas e honorários. É requisito para ser atendido."},
+  {p:"Quantas camadas legais protegem os dados dos assistidos no DOL?",o:["1 — apenas a LGPD","2 — LGPD e Código de Ética OAB","3 — LGPD, LC 988/2006 e Código de Ética OAB","4 — LGPD, CPF, CNJ e OAB"],c:2,fb:"São 3 camadas simultâneas: LGPD (Lei 13.709/2018), LC 988/2006 (Lei Orgânica DPESP) e Código de Ética OAB."},
+];
+const qOuro=[
+  {p:"Em caso de prisão em flagrante, qual é o prazo para a audiência de custódia?",o:["72 horas","48 horas","Até 24 horas","7 dias"],c:2,fb:"Audiência de custódia = até 24 horas após a prisão. Nomeação tem prioridade máxima — comunique a Cássia imediatamente."},
+  {p:"Quando você identifica um cadastro duplicado no DOL, o que deve fazer?",o:["Deletar o mais antigo imediatamente","Editar ambos para deixar os dados iguais","Comunicar a Cássia — não agir sozinha","Ignorar, pois duplicatas são normais"],c:2,fb:"Exclusão pode apagar histórico jurídico importante. Sempre comunique a Cássia para o processo correto."},
+  {p:"O que é o campo 'Mãe em cárcere' no cadastro do assistido?",o:["Indica que a mãe do funcionário está presa","Flag que identifica assistido filho(a) de mulher presa, ativando protocolos especiais","Campo para registrar visitas ao sistema prisional","Informação sobre a situação habitacional"],c:1,fb:"'Mãe em cárcere' identifica o(a) assistido(a) filho(a) de mulher presa. Aciona protocolos especiais de atendimento."},
+  {p:"O histórico de alterações cadastrais registra:",o:["Apenas o nome de quem criou o cadastro","Somente edições de endereço","Data, quem editou, qual campo foi mudado e o novo valor","Apenas avaliações financeiras negadas"],c:2,fb:"O log é auditável e permanente: data, login do editor, campo alterado e valor novo. Isso existe para sempre no sistema."},
+];
+const todosQ=[...qBronze,...qPrata,...qOuro];
+function shuffle(arr){return arr.map(a=>[Math.random(),a]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);}
+let misQ=[];
 
-let resp = new Array(qs.length).fill(null);
-let acertos = 0;
-
-function renderQuiz(){
-  const c = document.getElementById('quizC');
-  c.innerHTML = '';
-  const dots = document.createElement('div');
-  dots.className = 'q-progresso';
-  dots.id = 'qDots';
+function renderBloco(qs,wrapId,callback,dotPrefix){
+  const wrap=document.getElementById(wrapId);
+  if(!wrap) return;
+  const resp=new Array(qs.length).fill(null);
+  let acertos=0;
+  const dots=document.createElement('div');
+  dots.className='q-progresso';
   qs.forEach((_,i)=>{
-    const d = document.createElement('div');
-    d.className = 'q-dot';
-    d.id = 'qd'+i;
+    const d=document.createElement('div');
+    d.className='q-dot';d.id=dotPrefix+i;
     dots.appendChild(d);
   });
-  c.appendChild(dots);
-
+  wrap.appendChild(dots);
   qs.forEach((q,qi)=>{
-    const d = document.createElement('div');
+    const d=document.createElement('div');
     d.className='card';
-    d.id='qq'+qi;
-    d.innerHTML=`<p class="qp"><span class="q-num">${qi+1}</span>${q.p}</p><div class="qopts">${q.o.map((o,oi)=>`<button class="qopt" onclick="respQ(${qi},${oi})" id="qo${qi}_${oi}">${o}</button>`).join('')}</div><div class="qfb" id="qf${qi}"></div>`;
-    c.appendChild(d);
+    d.innerHTML='<p class="qp"><span class="q-num">'+(qi+1)+'</span>'+q.p+'</p><div class="qopts">'+q.o.map((o,oi)=>'<button class="qopt" onclick="respBlocoQ(this,\''+wrapId+'\','+qi+','+oi+')" data-wrap="'+wrapId+'" data-qi="'+qi+'" data-oi="'+oi+'">'+o+'</button>').join('')+'</div><div class="qfb" id="'+dotPrefix+'fb'+qi+'"></div>';
+    wrap.appendChild(d);
   });
-
-  const b=document.createElement('button');
-  b.className='btn-ok';b.id='btnQR';b.style.display='none';
-  b.textContent='📊 Ver meu resultado';
-  b.onclick=verResultQuiz;
-  c.appendChild(b);
+  wrap._resp=resp;wrap._qs=qs;wrap._ac=()=>acertos;wrap._addAc=()=>acertos++;
+  wrap._dotPrefix=dotPrefix;wrap._callback=callback;wrap._done=false;
+  const btnR=document.createElement('button');
+  btnR.className='btn-ok';btnR.id=dotPrefix+'btnR';btnR.style.display='none';
+  btnR.textContent='📊 Ver resultado deste bloco';
+  btnR.onclick=()=>verResultBloco(wrapId);
+  wrap.appendChild(btnR);
 }
-
-function respQ(qi,oi){
-  if(resp[qi]!==null) return;
-  resp[qi]=oi;
-  const q=qs[qi];
-  const acertou = oi===q.c;
-  if(acertou) acertos++;
-
-  const dot = document.getElementById('qd'+qi);
-  if(dot) { dot.classList.add(acertou?'feita':'errada-d'); }
-
-  for(let i=0;i<q.o.length;i++){
-    const b=document.getElementById(`qo${qi}_${i}`);
+window.respBlocoQ=function(btnEl,wrapId,qi,oi){
+  const wrap=document.getElementById(wrapId);
+  if(!wrap||wrap._resp[qi]!==null) return;
+  const q=wrap._qs[qi];
+  wrap._resp[qi]=oi;
+  const acertou=oi===q.c;
+  if(acertou) wrap._addAc();
+  const dot=document.getElementById(wrap._dotPrefix+qi);
+  if(dot) dot.classList.add(acertou?'feita':'errada-d');
+  const allBtns=document.querySelectorAll('[data-wrap="'+wrapId+'"][data-qi="'+qi+'"]');
+  allBtns.forEach(b=>{
     b.disabled=true;
-    if(i===q.c) b.classList.add('certa');
-    else if(i===oi&&!acertou) b.classList.add('errada');
-  }
-  const fb=document.getElementById('qf'+qi);
+    const bOi=parseInt(b.getAttribute('data-oi'));
+    if(bOi===q.c) b.classList.add('certa');
+    else if(bOi===oi&&!acertou) b.classList.add('errada');
+  });
+  const fb=document.getElementById(wrap._dotPrefix+'fb'+qi);
   fb.classList.add('show');
   fb.className='qfb show '+(acertou?'certo':'errado');
   fb.textContent=(acertou?'✅ ':'❌ ')+q.fb;
-
-  if(resp.every(r=>r!==null)) document.getElementById('btnQR').style.display='block';
+  if(wrap._resp.every(r=>r!==null)){
+    document.getElementById(wrap._dotPrefix+'btnR').style.display='block';
+  }
+};
+function verResultBloco(wrapId){
+  const wrap=document.getElementById(wrapId);
+  if(!wrap||wrap._done) return;
+  wrap._done=true;
+  const total=wrap._qs.length;
+  const ac=wrap._ac();
+  document.getElementById(wrap._dotPrefix+'btnR').style.display='none';
+  let msg,em;
+  if(ac===total){em='🏆';msg='Perfeito! '+total+'/'+total+'! Aprovada!';}
+  else if(ac/total>=.75){em='🎉';msg='Excelente! '+ac+'/'+total+' corretas!';}
+  else if(ac/total>=.5){em='💪';msg='Bom! '+ac+'/'+total+' corretas. Revise os módulos!';}
+  else{em='📚';msg=ac+'/'+total+' corretas. Releia os módulos deste bloco.';}
+  const res=document.createElement('div');
+  res.className='card';res.style='text-align:center;padding:1.5rem';
+  res.innerHTML='<div style="font-size:2.5rem;margin-bottom:.5rem">'+em+'</div><div style="font-family:Sora;font-weight:700;font-size:1rem;margin-bottom:.35rem">'+ac+' de '+total+' corretas</div><p style="color:var(--texto-s);font-size:.85rem">'+msg+'</p>';
+  wrap.appendChild(res);
+  if(wrap._callback) wrap._callback(ac,total);
+  verificarDiamante();
 }
 
-function verResultQuiz(){
-  document.getElementById('quizC').style.display='none';
-  const r=document.getElementById('quizR');
-  r.style.display='block';
-  const total=qs.length;
-  const pct=acertos/total;
-  let em,msg;
-  if(pct===1){em='🏆';msg='Perfeito! '+total+'/'+total+'! Você domina o DOL completamente. Parabéns!';}
-  else if(pct>=.83){em='🎉';msg='Excelente! '+acertos+' de '+total+' certas. Você está pronto(a) para o trabalho!';}
-  else if(pct>=.67){em='💪';msg='Muito bom! '+acertos+' de '+total+' certas. Revise os módulos com dúvida e vai mandar bem!';}
-  else if(pct>=.5){em='📚';msg='Bom começo! '+acertos+' de '+total+' certas. Vale revisar os módulos antes de operar o sistema.';}
-  else{em='🔄';msg=acertos+' de '+total+' certas. Releia os módulos com calma — você consegue!';}
-  document.getElementById('qEmoji').textContent=em;
-  document.getElementById('qPlacar').textContent=acertos+' de '+total+' corretas';
-  document.getElementById('qMsg').textContent=msg;
-  r.scrollIntoView({behavior:'smooth'});
+function desbloquearCert(nivel){
+  if(certStatus[nivel]) return;
+  certStatus[nivel]=true;
+  const locked=document.getElementById('locked-'+nivel);
+  const wrapper=document.getElementById('cert-wrapper-'+nivel);
+  const stat=document.getElementById('stat-'+nivel);
+  const hb=document.getElementById('hb-'+nivel);
+  const cpp=document.getElementById('cpp-'+nivel);
+  const cps=document.getElementById('cps-'+nivel);
+  if(locked) locked.style.display='none';
+  if(wrapper) wrapper.style.display='block';
+  if(stat){stat.className='cnt-status cnt-earned';stat.textContent='✓ Conquistado';}
+  if(hb) hb.classList.add('earned');
+  if(cpp) cpp.classList.add('active');
+  if(cps) cps.textContent='✓ Conquistado';
+  const nomes={bronze:'🥉 Bronze',prata:'🥈 Prata',ouro:'🥇 Ouro',dia:'💎 Diamante'};
+  const cores={bronze:'#7D4C1A',prata:'#4A4A52',ouro:'#8B6914',dia:'#1A3A6E'};
+  showPop('Certificado '+nomes[nivel]+' conquistado!','Vá em Certificados para imprimir!','',cores[nivel]);
+}
+function verificarDiamante(){
+  if(certStatus.bronze&&certStatus.prata&&certStatus.ouro&&!quizStatus.dia){
+    document.getElementById('qDiaLocked').style.display='none';
+    document.getElementById('qDiaWrap').style.display='block';
+    if(!misQ.length){
+      misQ=shuffle(todosQ);
+      renderBloco(misQ,'qDiaWrap',(ac,total)=>{
+        quizStatus.dia=true;
+        if(ac>=Math.ceil(total*0.7)) desbloquearCert('dia');
+        document.getElementById('btnConcluirQuiz').style.display='block';
+      },'dia_');
+    }
+  }
+}
+function cbBronze(ac,total){quizStatus.bronze=true;if(ac>=Math.ceil(total*0.5)) desbloquearCert('bronze');verificarDiamante();checarBtnConcluir();}
+function cbPrata(ac,total){quizStatus.prata=true;if(ac>=Math.ceil(total*0.5)) desbloquearCert('prata');verificarDiamante();checarBtnConcluir();}
+function cbOuro(ac,total){quizStatus.ouro=true;if(ac>=Math.ceil(total*0.5)) desbloquearCert('ouro');verificarDiamante();checarBtnConcluir();}
+function checarBtnConcluir(){if(quizStatus.bronze&&quizStatus.prata&&quizStatus.ouro) document.getElementById('btnConcluirQuiz').style.display='block';}
+function atualizarTodosNomes(v){
+  const nome=v.trim()||'____________';
+  ['bronze','prata','ouro','dia'].forEach(n=>{const el=document.getElementById('cn-'+n);if(el) el.textContent=nome;});
+}
+function imprimirCert(nivel){
+  const input=document.getElementById('nomeInput-'+nivel);
+  if(!input||!input.value.trim()){
+    alert('Por favor, insira o nome do aluno antes de imprimir.');
+    if(input) input.focus();
+    return;
+  }
+  window.print();
 }
 
-// ===== GLOSSÁRIO =====
-const glossario = [
+const glossario=[
   {t:'DOL — Defensoria Online',d:'Sistema oficial da DPESP para gerenciar atendimentos, cadastros e processos. Versão atual: v.4.403.0 (68).',tag:'Sistema',tc:'ca'},
   {t:'DPESP',d:'Defensoria Pública do Estado de São Paulo. Órgão que presta assistência jurídica gratuita a hipossuficientes.',tag:'Instituição',tc:'cv'},
   {t:'247ª Subseção OAB-SP',d:'A Ordem dos Advogados do Brasil, subseção de Santana de Parnaíba. Tem convênio com a DPESP para indicação de dativos.',tag:'Instituição',tc:'cv'},
@@ -1298,48 +1362,33 @@ const glossario = [
   {t:'Defensor.IA',d:'Assistente de inteligência artificial da DPESP integrado ao DOL. Ajuda com pesquisas jurídicas e automação.',tag:'Tecnologia',tc:'cr'},
   {t:'Lei 13.431/2017',d:'Lei do sistema de garantia de direitos de crianças e adolescentes vítimas de violência. Protocolo especial na 247ª.',tag:'Jurídico',tc:'cv'},
   {t:'LGPD — Lei 13.709/2018',d:'Lei Geral de Proteção de Dados. Rege o uso e proteção de dados pessoais dos assistidos no DOL.',tag:'Jurídico',tc:'cv'},
-  {t:'LC 988/2006',d:'Lei Complementar 988/2006 — Lei Orgânica da Defensoria Pública do Estado de SP. Estabelece o sigilo dos dados dos assistidos.',tag:'Jurídico',tc:'cv'},
+  {t:'LC 988/2006',d:'Lei Complementar 988/2006 — Lei Orgânica da Defensoria Pública do Estado de SP. Estabelece o sigilo dos dados.',tag:'Jurídico',tc:'cv'},
   {t:'Nome social',d:'Nome pelo qual a pessoa prefere ser chamada. Obrigatório respeitar por lei, independente do nome no documento.',tag:'Campo',tc:'cr'},
   {t:'Número de identificação',d:'ID único interno do DOL para cada assistido. Mais preciso que CPF para busca — resultado único garantido.',tag:'Número',tc:'cg'},
   {t:'Histórico de alterações cadastrais',d:'Log auditável e permanente de todas as edições no cadastro: data, quem editou, qual campo e o novo valor.',tag:'Sistema',tc:'ca'},
   {t:'Mãe em cárcere',d:'Flag no cadastro para identificar o(a) assistido(a) filho(a) de mulher presa. Aciona protocolos especiais de atendimento.',tag:'Campo',tc:'cr'},
   {t:'Demandas do Fórum',d:'Sistema interno da 247ª específico para gerenciar pedidos de nomeação da Lei 13.431/2017. Separado do DOL principal.',tag:'Sistema',tc:'ca'},
 ];
-
 function renderGlossario(){
-  const c = document.getElementById('glsItens');
-  c.innerHTML = '';
+  const c=document.getElementById('glsItens');c.innerHTML='';
   glossario.forEach((g,i)=>{
-    const d = document.createElement('div');
-    d.className='gi';
-    d.id='gi'+i;
-    d.innerHTML=`<div class="gt"><span>${g.t}</span><span class="gt-tag chip ${g.tc}">${g.tag}</span></div><div class="gd">${g.d}</div>`;
+    const d=document.createElement('div');d.className='gi';d.id='gi'+i;
+    d.innerHTML='<div class="gt"><span>'+g.t+'</span><span class="gt-tag chip '+g.tc+'">'+g.tag+'</span></div><div class="gd">'+g.d+'</div>';
     c.appendChild(d);
   });
 }
-
 function filtrarGls(v){
   const q=v.toLowerCase().trim();
   glossario.forEach((_,i)=>{
-    const el=document.getElementById('gi'+i);
-    if(!el) return;
+    const el=document.getElementById('gi'+i);if(!el) return;
     const txt=(glossario[i].t+' '+glossario[i].d+' '+glossario[i].tag).toLowerCase();
-    el.classList.toggle('hidden', q!=='' && !txt.includes(q));
+    el.classList.toggle('hidden',q!==''&&!txt.includes(q));
   });
 }
 
-// ===== CERTIFICADO =====
-function atualizarCert(nome){
-  document.getElementById('certNome').textContent = nome.trim() || '____________';
-}
-
-(function setData(){
-  const d=new Date();
-  const meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-  document.getElementById('certData').textContent='Santana de Parnaíba, '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();
-})();
-
-renderQuiz();
+renderBloco(qBronze,'qBronzeWrap',cbBronze,'br_');
+renderBloco(qPrata,'qPrataWrap',cbPrata,'pt_');
+renderBloco(qOuro,'qOuroWrap',cbOuro,'ou_');
 renderGlossario();
 atualizarXP();
 </script>
