@@ -18,8 +18,6 @@
   --texto:#1a1a1a;--texto-s:#5F5E5A;
   --bg:#f2f4f0;--branco:#fff;--borda:rgba(0,0,0,0.09);
   --sombra:0 2px 8px rgba(0,0,0,0.07);
-
-  /* Certificados */
   --bronze:#CD7F32;--bronze-c:#F9EDDF;--bronze-e:#7D4C1A;
   --prata:#A8A9AD;--prata-c:#F0F0F2;--prata-e:#4A4A52;
   --ouro:#D4AF37;--ouro-c:#FBF4D6;--ouro-e:#8B6914;
@@ -45,8 +43,6 @@ header>p{opacity:.75;font-size:.9rem;max-width:460px;margin:0 auto .5rem}
 .xp-bar-c{width:min(360px,90%);background:rgba(255,255,255,0.18);border-radius:20px;height:10px;overflow:hidden}
 .xp-bar-f{height:100%;background:linear-gradient(90deg,var(--laranja),#FFD166);border-radius:20px;width:0%;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .xp-txt{font-size:11px;opacity:.6;margin-top:6px}
-
-/* Badges de certificado no header */
 .cert-badges-row{display:flex;justify-content:center;gap:8px;margin-top:.85rem;flex-wrap:wrap}
 .cert-badge-mini{padding:4px 12px;border-radius:20px;font-size:11px;font-family:'Sora',sans-serif;font-weight:700;opacity:.4;transition:opacity .3s,transform .3s;border:1.5px solid rgba(255,255,255,0.2)}
 .cert-badge-mini.earned{opacity:1;transform:scale(1.08);border-color:rgba(255,255,255,0.5)}
@@ -139,50 +135,91 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .mr .mf{flex:1}
 .mf{margin-bottom:8px}
 .mbtn{background:#e67e22;color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:10px;cursor:default;font-weight:700}
-.mk-alert{background:#fff8dc;border:1px solid #ddd;padding:7px 10px;border-radius:4px;margin-bottom:8px;font-size:9.5px;line-height:1.5;color:#555}
 
-/* ── QUIZ ── */
-.quiz-nivel-header{text-align:center;padding:1rem;border-radius:12px;margin-bottom:1.25rem;border:2px solid}
-.quiz-nivel-header h3{font-family:'Sora',sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:4px}
-.quiz-nivel-header p{font-size:.84rem;opacity:.8}
-.qp{font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;color:var(--texto);margin-bottom:.9rem;line-height:1.45}
-.q-num{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--verde-e);color:#fff;border-radius:50%;font-size:12px;font-weight:700;margin-right:7px;flex-shrink:0}
-.qopts{display:flex;flex-direction:column;gap:8px}
-.qopt{padding:.75rem 1rem;border-radius:10px;border:1.5px solid var(--borda);background:var(--branco);font-size:.88rem;cursor:pointer;transition:all .2s;text-align:left;font-family:'DM Sans',sans-serif;line-height:1.5}
-.qopt:hover:not(:disabled){border-color:var(--verde);background:var(--verde-c)}
-.qopt.certa{border-color:var(--verde);background:var(--verde-c);color:var(--verde-e);font-weight:500}
+/* ══════════════════════════════════════════
+   QUIZ ADAPTATIVO — PERGUNTA POR VEZ
+══════════════════════════════════════════ */
+.quiz-container{background:var(--branco);border:1px solid var(--borda);border-radius:16px;overflow:hidden;box-shadow:var(--sombra);margin-bottom:1rem}
+.quiz-header{padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--cinza-c);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.quiz-nivel-chip{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;padding:4px 14px;border-radius:20px}
+.quiz-contadores{display:flex;gap:.75rem;align-items:center}
+.quiz-cont-item{font-family:'Sora',sans-serif;font-size:.8rem;font-weight:600;color:var(--texto-s);display:flex;align-items:center;gap:4px}
+.quiz-cont-item .num{font-weight:800;color:var(--texto)}
+
+/* Barra de progresso das perguntas */
+.quiz-prog-bar-wrap{padding:.6rem 1.25rem;background:var(--cinza-c)}
+.quiz-prog-dots{display:flex;gap:4px;align-items:center}
+.qd{height:6px;flex:1;border-radius:3px;background:rgba(0,0,0,0.12);transition:background .3s}
+.qd.certa{background:var(--verde)}
+.qd.errada{background:#E24B4A}
+.qd.atual{background:var(--azul);animation:pulse-dot .8s ease infinite alternate}
+@keyframes pulse-dot{from{opacity:.6}to{opacity:1}}
+
+/* Dificuldade visual */
+.dif-wrap{padding:.5rem 1.25rem .25rem;display:flex;align-items:center;gap:6px}
+.dif-label{font-size:.73rem;color:var(--cinza-e);font-family:'Sora',sans-serif;font-weight:600}
+.dif-star{font-size:.85rem;opacity:.25;transition:opacity .3s}
+.dif-star.on{opacity:1}
+
+/* Pergunta */
+.quiz-q-wrap{padding:1.25rem;animation:slide-in .25s ease}
+@keyframes slide-in{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+.quiz-q-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--verde-e);color:#fff;border-radius:50%;font-size:.8rem;font-weight:700;font-family:'Sora',sans-serif;margin-right:8px;flex-shrink:0;vertical-align:middle}
+.quiz-q-txt{font-family:'Sora',sans-serif;font-weight:700;font-size:.97rem;color:var(--texto);margin-bottom:1rem;line-height:1.5}
+.quiz-opts{display:flex;flex-direction:column;gap:8px}
+.qopt{padding:.8rem 1rem;border-radius:10px;border:1.5px solid var(--borda);background:var(--branco);font-size:.88rem;cursor:pointer;transition:all .18s;text-align:left;font-family:'DM Sans',sans-serif;line-height:1.5;position:relative}
+.qopt:hover:not(:disabled){border-color:var(--verde);background:var(--verde-c);transform:translateX(2px)}
+.qopt.certa{border-color:var(--verde);background:var(--verde-c);color:var(--verde-e);font-weight:600}
+.qopt.certa::after{content:'✓';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1rem;color:var(--verde)}
 .qopt.errada{border-color:#E24B4A;background:#FCEBEB;color:#A32D2D}
+.qopt.errada::after{content:'✗';position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:1rem;color:#E24B4A}
 .qopt:disabled{cursor:default}
-.qfb{margin-top:.65rem;font-size:.85rem;padding:.7rem .9rem;border-radius:8px;display:none;line-height:1.55}
-.qfb.show{display:block}
-.qfb.certo{background:var(--verde-c);color:var(--verde-e)}
-.qfb.errado{background:#FCEBEB;color:#A32D2D}
-.q-progresso{display:flex;gap:5px;margin-bottom:1.25rem;flex-wrap:wrap}
-.q-dot{width:28px;height:6px;border-radius:3px;background:var(--cinza-c);transition:background .3s}
-.q-dot.feita{background:var(--verde)}
-.q-dot.errada-d{background:#E24B4A}
 
-/* ── SEPARADOR DE QUIZ ── */
-.quiz-bloco-sep{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 1rem}
+/* Feedback */
+.quiz-feedback{margin:1rem 0 0;padding:.85rem 1rem;border-radius:10px;font-size:.88rem;line-height:1.6;display:none}
+.quiz-feedback.show{display:block;animation:fi .2s ease}
+.quiz-feedback.certo{background:var(--verde-c);color:var(--verde-e)}
+.quiz-feedback.errado{background:#FCEBEB;color:#A32D2D}
+.quiz-feedback-emoji{font-size:1.1rem;margin-right:6px}
+
+/* Próxima pergunta */
+.quiz-btn-next{display:none;width:100%;padding:.85rem;background:var(--verde);color:#fff;border:none;border-radius:0 0 14px 14px;font-family:'Sora',sans-serif;font-size:.9rem;font-weight:700;cursor:pointer;transition:background .2s;margin-top:.75rem}
+.quiz-btn-next:hover{background:var(--verde-e)}
+.quiz-btn-next.show{display:block;animation:fi .2s ease}
+
+/* Indicador adaptativo */
+.adapt-badge{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;font-family:'Sora',sans-serif;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:.5rem}
+.adapt-harder{background:#FCEBEB;color:#A32D2D}
+.adapt-easier{background:var(--azul-c);color:var(--azul-e)}
+.adapt-same{background:var(--cinza-c);color:var(--cinza-e)}
+
+/* Resultado final do bloco */
+.quiz-resultado{padding:1.5rem;text-align:center;animation:fi .3s ease}
+.qr-emoji{font-size:3rem;margin-bottom:.6rem}
+.qr-titulo{font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:.3rem}
+.qr-sub{font-size:.88rem;color:var(--texto-s);line-height:1.6;margin-bottom:1rem}
+.qr-stats{display:flex;justify-content:center;gap:1rem;margin:.75rem 0 1rem;flex-wrap:wrap}
+.qrs{background:var(--cinza-c);border-radius:10px;padding:.6rem 1rem;text-align:center}
+.qrs .qrs-n{font-family:'Sora',sans-serif;font-weight:800;font-size:1.4rem}
+.qrs .qrs-l{font-size:.72rem;color:var(--cinza-e);text-transform:uppercase;letter-spacing:.04em}
+.btn-retry{display:inline-flex;align-items:center;gap:7px;padding:.65rem 1.35rem;background:var(--azul-c);color:var(--azul-e);border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;margin-top:.3rem;transition:all .2s}
+.btn-retry:hover{background:var(--azul);color:#fff}
+
+/* Separador de bloco */
+.quiz-bloco-sep{display:flex;align-items:center;gap:.75rem;margin:1.5rem 0 .85rem}
 .quiz-bloco-sep .sep-linha{flex:1;height:1.5px;background:var(--cinza-c)}
 .quiz-bloco-sep .sep-badge{font-family:'Sora',sans-serif;font-size:.78rem;font-weight:700;padding:4px 14px;border-radius:20px;white-space:nowrap}
 
-/* ── GLOSSÁRIO ── */
-.gls-search{width:100%;padding:.7rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem;font-family:'DM Sans',sans-serif}
-.gls-search:focus{border-color:var(--verde)}
-.gi{border-bottom:1px solid var(--cinza-c);padding:.85rem 0}
-.gi:last-child{border-bottom:none}
-.gt{font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;color:var(--verde-e);margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.gt-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
-.gd{font-size:.85rem;color:var(--texto-s);line-height:1.6}
-.gi.hidden{display:none}
+/* Bloqueio */
+.locked-overlay{text-align:center;padding:1.25rem;background:var(--cinza-c);border-radius:12px;margin-bottom:1.25rem}
+.locked-overlay .lo-icon{font-size:2rem;margin-bottom:.4rem}
+.locked-overlay p{font-size:.85rem;color:var(--texto-s);line-height:1.6}
+.locked-overlay strong{color:var(--texto)}
 
 /* ── BTN CONCLUIR ── */
-.btn-ok{display:block;width:100%;padding:1rem;background:var(--verde);color:#fff;border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:1.35rem;transition:all .2s;text-align:center;letter-spacing:.01em}
+.btn-ok{display:block;width:100%;padding:1rem;background:var(--verde);color:#fff;border:none;border-radius:12px;font-family:'Sora',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:1.35rem;transition:all .2s;text-align:center}
 .btn-ok:hover{background:var(--verde-e);transform:translateY(-1px);box-shadow:0 4px 12px rgba(15,110,86,0.3)}
-.btn-ok:active{transform:scale(.98)}
 .btn-ok:disabled{background:#9FE1CB;cursor:default;transform:none;box-shadow:none}
-.btn-ok.locked{background:var(--cinza);opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
 
 /* ── PROGRESS OVERVIEW ── */
 .prog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-bottom:1.5rem}
@@ -204,7 +241,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .pop-dismiss{font-size:.72rem;opacity:.5;margin-top:6px;text-align:right}
 
 /* ── FLUXO ── */
-.fluxo-card{display:flex;align-items:center;overflow-x:auto;padding:.5rem 0;scrollbar-width:thin;gap:0}
+.fluxo-card{display:flex;align-items:center;overflow-x:auto;padding:.5rem 0;gap:0}
 .fluxo-item{display:flex;align-items:center;flex-shrink:0}
 .fluxo-box{background:var(--branco);border:1.5px solid var(--borda);border-radius:10px;padding:.65rem .9rem;text-align:center;min-width:88px;max-width:108px}
 .fluxo-box .fb-icon{font-size:1.3rem;margin-bottom:4px}
@@ -213,12 +250,8 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .fluxo-box.ativo .fb-txt{color:var(--verde-e)}
 .fluxo-seta{color:var(--cinza);font-size:1.2rem;margin:0 .3rem;flex-shrink:0}
 
-/* ── AVALIAÇÃO FINANCEIRA ── */
-.av-concedido{background:var(--verde-c);color:var(--verde-e);padding:2px 9px;border-radius:10px;font-size:.78rem;font-weight:600;font-family:'Sora',sans-serif}
-.av-negado{background:var(--coral-c);color:var(--coral-e);padding:2px 9px;border-radius:10px;font-size:.78rem;font-weight:600;font-family:'Sora',sans-serif}
-
 /* ══════════════════════════════════════════
-   CERTIFICADOS — SISTEMA DE NÍVEIS
+   CERTIFICADOS
 ══════════════════════════════════════════ */
 .cert-secao{margin-bottom:2rem}
 .cert-nivel-titulo{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem;padding:.65rem 1rem;border-radius:10px;font-family:'Sora',sans-serif;font-weight:700;font-size:1rem}
@@ -227,14 +260,10 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .cnt-sub{font-size:.78rem;font-weight:400;opacity:.75;display:block;margin-top:1px}
 .cnt-status{font-size:.8rem;padding:3px 12px;border-radius:20px;font-weight:700;white-space:nowrap}
 .cnt-locked{background:var(--cinza-c);color:var(--cinza-e)}
-.cnt-ready{background:#E6F1FB;color:#185FA5}
 .cnt-earned{background:var(--verde-c);color:var(--verde-e)}
-
-/* Cartão de certificado */
 .cert-card{border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.12);margin-bottom:1.25rem;position:relative}
 .cert-card.locked-card{opacity:.55;filter:grayscale(.6);pointer-events:none}
 .cert-topo{padding:1.5rem 1.5rem 1rem;text-align:center;position:relative}
-.cert-topo::before{content:'';position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:160px;height:160px;border-radius:50%;opacity:.07}
 .cert-medalha{font-size:3rem;margin-bottom:.4rem;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15))}
 .cert-titulo-card{font-family:'Sora',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
 .cert-subtitulo{font-size:.82rem;opacity:.75;line-height:1.5;max-width:320px;margin:0 auto}
@@ -253,56 +282,27 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .cert-ass-bloco .nome-ass{font-family:'Sora',sans-serif;font-size:.73rem;font-weight:700;color:var(--texto)}
 .cert-ass-bloco .cargo-ass{font-size:.68rem;color:var(--cinza-e)}
 .cert-data-rod{font-size:.72rem;color:var(--cinza)}
-
-/* Cores por nível */
 .cert-bronze .cert-topo{background:linear-gradient(135deg,#8B4513,var(--bronze),#E8A860)}
-.cert-bronze .cert-topo::before{background:var(--bronze)}
 .cert-bronze .cert-nome-display{border-color:var(--bronze-e)}
 .cert-bronze .cert-mod-chip{background:var(--bronze-c);color:var(--bronze-e)}
 .cert-bronze .csm-num{color:var(--bronze-e)}
 .cert-bronze .cert-topo *{color:#fff}
-
 .cert-prata .cert-topo{background:linear-gradient(135deg,#4A4A52,var(--prata),#D0D0D5)}
-.cert-prata .cert-topo::before{background:var(--prata)}
 .cert-prata .cert-nome-display{border-color:var(--prata-e)}
 .cert-prata .cert-mod-chip{background:var(--prata-c);color:var(--prata-e)}
 .cert-prata .csm-num{color:var(--prata-e)}
 .cert-prata .cert-topo *{color:#fff}
-
 .cert-ouro .cert-topo{background:linear-gradient(135deg,#5C4500,var(--ouro),#F0D060)}
-.cert-ouro .cert-topo::before{background:var(--ouro)}
 .cert-ouro .cert-nome-display{border-color:var(--ouro-e)}
 .cert-ouro .cert-mod-chip{background:var(--ouro-c);color:var(--ouro-e)}
 .cert-ouro .csm-num{color:var(--ouro-e)}
 .cert-ouro .cert-topo *{color:#fff}
-
 .cert-diamante .cert-topo{background:linear-gradient(135deg,#0D2147,var(--diamante),#8ABFFF)}
-.cert-diamante .cert-topo::before{background:var(--diamante)}
 .cert-diamante .cert-nome-display{border-color:var(--diamante-e)}
 .cert-diamante .cert-mod-chip{background:var(--diamante-c);color:var(--diamante-e)}
 .cert-diamante .csm-num{color:var(--diamante-e)}
 .cert-diamante .cert-topo *{color:#fff}
-
-/* Topo arco-íris diamante */
 .cert-diamante-borda{height:5px;background:linear-gradient(90deg,#CD7F32,#A8A9AD,#D4AF37,var(--diamante));margin-bottom:0}
-
-/* Bloqueio visual */
-.locked-overlay{text-align:center;padding:1.25rem;background:var(--cinza-c);border-radius:12px;margin-bottom:1.25rem}
-.locked-overlay .lo-icon{font-size:2rem;margin-bottom:.4rem}
-.locked-overlay p{font-size:.85rem;color:var(--texto-s);line-height:1.6}
-.locked-overlay strong{color:var(--texto)}
-
-/* Botão imprimir certificado */
-.btn-cert-print{display:inline-flex;align-items:center;gap:7px;padding:.65rem 1.25rem;border-radius:10px;font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;border:none;cursor:pointer;margin-top:.85rem;transition:all .2s}
-.btn-cert-print:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,0.12)}
-
-/* Nome input */
-.nome-input-wrap{margin:1.1rem 0}
-.nome-input-wrap label{font-size:.88rem;font-family:'Sora',sans-serif;font-weight:600;display:block;margin-bottom:.4rem;color:var(--texto-s)}
-.nome-input-wrap input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:1rem;font-family:'Sora',sans-serif;font-weight:700;outline:none;transition:border-color .2s;color:var(--texto)}
-.nome-input-wrap input:focus{border-color:var(--verde)}
-
-/* Painel de progresso de certificados */
 .cert-prog-panel{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin:1.25rem 0}
 .cpp{border-radius:14px;padding:1rem .75rem;text-align:center;border:2px solid transparent;transition:all .3s}
 .cpp.active{border-color:currentColor;box-shadow:0 2px 12px rgba(0,0,0,0.1)}
@@ -313,17 +313,22 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
 .cpp-s{background:var(--prata-c);color:var(--prata-e)}
 .cpp-o{background:var(--ouro-c);color:var(--ouro-e)}
 .cpp-d{background:var(--diamante-c);color:var(--diamante-e)}
+.nome-input-wrap{margin:1.1rem 0}
+.nome-input-wrap label{font-size:.88rem;font-family:'Sora',sans-serif;font-weight:600;display:block;margin-bottom:.4rem;color:var(--texto-s)}
+.nome-input-wrap input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:1rem;font-family:'Sora',sans-serif;font-weight:700;outline:none;transition:border-color .2s;color:var(--texto)}
+.nome-input-wrap input:focus{border-color:var(--verde)}
+.btn-cert-print{display:inline-flex;align-items:center;gap:7px;padding:.65rem 1.25rem;border-radius:10px;font-family:'Sora',sans-serif;font-size:.85rem;font-weight:700;border:none;cursor:pointer;margin-top:.85rem;transition:all .2s}
+.btn-cert-print:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,0.12)}
 
-/* Final / celebração */
-.final-wrap{text-align:center;padding:1.5rem 0}
-.final-wrap .trofeu{font-size:4rem;margin-bottom:1rem;animation:bounce 1s ease infinite alternate}
-@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-8px)}}
-.final-wrap h2{font-family:'Sora',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:.5rem}
-.final-wrap>p{font-size:.92rem;color:var(--texto-s);max-width:420px;margin:0 auto;line-height:1.6}
-.stats-f{display:flex;justify-content:center;gap:.85rem;margin:1.5rem 0;flex-wrap:wrap}
-.sf{background:var(--branco);border:1px solid var(--borda);border-radius:12px;padding:.9rem 1.3rem;text-align:center;box-shadow:var(--sombra)}
-.sf .sn{font-family:'Sora',sans-serif;font-size:1.7rem;font-weight:800;color:var(--verde)}
-.sf .sl{font-size:11px;color:var(--texto-s);margin-top:2px;font-family:'Sora',sans-serif}
+/* Glossário */
+.gls-search{width:100%;padding:.7rem 1rem;border:1.5px solid var(--borda);border-radius:10px;font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem;font-family:'DM Sans',sans-serif}
+.gls-search:focus{border-color:var(--verde)}
+.gi{border-bottom:1px solid var(--cinza-c);padding:.85rem 0}
+.gi:last-child{border-bottom:none}
+.gt{font-family:'Sora',sans-serif;font-weight:700;font-size:.9rem;color:var(--verde-e);margin-bottom:3px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.gt-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.gd{font-size:.85rem;color:var(--texto-s);line-height:1.6}
+.gi.hidden{display:none}
 
 /* ── PRINT ── */
 @media print{
@@ -350,8 +355,8 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   .chips{gap:5px}
   .chip{font-size:10px;padding:3px 8px}
   .popup{right:.75rem;left:.75rem;max-width:none}
-  .fluxo-card{gap:0}
   .cert-rodape{flex-direction:column;gap:.75rem;text-align:center}
+  .qr-stats{gap:.5rem}
 }
 </style>
 </head>
@@ -369,10 +374,10 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   <h1>Sistema DOL — Guia Completo</h1>
   <p>Do zero ao especialista: login, cadastro, pesquisa, nomeação, avaliação financeira e mais</p>
   <div class="mod-count">
-    <span>12 módulos</span> · <span>4 certificados</span> · <span>quiz interativo</span>
+    <span>12 módulos</span> · <span>4 certificados</span> · <span>quiz adaptativo</span>
   </div>
   <div class="nivel-row">
-    <div class="nivel-badge" id="hNivel"><span>Nível:</span><span id="hNivelNome">🌱 Iniciante</span></div>
+    <div class="nivel-badge"><span>Nível:</span><span id="hNivelNome">🌱 Iniciante</span></div>
     <div class="nivel-badge" id="hXpBadge">0 XP</div>
   </div>
   <div class="xp-wrap">
@@ -412,7 +417,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     <div>
       <div class="nivel-tag" style="background:var(--verde-c);color:var(--verde-e)">Apresentação · Pré-leitura obrigatória</div>
       <h2>Bem-vindo ao Guia DOL da 247ª</h2>
-      <p>12 módulos progressivos. Conclua cada etapa, faça os quizzes e conquiste seus certificados Bronze, Prata, Ouro e Diamante.</p>
+      <p>12 módulos progressivos. Conclua cada etapa, responda os quizzes adaptativos e conquiste seus certificados Bronze, Prata, Ouro e Diamante.</p>
     </div>
   </div>
 
@@ -445,28 +450,24 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
   </div>
 
   <div class="card">
+    <h3>Como funciona o quiz adaptativo</h3>
+    <table class="tbl">
+      <tr><th>O que é</th><th>Como funciona</th></tr>
+      <tr><td>⭐ Fácil</td><td>Primeira pergunta sempre. Se errar, a próxima será do mesmo nível.</td></tr>
+      <tr><td>⭐⭐ Médio</td><td>Se acertar no fácil, sobe para médio. Se errar no difícil, desce para médio.</td></tr>
+      <tr><td>⭐⭐⭐ Difícil</td><td>Se acertar no médio, a próxima será difícil. Mais pontos!</td></tr>
+    </table>
+    <div class="al al-d"><i>💡</i><span>Cada bloco tem 4 perguntas sorteadas de um banco de 10. Cada tentativa pode ser diferente! Aprovação: 50% (2/4) para Bronze/Prata/Ouro, 70% (8/12) para o Mistão Diamante.</span></div>
+  </div>
+
+  <div class="card">
     <h3>Sistema de certificados — 4 níveis</h3>
     <table class="tbl">
       <tr><th>Certificado</th><th>Módulos cobertos</th><th>Quiz</th><th>O que comprova</th></tr>
       <tr><td>🥉 Bronze</td><td>1 a 4 · Login, Home, Pesquisa, Cadastro</td><td>4 perguntas</td><td>Domínio do acesso e operação básica</td></tr>
       <tr><td>🥈 Prata</td><td>5 a 8 · Histórico, Av. Financeira, Nomeação, LGPD</td><td>4 perguntas</td><td>Gestão de casos e conformidade</td></tr>
-      <tr><td>🥇 Ouro</td><td>9 a 11 · Situações especiais, Quiz geral, Glossário</td><td>4 perguntas</td><td>Protocolos de urgência e vocabulário completo</td></tr>
+      <tr><td>🥇 Ouro</td><td>9 a 11 · Situações especiais, Quiz geral, Glossário</td><td>4 perguntas</td><td>Protocolos de urgência e vocabulário</td></tr>
       <tr><td>💎 Diamante</td><td>Mistão — todos os módulos</td><td>12 perguntas</td><td>Maestria completa do sistema DOL</td></tr>
-    </table>
-    <div class="al al-d"><i>💡</i><span>O Diamante só é liberado após você conquistar Bronze + Prata + Ouro. As perguntas do mistão são embaralhadas — cada tentativa é diferente!</span></div>
-  </div>
-
-  <div class="card">
-    <h3>Níveis de progresso</h3>
-    <table class="tbl">
-      <tr><th>Módulos</th><th>Nível</th><th>XP</th></tr>
-      <tr><td>0</td><td>🌱 Iniciante</td><td>0</td></tr>
-      <tr><td>1–2</td><td>🔍 Observador</td><td>até 30</td></tr>
-      <tr><td>3–4</td><td>📋 Assistente</td><td>até 60</td></tr>
-      <tr><td>5–6</td><td>⚖️ Operador</td><td>até 100</td></tr>
-      <tr><td>7–9</td><td>🏅 Analista</td><td>até 150</td></tr>
-      <tr><td>10–11</td><td>🎓 Especialista</td><td>até 185</td></tr>
-      <tr><td>12</td><td>🏆 Mestre DOL</td><td>200</td></tr>
     </table>
   </div>
 
@@ -555,7 +556,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Mapa completo da interface pós-login: sistemas disponíveis, calendário e navegação.</p>
     </div>
   </div>
-
   <div class="card">
     <h3>Menu "Sistemas" — lado esquerdo da Home</h3>
     <div class="passos">
@@ -563,7 +563,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">B</div><div class="pc"><h4>Sistema de Indicação OAB</h4><p>Específico para a 247ª. Indica advogados dativos pelo convênio OAB/DPESP.</p></div></div>
     </div>
   </div>
-
   <div class="card">
     <h3>Calendário de compromissos</h3>
     <ul>
@@ -573,7 +572,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <li>Botões <strong>mês / semana / dia</strong> mudam a visualização</li>
     </ul>
   </div>
-
   <div class="card">
     <h3>Como entrar no DOL Atividade Fim</h3>
     <div class="passos">
@@ -582,7 +580,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>A aba "Cadastro" já fica selecionada</h4><p>A tela de Pesquisa de Usuários abre automaticamente.</p></div></div>
     </div>
   </div>
-
   <button class="btn-ok" onclick="ok(2,'pc2'); ir(3,nav.querySelectorAll('.nb')[3])">✅ Módulo concluído → Pesquisa</button>
 </section>
 
@@ -596,7 +593,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>A função mais usada todo dia. Aprenda a encontrar qualquer assistido com precisão.</p>
     </div>
   </div>
-
   <div class="card">
     <h3>Qual campo usar — ordem de prioridade</h3>
     <table class="tbl">
@@ -610,7 +606,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>7ª</td><td>Nº processo / PA</td><td>Quando você já tem o número do caso específico</td></tr>
     </table>
   </div>
-
   <div class="card">
     <h3>Dicas práticas</h3>
     <div class="passos">
@@ -620,7 +615,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     </div>
     <div class="al al-r"><i>🔴</i><span>NUNCA pesquise por curiosidade. Cada consulta fica registrada com seu login, data e hora.</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(3,'pc3'); ir(4,nav.querySelectorAll('.nb')[4])">✅ Módulo concluído → Cadastro</button>
 </section>
 
@@ -634,7 +628,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Abas, campos, alertas obrigatórios, dados criminais, endereço e como salvar corretamente.</p>
     </div>
   </div>
-
   <div class="card">
     <h3>Seções da aba Cadastro</h3>
     <table class="tbl">
@@ -645,7 +638,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td><strong>Contato</strong></td><td>E-mail e telefone com DDD. Flag "não possui e-mail"</td><td>Telefone* (se preencher)</td></tr>
     </table>
   </div>
-
   <div class="card">
     <h3>Os 3 alertas amarelos</h3>
     <div class="passos">
@@ -654,7 +646,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="passo"><div class="pn" style="background:var(--laranja-c);color:var(--laranja-e)">!</div><div class="pc"><h4>"Cadastro vinculado com outros módulos"</h4><p>Campos cinza não editáveis — gerenciados por outro módulo. Não tente forçar edição.</p></div></div>
     </div>
   </div>
-
   <div class="card">
     <h3>Campos especiais</h3>
     <table class="tbl">
@@ -667,7 +658,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     </table>
     <div class="al al-a"><i>⚠️</i><span>O log de alterações é permanente e auditável. Cada mudança fica com seu nome, data e campo alterado.</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(4,'pc4'); ir(5,nav.querySelectorAll('.nb')[5])">✅ Módulo concluído → Histórico</button>
 </section>
 
@@ -681,7 +671,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Tudo que fica registrado sobre o assistido: casos jurídicos, histórico de alterações, Portal DEFi.</p>
     </div>
   </div>
-
   <div class="card">
     <h3>Colunas da tabela de histórico</h3>
     <table class="tbl">
@@ -695,7 +684,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>▶ (seta)</td><td>Clique para ver detalhes completos daquele caso</td></tr>
     </table>
   </div>
-
   <div class="card">
     <h3>Seções embaixo do cadastro</h3>
     <table class="tbl">
@@ -704,9 +692,8 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>Histórico de renda familiar</td><td>Renda declarada no autoatendimento</td></tr>
       <tr><td>Histórico de alterações cadastrais</td><td>Log auditável: data, quem editou, qual campo e o novo valor</td></tr>
     </table>
-    <div class="al al-a"><i>⚠️</i><span>O log de alterações é permanente. Você pode ver: "25/07/2023 — Cassia Kelly Lins Reis alterou Cidade → Pirapora do Bom Jesus".</span></div>
+    <div class="al al-a"><i>⚠️</i><span>O log é permanente. Você pode ver: "25/07/2023 — Cassia Kelly Lins Reis alterou Cidade → Pirapora do Bom Jesus".</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(5,'pc5'); ir(6,nav.querySelectorAll('.nb')[6])">✅ Módulo concluído → Avaliação Financeira</button>
 </section>
 
@@ -720,7 +707,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Como registrar, quando usar e interpretar o histórico de avaliações de hipossuficiência.</p>
     </div>
   </div>
-
   <div class="card card-destaque">
     <h3>O que é avaliação financeira?</h3>
     <p>A Defensoria só atende <strong>hipossuficientes</strong> — quem não tem renda para pagar advogado. A avaliação é o registro formal dessa comprovação.</p>
@@ -729,7 +715,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <span class="chip cc">Negado = renda acima do limite</span>
     </div>
   </div>
-
   <div class="card">
     <h3>Quando reavaliar?</h3>
     <table class="tbl">
@@ -739,9 +724,8 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>Situação financeira mudou</td><td>Sim — pode resultar em negado</td></tr>
       <tr><td>Continuidade do mesmo processo</td><td>Não — a avaliação já feita vale</td></tr>
     </table>
-    <div class="al al-r"><i>🔴</i><span>Somente registre avaliações quando orientada pela defensora. Nunca registre sem o assistido presente. Isso é auditável e tem consequências jurídicas.</span></div>
+    <div class="al al-r"><i>🔴</i><span>Somente registre avaliações quando orientada pela defensora. Nunca registre sem o assistido presente.</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(6,'pc6'); ir(7,nav.querySelectorAll('.nb')[7])">✅ Módulo concluído → Nomeação</button>
 </section>
 
@@ -755,7 +739,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>O trabalho central da 247ª: indicação de advogados dativos para o Fórum de Santana de Parnaíba.</p>
     </div>
   </div>
-
   <div class="card card-destaque">
     <h3>O que é o convênio OAB/DPESP?</h3>
     <p>Quando a Defensoria não tem defensor disponível, ela aciona a OAB. A 247ª indica um advogado — o <strong>defensor dativo</strong> — que atua pelo convênio e é remunerado pelo Estado.</p>
@@ -764,7 +747,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <span class="chip cr">Família e Sucessões</span><span class="chip cc">Execução Penal</span><span class="chip cg">Infância e Juventude</span>
     </div>
   </div>
-
   <div class="card">
     <h3>Fluxo completo da nomeação</h3>
     <div class="fluxo-card">
@@ -779,7 +761,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="fluxo-item"><div class="fluxo-box"><div class="fb-icon">✅</div><div class="fb-txt">Comunica advogado + Fórum</div></div></div>
     </div>
   </div>
-
   <div class="card">
     <h3>Dados necessários para nomear</h3>
     <table class="tbl">
@@ -792,7 +773,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     </table>
     <div class="al al-r"><i>🔴</i><span>Toda nomeação é ato oficial com consequências jurídicas. Em caso de dúvida, consulte a Cássia antes de confirmar.</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(7,'pc7'); ir(8,nav.querySelectorAll('.nb')[8])">✅ Módulo concluído → LGPD</button>
 </section>
 
@@ -806,7 +786,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Por que dados de assistidos são sigilosos e o que você pode e não pode fazer.</p>
     </div>
   </div>
-
   <div class="card card-destaque">
     <h3>3 camadas de proteção simultâneas</h3>
     <div class="chips">
@@ -815,7 +794,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <span class="chip cv">Código de Ética OAB</span>
     </div>
   </div>
-
   <div class="card">
     <h3>O que você NUNCA pode fazer</h3>
     <div class="al al-r" style="margin-top:0"><i>🚫</i><span>Acessar cadastros por curiosidade, mesmo que a pessoa seja conhecida</span></div>
@@ -824,7 +802,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     <div class="al al-r"><i>🚫</i><span>Deixar a sessão aberta e sair do computador sem logout</span></div>
     <div class="al al-r"><i>🚫</i><span>Registrar avaliações financeiras sem o assistido presente</span></div>
   </div>
-
   <div class="card">
     <h3>Rastreabilidade — você sempre deixa rastro</h3>
     <table class="tbl">
@@ -836,7 +813,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
     </table>
     <div class="al al-a"><i>⚠️</i><span>O log é permanente e auditável pela Defensoria e pela OAB. Uma consulta indevida pode gerar processo administrativo disciplinar.</span></div>
   </div>
-
   <button class="btn-ok" onclick="ok(8,'pc8'); ir(9,nav.querySelectorAll('.nb')[9])">✅ Módulo concluído → Situações Especiais</button>
 </section>
 
@@ -850,7 +826,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Urgências, erros no sistema, cadastros duplicados e outras situações críticas.</p>
     </div>
   </div>
-
   <div class="card">
     <h3>Prisão em flagrante — protocolo de urgência</h3>
     <div class="al al-r"><i>🚨</i><span>Prazo de 24 horas para audiência de custódia. Ação imediata obrigatória.</span></div>
@@ -860,7 +835,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="passo"><div class="pn" style="background:var(--coral-c);color:var(--coral-e)">3</div><div class="pc"><h4>Nomeação com prioridade máxima</h4><p>O advogado de plantão é indicado imediatamente e comunicado para a audiência de custódia.</p></div></div>
     </div>
   </div>
-
   <div class="card">
     <h3>Situações que exigem sempre consultar a Cássia</h3>
     <table class="tbl">
@@ -873,7 +847,6 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <tr><td>Solicitação de outro município</td><td>Pode não ser do convênio da 247ª</td></tr>
     </table>
   </div>
-
   <div class="card">
     <h3>Sistema fora do ar</h3>
     <div class="passos">
@@ -882,68 +855,55 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <div class="passo"><div class="pn" style="background:var(--azul-c);color:var(--azul-e)">3</div><div class="pc"><h4>Comunique a Cássia</h4><p>Se persistir. Para urgências (flagrante), o contato direto com a Defensoria de plantão substitui temporariamente.</p></div></div>
     </div>
   </div>
-
   <button class="btn-ok" onclick="ok(9,'pc9'); ir(10,nav.querySelectorAll('.nb')[10])">✅ Módulo concluído → Quiz por Nível</button>
 </section>
 
-<!-- ══════════════ 10: QUIZ POR NÍVEL ══════════════ -->
+<!-- ══════════════ 10: QUIZ ADAPTATIVO ══════════════ -->
 <section class="sec" id="s10">
   <div class="sec-hd">
     <div class="sec-ic" style="background:#FCEBEB">❓</div>
     <div>
       <div class="nivel-tag" style="background:#FCEBEB;color:#A32D2D">Módulo 10 · +25 XP · 🥇 Ouro</div>
-      <h2>Quiz por nível de certificado</h2>
-      <p>4 perguntas por bloco + mistão Diamante ao final. Responda tudo para liberar seu certificado máximo!</p>
+      <h2>Quiz adaptativo por nível</h2>
+      <p>Uma pergunta por vez. O sistema ajusta a dificuldade conforme suas respostas — acertou, sobe; errou, o sistema ajuda com uma mais acessível.</p>
     </div>
   </div>
 
-  <!-- Blocos Bronze / Prata / Ouro -->
-  <div id="quizBronzeC">
-    <div class="quiz-bloco-sep">
-      <div class="sep-linha"></div>
-      <div class="sep-badge" style="background:var(--bronze-c);color:var(--bronze-e)">🥉 Quiz Bronze · Módulos 1–4</div>
-      <div class="sep-linha"></div>
-    </div>
-    <div id="qBronzeWrap"></div>
-    <div id="qBronzeResult" style="display:none"></div>
+  <!-- BRONZE -->
+  <div class="quiz-bloco-sep">
+    <div class="sep-linha"></div>
+    <div class="sep-badge" style="background:var(--bronze-c);color:var(--bronze-e)">🥉 Quiz Bronze · Módulos 1–4</div>
+    <div class="sep-linha"></div>
   </div>
+  <div id="quiz-bronze"></div>
 
-  <div id="quizPrataC" style="margin-top:1.5rem">
-    <div class="quiz-bloco-sep">
-      <div class="sep-linha"></div>
-      <div class="sep-badge" style="background:var(--prata-c);color:var(--prata-e)">🥈 Quiz Prata · Módulos 5–8</div>
-      <div class="sep-linha"></div>
-    </div>
-    <div id="qPrataWrap"></div>
-    <div id="qPrataResult" style="display:none"></div>
+  <!-- PRATA -->
+  <div class="quiz-bloco-sep" style="margin-top:2rem">
+    <div class="sep-linha"></div>
+    <div class="sep-badge" style="background:var(--prata-c);color:var(--prata-e)">🥈 Quiz Prata · Módulos 5–8</div>
+    <div class="sep-linha"></div>
   </div>
+  <div id="quiz-prata"></div>
 
-  <div id="quizOuroC" style="margin-top:1.5rem">
-    <div class="quiz-bloco-sep">
-      <div class="sep-linha"></div>
-      <div class="sep-badge" style="background:var(--ouro-c);color:var(--ouro-e)">🥇 Quiz Ouro · Módulos 9–11</div>
-      <div class="sep-linha"></div>
-    </div>
-    <div id="qOuroWrap"></div>
-    <div id="qOuroResult" style="display:none"></div>
+  <!-- OURO -->
+  <div class="quiz-bloco-sep" style="margin-top:2rem">
+    <div class="sep-linha"></div>
+    <div class="sep-badge" style="background:var(--ouro-c);color:var(--ouro-e)">🥇 Quiz Ouro · Módulos 9–11</div>
+    <div class="sep-linha"></div>
   </div>
+  <div id="quiz-ouro"></div>
 
-  <!-- Mistão Diamante — bloqueado até completar os 3 -->
-  <div id="quizDiamanteC" style="margin-top:2rem">
-    <div class="quiz-bloco-sep">
-      <div class="sep-linha"></div>
-      <div class="sep-badge" style="background:var(--diamante-c);color:var(--diamante-e)">💎 Mistão Diamante · Todos os módulos</div>
-      <div class="sep-linha"></div>
-    </div>
-    <div id="qDiaLocked">
-      <div class="locked-overlay">
-        <div class="lo-icon">🔒</div>
-        <p>O Mistão Diamante é liberado após você completar os quizzes <strong>Bronze, Prata e Ouro</strong>.<br>Responda os blocos acima para desbloquear!</p>
-      </div>
-    </div>
-    <div id="qDiaWrap" style="display:none"></div>
-    <div id="qDiaResult" style="display:none"></div>
+  <!-- DIAMANTE -->
+  <div class="quiz-bloco-sep" style="margin-top:2rem">
+    <div class="sep-linha"></div>
+    <div class="sep-badge" style="background:var(--diamante-c);color:var(--diamante-e)">💎 Mistão Diamante · Todos os módulos</div>
+    <div class="sep-linha"></div>
   </div>
+  <div id="quiz-diamante-lock" class="locked-overlay">
+    <div class="lo-icon">🔒</div>
+    <p>O Mistão Diamante é liberado após você completar os quizzes <strong>Bronze, Prata e Ouro</strong>.</p>
+  </div>
+  <div id="quiz-diamante" style="display:none"></div>
 
   <button class="btn-ok" id="btnConcluirQuiz" onclick="ok(10,'pc10'); ir(11,nav.querySelectorAll('.nb')[11])" style="display:none">📖 Ver Glossário →</button>
 </section>
@@ -975,23 +935,17 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
       <p>Insira seu nome e imprima cada certificado que você conquistou.</p>
     </div>
   </div>
-
-  <!-- Painel de progresso -->
   <div class="cert-prog-panel">
     <div class="cpp cpp-b" id="cpp-bronze"><div class="cpp-icon">🥉</div><div class="cpp-nome">Bronze</div><div class="cpp-status" id="cps-bronze">Pendente</div></div>
     <div class="cpp cpp-s" id="cpp-prata"><div class="cpp-icon">🥈</div><div class="cpp-nome">Prata</div><div class="cpp-status" id="cps-prata">Pendente</div></div>
     <div class="cpp cpp-o" id="cpp-ouro"><div class="cpp-icon">🥇</div><div class="cpp-nome">Ouro</div><div class="cpp-status" id="cps-ouro">Pendente</div></div>
     <div class="cpp cpp-d" id="cpp-dia"><div class="cpp-icon">💎</div><div class="cpp-nome">Diamante</div><div class="cpp-status" id="cps-dia">Bloqueado</div></div>
   </div>
-
-  <!-- Campo nome -->
   <div class="nome-input-wrap">
     <label>Seu nome completo (aparece em todos os certificados):</label>
     <input type="text" id="nomeInput" placeholder="Ex: Ana Clara Souza" oninput="atualizarTodosNomes(this.value)" maxlength="60">
   </div>
-
   <div id="certArea">
-
     <!-- BRONZE -->
     <div class="cert-secao">
       <div class="cert-nivel-titulo" style="background:var(--bronze-c);color:var(--bronze-e)">
@@ -1023,7 +977,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         </div>
         <div class="cert-rodape">
           <div class="cert-data-rod" id="cert-data-bronze"></div>
-          <div style="display:flex;gap:2.5rem">
+          <div style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center">
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">Cássia Kelly Lins Reis</div><div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div></div>
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">247ª Subseção OAB-SP</div><div class="cargo-ass">Santana de Parnaíba · SP</div></div>
           </div>
@@ -1033,7 +987,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="lo-icon">🔒</div>
         <p>Complete os módulos <strong>1 a 4</strong> e o <strong>Quiz Bronze</strong> para desbloquear este certificado.</p>
       </div>
-      <button class="btn-cert-print" id="btn-print-bronze" style="display:none;background:var(--bronze-c);color:var(--bronze-e)" onclick="imprimirCert('bronze')">🖨️ Imprimir Certificado Bronze</button>
+      <button class="btn-cert-print" id="btn-print-bronze" style="display:none;background:var(--bronze-c);color:var(--bronze-e)" onclick="imprimirCert()">🖨️ Imprimir Certificado Bronze</button>
     </div>
 
     <!-- PRATA -->
@@ -1067,7 +1021,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         </div>
         <div class="cert-rodape">
           <div class="cert-data-rod" id="cert-data-prata"></div>
-          <div style="display:flex;gap:2.5rem">
+          <div style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center">
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">Cássia Kelly Lins Reis</div><div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div></div>
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">247ª Subseção OAB-SP</div><div class="cargo-ass">Santana de Parnaíba · SP</div></div>
           </div>
@@ -1077,7 +1031,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="lo-icon">🔒</div>
         <p>Complete os módulos <strong>5 a 8</strong> e o <strong>Quiz Prata</strong> para desbloquear.</p>
       </div>
-      <button class="btn-cert-print" id="btn-print-prata" style="display:none;background:var(--prata-c);color:var(--prata-e)" onclick="imprimirCert('prata')">🖨️ Imprimir Certificado Prata</button>
+      <button class="btn-cert-print" id="btn-print-prata" style="display:none;background:var(--prata-c);color:var(--prata-e)" onclick="imprimirCert()">🖨️ Imprimir Certificado Prata</button>
     </div>
 
     <!-- OURO -->
@@ -1096,7 +1050,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="cert-corpo">
           <div class="cert-label-nome">Certificamos que</div>
           <div class="cert-nome-display" id="cn-ouro">____________</div>
-          <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com êxito os <strong>Módulos 9 a 11</strong> do Treinamento DOL, demonstrando domínio em: protocolos de situações especiais e urgências (prisão em flagrante, Lei 13.431/2017), aprovação no quiz geral do sistema e vocabulário completo do glossário DOL.</p>
+          <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com êxito os <strong>Módulos 9 a 11</strong> do Treinamento DOL, demonstrando domínio em: protocolos de situações especiais e urgências (prisão em flagrante, Lei 13.431/2017), aprovação no quiz geral e vocabulário completo do glossário DOL.</p>
           <div class="cert-modulos">
             <span class="cert-mod-chip">🚨 Situações especiais</span>
             <span class="cert-mod-chip">❓ Quiz aprovado</span>
@@ -1110,7 +1064,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         </div>
         <div class="cert-rodape">
           <div class="cert-data-rod" id="cert-data-ouro"></div>
-          <div style="display:flex;gap:2.5rem">
+          <div style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center">
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">Cássia Kelly Lins Reis</div><div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div></div>
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">247ª Subseção OAB-SP</div><div class="cargo-ass">Santana de Parnaíba · SP</div></div>
           </div>
@@ -1120,7 +1074,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="lo-icon">🔒</div>
         <p>Complete os módulos <strong>9 a 11</strong> e o <strong>Quiz Ouro</strong> para desbloquear.</p>
       </div>
-      <button class="btn-cert-print" id="btn-print-ouro" style="display:none;background:var(--ouro-c);color:var(--ouro-e)" onclick="imprimirCert('ouro')">🖨️ Imprimir Certificado Ouro</button>
+      <button class="btn-cert-print" id="btn-print-ouro" style="display:none;background:var(--ouro-c);color:var(--ouro-e)" onclick="imprimirCert()">🖨️ Imprimir Certificado Ouro</button>
     </div>
 
     <!-- DIAMANTE -->
@@ -1140,7 +1094,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="cert-corpo">
           <div class="cert-label-nome">Certificamos que</div>
           <div class="cert-nome-display" id="cn-dia">____________</div>
-          <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com excelência o <strong>Treinamento Completo do Sistema DOL</strong> — todos os 12 módulos e o Mistão Diamante — demonstrando maestria em: segurança de acesso e LGPD, pesquisa e cadastro de assistidos, avaliação de hipossuficiência, fluxo completo de nomeação dativa, protocolos de urgência (flagrante, Lei 13.431/2017) e vocabulário especializado.</p>
+          <p style="font-size:.84rem;color:var(--texto-s);line-height:1.6;margin-bottom:.85rem">concluiu com excelência o <strong>Treinamento Completo do Sistema DOL</strong> — todos os 12 módulos e o Mistão Diamante — demonstrando maestria em segurança de acesso, LGPD, pesquisa e cadastro de assistidos, avaliação de hipossuficiência, fluxo de nomeação dativa, protocolos de urgência e vocabulário especializado.</p>
           <div class="cert-modulos">
             <span class="cert-mod-chip">🥉 Bronze concluído</span>
             <span class="cert-mod-chip">🥈 Prata concluído</span>
@@ -1157,7 +1111,7 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         </div>
         <div class="cert-rodape">
           <div class="cert-data-rod" id="cert-data-dia"></div>
-          <div style="display:flex;gap:2.5rem">
+          <div style="display:flex;gap:2.5rem;flex-wrap:wrap;justify-content:center">
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">Cássia Kelly Lins Reis</div><div class="cargo-ass">Auxiliar Administrativo · 247ª OAB-SP</div></div>
             <div class="cert-ass-bloco"><div class="linha-ass"></div><div class="nome-ass">247ª Subseção OAB-SP</div><div class="cargo-ass">Santana de Parnaíba · SP</div></div>
           </div>
@@ -1167,10 +1121,9 @@ code{background:var(--cinza-c);padding:2px 7px;border-radius:5px;font-size:.83re
         <div class="lo-icon">💎</div>
         <p>Conquiste os certificados <strong>Bronze, Prata e Ouro</strong> e complete o <strong>Mistão Diamante</strong> para receber o certificado máximo!</p>
       </div>
-      <button class="btn-cert-print" id="btn-print-dia" style="display:none;background:var(--diamante-c);color:var(--diamante-e)" onclick="imprimirCert('dia')">🖨️ Imprimir Certificado Diamante</button>
+      <button class="btn-cert-print" id="btn-print-dia" style="display:none;background:var(--diamante-c);color:var(--diamante-e)" onclick="imprimirCert()">🖨️ Imprimir Certificado Diamante</button>
     </div>
-
-  </div><!-- /certArea -->
+  </div>
 
   <button class="btn-ok" onclick="ok(12,'pc12')">✅ Finalizar treinamento</button>
 </section>
@@ -1185,22 +1138,16 @@ const navEl = document.getElementById('nav');
 let xp = 0, concl = 0;
 const TOTAL = 12;
 const concSet = new Set();
-
-// Progresso de certificados
 const certStatus = {bronze:false, prata:false, ouro:false, dia:false};
 const quizStatus = {bronze:false, prata:false, ouro:false, dia:false};
-
 const xpMap = {pc1:15,pc2:15,pc3:15,pc4:15,pc5:15,pc6:20,pc7:20,pc8:20,pc9:20,pc10:25,pc11:10,pc12:10};
-
 const niveis = [
   {min:0,nome:'🌱 Iniciante'},{min:1,nome:'🔍 Observador'},
   {min:3,nome:'📋 Assistente'},{min:5,nome:'⚖️ Operador'},
   {min:7,nome:'🏅 Analista'},{min:10,nome:'🎓 Especialista'},
   {min:12,nome:'🏆 Mestre DOL'}
 ];
-
 function getNivel(n){let c=niveis[0];for(let nv of niveis){if(n>=nv.min)c=nv;}return c;}
-
 function atualizarXP(){
   const pct=Math.round((concl/TOTAL)*100);
   document.getElementById('xpBar').style.width=pct+'%';
@@ -1208,7 +1155,6 @@ function atualizarXP(){
   document.getElementById('hXpBadge').textContent=xp+' XP';
   document.getElementById('hNivelNome').textContent=getNivel(concl).nome;
 }
-
 function ok(secIdx, pcId){
   if(pcId && pcId!=='pc0-fake' && concSet.has(pcId)) return;
   if(pcId && pcId!=='pc0-fake'){
@@ -1223,9 +1169,9 @@ function ok(secIdx, pcId){
     atualizarXP();
     const nv=getNivel(concl);
     showPop('Módulo '+concl+'/'+TOTAL+' concluído!',nv.nome,'+'+gain+' XP','var(--verde-e)');
+    salvarProgresso();
   }
 }
-
 function showPop(t,m,xpStr,bg){
   const p=document.getElementById('pop');
   p.style.background=bg||'var(--verde-e)';
@@ -1236,7 +1182,6 @@ function showPop(t,m,xpStr,bg){
   clearTimeout(p._timer);
   p._timer=setTimeout(()=>p.classList.remove('show'),5000);
 }
-
 function ir(idx,btn){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('ativa'));
   document.getElementById('s'+idx).classList.add('ativa');
@@ -1244,10 +1189,6 @@ function ir(idx,btn){
   if(btn) btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
-
-// ════════════════════════════════════════════
-// DATA
-// ════════════════════════════════════════════
 const meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
 function dataHoje(){const d=new Date();return'Santana de Parnaíba, '+d.getDate()+' de '+meses[d.getMonth()]+' de '+d.getFullYear();}
 ['bronze','prata','ouro','dia'].forEach(n=>{
@@ -1256,181 +1197,354 @@ function dataHoje(){const d=new Date();return'Santana de Parnaíba, '+d.getDate(
 });
 
 // ════════════════════════════════════════════
-// QUIZ — BANCO DE PERGUNTAS DIVIDIDO
+// BANCO DE PERGUNTAS — 10 por nível, com dificuldade
 // ════════════════════════════════════════════
-// ── BANCOS DE 8 PERGUNTAS (sorteiam 4 por tentativa)
 const bancoBronze = [
-  {p:"Qual é o endereço correto do sistema DOL?",o:["dol.oabsp.org.br","online.defensoria.sp.def.br","defensoria.sp.gov.br/dol","portal.dpesp.sp.gov.br"],c:1,fb:"O endereço correto é online.defensoria.sp.def.br — salve nos favoritos!"},
-  {p:"O que significa SSO no contexto do login?",o:["Sistema de Segurança Online","Sistema de Suporte Operacional","Single Sign-On — uma conta para todos os módulos","Senha Segura Oficial"],c:2,fb:"SSO = Single Sign-On. Uma conta dá acesso a todos os módulos sem logins separados."},
-  {p:"Qual campo garante resultado único ao pesquisar um assistido?",o:["Nome completo","Data de nascimento","CPF","Número PA"],c:2,fb:"CPF é único por pessoa no Brasil — resultado exato, sem duplicatas."},
-  {p:"Ao encerrar o DOL, o que você NUNCA deve fazer?",o:["Salvar o cadastro","Anotar o número do PA","Fechar a aba sem logout","Verificar alertas amarelos"],c:2,fb:"Fechar sem logout deixa a sessão aberta — falha grave de segurança."},
-  {p:"Qual a versão do DOL Atividade Fim usada pela 247ª?",o:["v.3.1.0","v.4.403.0 (68)","v.5.0.1","v.2.10.4"],c:1,fb:"A versão é v.4.403.0 (68) — confirme no topo esquerdo ao entrar."},
-  {p:"Qual campo usar para assistido do sistema penitenciário sem CPF?",o:["Nome da mãe","SAP","Número PA","Data de nascimento"],c:1,fb:"SAP = Sistema de Administração Penitenciária — campo específico para quem está ou esteve preso."},
-  {p:"Quando dois campos combinados são mais úteis na pesquisa?",o:["CPF + RG","Nome + Data de nascimento para nomes comuns","SAP + RNE","PA + Processo"],c:1,fb:"Nome sozinho pode trazer dezenas de resultados. Combinar com nascimento filtra com muito mais precisão."},
-  {p:"O que aparece no canto superior direito após o login?",o:["O número do PA aberto","O nome do usuário logado","A versão do sistema","O calendário do dia"],c:1,fb:"Após login, seu nome aparece no topo direito — confirme que é a conta certa."}
+  {p:"Qual é o endereço correto do sistema DOL?",o:["dol.oabsp.org.br","online.defensoria.sp.def.br","defensoria.sp.gov.br/dol","portal.dpesp.sp.gov.br"],c:1,fb:"O endereço correto é online.defensoria.sp.def.br — salve nos favoritos!",lvl:1},
+  {p:"Ao encerrar o DOL, o que você NUNCA deve fazer?",o:["Salvar o cadastro antes","Anotar o número do PA","Fechar a aba sem fazer logout","Verificar os alertas amarelos"],c:2,fb:"Fechar sem logout deixa a sessão aberta — falha grave de segurança e responsabilidade sua.",lvl:1},
+  {p:"O que significa SSO no contexto do DOL?",o:["Sistema de Segurança Online","Sistema de Suporte Operacional","Single Sign-On — uma conta única para todos os módulos","Senha Segura Oficial"],c:2,fb:"SSO = Single Sign-On. Uma conta dá acesso a todos os módulos sem logins separados.",lvl:2},
+  {p:"Qual campo garante resultado único ao pesquisar um assistido?",o:["Nome completo","Data de nascimento","CPF","Número PA"],c:2,fb:"CPF é único por pessoa no Brasil — resultado exato, sem duplicatas.",lvl:1},
+  {p:"Qual a versão do DOL Atividade Fim usada pela 247ª?",o:["v.3.1.0","v.4.403.0 (68)","v.5.0.1","v.2.10.4"],c:1,fb:"A versão é v.4.403.0 (68) — confirme no canto superior esquerdo ao entrar.",lvl:2},
+  {p:"Qual campo específico identificar assistido do sistema prisional?",o:["Nome da mãe","SAP","Número PA","Data de nascimento"],c:1,fb:"SAP = Sistema de Administração Penitenciária — campo específico para presos.",lvl:2},
+  {p:"Por que combinar Nome + Data de nascimento na pesquisa?",o:["Porque o CPF pode ter erro","Porque nomes comuns retornam dezenas de resultados","Para economizar tempo","O sistema exige os dois juntos"],c:1,fb:"Nome sozinho traz dezenas de resultados. Combinar com nascimento filtra com muito mais precisão.",lvl:3},
+  {p:"O que aparece no canto superior direito após o login correto?",o:["O número do PA aberto","O nome do usuário logado","A versão do sistema","O calendário do dia"],c:1,fb:"Após login, seu nome aparece no topo direito — confirme que é a conta certa antes de agir.",lvl:1},
+  {p:"Qual é a segunda aba do DOL e para que serve?",o:["Histórico DPESP — ver casos antigos","Busca Atendimentos em Plantões Judiciários — flagrante e custódia","Avaliação Financeira — hipossuficiência","Portal DEFi — autoatendimento"],c:1,fb:"Segunda aba: 'Busca Atendimentos em Plantões Judiciários' — campos específicos para flagrante.",lvl:3},
+  {p:"Em computadores compartilhados, o logout é obrigatório porque:",o:["O sistema trava se não fizer logout","Todo acesso fica registrado com seu login, data e hora","O próximo usuário não consegue entrar","É apenas uma boa prática recomendada"],c:1,fb:"Cada acesso fica rastreado. Sessão aberta = acesso indevido registrado no seu nome.",lvl:3},
 ];
 
 const bancoPrata = [
-  {p:"O que é um 'defensor dativo'?",o:["Defensor público contratado","Advogado privado indicado pela OAB quando a Defensoria não tem defensor","Juiz que defende o réu","Assistente social"],c:1,fb:"Dativo = advogado privado indicado pela OAB pelo convênio OAB/DPESP, remunerado pelo Estado."},
-  {p:"Qual aba mostra todos os casos jurídicos anteriores do assistido?",o:["Cadastro","Portal DEFi","Histórico DPESP","Avaliação financeira"],c:2,fb:"Aba Histórico DPESP — mostra área, problema, situação e data de cada caso."},
-  {p:"O que é hipossuficiência?",o:["Ter deficiência física","Não ter renda para pagar advogado","Não ter documentos","Ser menor de 18 anos"],c:1,fb:"Hipossuficiente = renda insuficiente para custas e honorários. Requisito para assistência gratuita."},
-  {p:"Quantas camadas legais protegem os dados dos assistidos?",o:["1 — apenas LGPD","2 — LGPD e Ética OAB","3 — LGPD, LC 988/2006 e Ética OAB","4"],c:2,fb:"3 camadas: LGPD (13.709/2018), LC 988/2006 (Lei Orgânica DPESP) e Código de Ética OAB."},
-  {p:"O que significa 'Cadastro vinculado com outros módulos'?",o:["Cadastro com erros","Campos cinza gerenciados por outro módulo — não editar","Em processo criminal","Atendimento cancelado"],c:1,fb:"Campos cinza = gerenciados por outro módulo da Defensoria. Normal — não force edição."},
-  {p:"Quando NÃO é necessária nova avaliação financeira?",o:["Novo caso jurídico diferente","Avaliação há mais de 1 ano","Continuidade do mesmo processo já avaliado","Situação financeira mudou"],c:2,fb:"Na continuidade do mesmo processo a avaliação já feita vale. Novo caso = nova avaliação."},
-  {p:"O histórico de alterações cadastrais registra:",o:["Só quem criou o cadastro","Só edições de endereço","Data, quem editou, qual campo e o valor novo","Apenas avaliações negadas"],c:2,fb:"Log auditável e permanente: data, login, campo alterado e valor novo."},
-  {p:"Para que serve o campo 'Nome social'?",o:["Nome artístico","Nome pelo qual a pessoa prefere ser chamada — obrigatório respeitar","Apelido informal","Segundo nome jurídico"],c:1,fb:"Nome social = como a pessoa se identifica. Obrigatório respeitar por lei."}
+  {p:"O que é um 'defensor dativo'?",o:["Defensor público contratado","Advogado privado indicado pela OAB quando a Defensoria não tem defensor","Juiz que defende o réu","Assistente social da Defensoria"],c:1,fb:"Dativo = advogado privado indicado pela OAB pelo convênio OAB/DPESP, remunerado pelo Estado.",lvl:1},
+  {p:"O que é hipossuficiência?",o:["Ter deficiência física","Não ter renda para pagar advogado","Não ter documentos de identidade","Ser menor de 18 anos"],c:1,fb:"Hipossuficiente = renda insuficiente para custas e honorários. Requisito para assistência gratuita.",lvl:1},
+  {p:"Quantas camadas legais protegem os dados dos assistidos?",o:["1 — apenas LGPD","2 — LGPD e Ética OAB","3 — LGPD, LC 988/2006 e Ética OAB","4 — incluindo Código Civil"],c:2,fb:"3 camadas: LGPD (13.709/2018), LC 988/2006 (Lei Orgânica DPESP) e Código de Ética OAB.",lvl:2},
+  {p:"Qual aba mostra todos os casos jurídicos anteriores do assistido?",o:["Cadastro","Portal DEFi","Histórico DPESP","Avaliação financeira"],c:2,fb:"Aba Histórico DPESP — mostra área, problema, situação e data de cada caso anterior.",lvl:1},
+  {p:"O que significa 'Cadastro vinculado com outros módulos'?",o:["Cadastro com erros de preenchimento","Campos cinza gerenciados por outro módulo — não editar","Assistido em processo criminal","Atendimento cancelado pela Defensoria"],c:1,fb:"Campos cinza = gerenciados por outro módulo da Defensoria. Normal — não force edição.",lvl:2},
+  {p:"Quando NÃO é necessária nova avaliação financeira?",o:["Novo caso jurídico diferente","Avaliação há mais de 1 ano","Continuidade do mesmo processo já avaliado","Situação financeira mudou"],c:2,fb:"Na continuidade do mesmo processo, a avaliação já feita vale. Novo caso = nova avaliação.",lvl:2},
+  {p:"O histórico de alterações cadastrais registra exatamente:",o:["Só quem criou o cadastro","Só edições de endereço","Data, login de quem editou, qual campo e o valor novo","Apenas avaliações negadas"],c:2,fb:"Log auditável e permanente: data, login, campo alterado, valor anterior e valor novo.",lvl:3},
+  {p:"Para que serve o campo 'Nome social'?",o:["Nome artístico do assistido","Nome pelo qual a pessoa prefere ser chamada — obrigatório respeitar","Apelido informal","Segundo nome jurídico"],c:1,fb:"Nome social = como a pessoa se identifica socialmente. Obrigatório respeitar por lei.",lvl:1},
+  {p:"O alerta 'Possui pelo menos um autoatendimento' significa que:",o:["Há erro no cadastro","A pessoa já fez contato digital e tem um PA — verifique o histórico antes de abrir novo","O assistido está em regime digital exclusivo","Não é possível fazer novo atendimento"],c:1,fb:"Sempre verifique o histórico antes de abrir novo atendimento — pode haver caso em andamento.",lvl:3},
+  {p:"A avaliação financeira deve ser registrada:",o:["Por qualquer funcionário presente","Apenas sob orientação da defensora, com o assistido presente","Previamente, antes do assistido chegar","Automaticamente pelo sistema"],c:1,fb:"Só registre com orientação da defensora e assistido presente. É ato jurídico auditável.",lvl:3},
 ];
 
 const bancoOuro = [
-  {p:"Qual é o prazo para audiência de custódia após prisão em flagrante?",o:["72 horas","48 horas","Até 24 horas","7 dias"],c:2,fb:"Até 24 horas. Comunicar a Cássia imediatamente — prioridade máxima."},
-  {p:"Ao identificar cadastro duplicado no DOL, o que fazer?",o:["Deletar o mais antigo","Editar ambos","Comunicar a Cássia — não agir sozinha","Ignorar"],c:2,fb:"Sempre comunique a Cássia. Exclusão pode apagar histórico jurídico importante."},
-  {p:"O campo 'Mãe em cárcere' identifica:",o:["Funcionária presa","Assistido filho(a) de mulher presa — aciona protocolos especiais","Visitas ao sistema prisional","Situação habitacional"],c:1,fb:"Identifica assistido filho(a) de mulher presa. Aciona protocolos especiais de atendimento."},
-  {p:"Solicitação de nomeação vem de outro município. O que fazer?",o:["Nomear normalmente","Consultar a Cássia — pode não ser do convênio da 247ª","Recusar sem verificar","Encaminhar direto ao Fórum"],c:1,fb:"Sempre consulte a Cássia. Outros municípios podem não ser da área da 247ª."},
-  {p:"Qual lei define protocolos para crianças/adolescentes vítimas?",o:["LGPD — 13.709/2018","Lei 13.431/2017","LC 988/2006","Lei 12.594/2012"],c:1,fb:"Lei 13.431/2017 — protocolo especial na 247ª com sistema próprio (Demandas do Fórum)."},
-  {p:"Sistema fora do ar em caso de flagrante urgente. O que fazer?",o:["Aguardar o sistema","Contato direto com a Defensoria de plantão","Encerrar o atendimento","Registrar só em papel"],c:1,fb:"Em flagrante, o contato direto com a Defensoria de plantão substitui o sistema temporariamente."},
-  {p:"Quem autoriza o registro de avaliação financeira no DOL?",o:["Qualquer funcionário presente","A defensora — nunca registre sem orientação","O próprio assistido","A secretária do Fórum"],c:1,fb:"A avaliação é registrada sob orientação da defensora. Tem consequências jurídicas."},
-  {p:"Assistido tem advogado constituído. O que você faz?",o:["Nomeia dativo mesmo assim","Não nomeia dativo — já tem advogado próprio","Aguarda o advogado ligar","Faz nomeação preventiva"],c:1,fb:"Quem tem advogado constituído não recebe dativo. Consulte a Cássia em caso de dúvida."}
+  {p:"Qual é o prazo para audiência de custódia após prisão em flagrante?",o:["72 horas","48 horas","Até 24 horas","7 dias corridos"],c:2,fb:"Até 24 horas. Comunicar a Cássia imediatamente — prioridade máxima e absoluta.",lvl:1},
+  {p:"Ao identificar cadastro duplicado no DOL, o que fazer?",o:["Deletar o mais antigo","Editar ambos para unificar os dados","Comunicar a Cássia — não agir sozinha","Ignorar e criar um novo"],c:2,fb:"Sempre comunique a Cássia. Exclusão pode apagar histórico jurídico irreversível.",lvl:1},
+  {p:"Qual lei define protocolos especiais para crianças e adolescentes vítimas?",o:["LGPD — 13.709/2018","Lei 13.431/2017","LC 988/2006","Lei 12.594/2012 — SINASE"],c:1,fb:"Lei 13.431/2017 — protocolo especial na 247ª com sistema próprio (Demandas do Fórum).",lvl:2},
+  {p:"O campo 'Mãe em cárcere' identifica:",o:["Funcionária presa","Assistido filho(a) de mulher presa — aciona protocolos especiais de atendimento","Visitas ao sistema prisional","Situação habitacional da família"],c:1,fb:"Identifica assistido filho(a) de mulher presa. Aciona protocolos especiais de atendimento.",lvl:2},
+  {p:"Solicitação de nomeação vem de outro município. O que fazer?",o:["Nomear normalmente como qualquer outro","Consultar a Cássia — pode não ser do convênio da 247ª","Recusar automaticamente sem verificar","Encaminhar direto ao Fórum sem registro"],c:1,fb:"Sempre consulte a Cássia. Outros municípios podem não ser da área de atuação da 247ª.",lvl:2},
+  {p:"Sistema fora do ar com caso urgente de flagrante. O que fazer?",o:["Aguardar o sistema voltar antes de agir","Contato direto com a Defensoria de plantão — substitui o sistema temporariamente","Encerrar o atendimento e registrar depois","Registrar só em papel e aguardar normalização"],c:1,fb:"Em flagrante, o contato direto com a Defensoria de plantão substitui o sistema.",lvl:3},
+  {p:"Assistido tem advogado constituído. Você deve:",o:["Nomear dativo mesmo assim como segurança extra","Não nomear dativo — já tem advogado próprio","Aguardar o advogado entrar em contato para confirmar","Fazer nomeação preventiva e cancelar depois"],c:1,fb:"Quem tem advogado constituído não recebe dativo. Consulte a Cássia em caso de dúvida.",lvl:2},
+  {p:"Por que uma consulta indevida no DOL pode gerar processo disciplinar?",o:["O sistema cobra multa automática","Todo acesso fica rastreado com login, data, hora e campos consultados","É proibido abrir mais de 10 cadastros por dia","O assistido é notificado automaticamente pelo sistema"],c:1,fb:"Log permanente e auditável. Consulta por curiosidade = processo administrativo OAB/DPESP.",lvl:3},
+  {p:"O advogado dativo recusa a nomeação. O que você faz?",o:["Força a aceitação registrando mesmo assim","Nomeia outro sem comunicar ninguém","Consulta a Cássia — há regras específicas para recusa e nova indicação","Comunica ao Fórum que não há advogado disponível"],c:2,fb:"Há regras específicas para recusa e nova indicação. Sempre envolva a Cássia.",lvl:3},
+  {p:"Qual módulo do DOL é específico para flagrante e audiências de custódia?",o:["Aba Cadastro — campo flagrante","Aba Histórico DPESP","Aba Busca Atendimentos em Plantões Judiciários","Portal DEFi — atendimento digital"],c:2,fb:"Segunda aba: 'Busca Atendimentos em Plantões Judiciários' — campos específicos para custódia.",lvl:3},
 ];
 
-function shuffle(arr){return arr.map(a=>[Math.random(),a]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);}
-function sortear4(banco){return shuffle([...banco]).slice(0,4);}
-
-// Aliases para compatibilidade com renderBloco
-const qBronze = sortear4(bancoBronze);
-const qPrata  = sortear4(bancoPrata);
-const qOuro   = sortear4(bancoOuro);
-
-// Mistão = todos embaralhados, 12 aleatórios
-const todosQ = [...qBronze,...qPrata,...qOuro];
-function shuffle(arr){return arr.map(a=>[Math.random(),a]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);}
-let misQ = [];
-
 // ════════════════════════════════════════════
-// RENDERIZAÇÃO DE QUIZ
+// ENGINE DE QUIZ ADAPTATIVO — PERGUNTA POR VEZ
 // ════════════════════════════════════════════
-function renderBloco(qs, wrapId, callback, dotPrefix){
-  const wrap = document.getElementById(wrapId);
-  if(!wrap) return;
-  const resp = new Array(qs.length).fill(null);
+function shuffle(arr){return arr.map(a=>[Math.random(),a]).sort((a,b)=>a[0]-b[0]).map(a=>a[1]);}
+
+/**
+ * Cria e roda um quiz adaptativo no container dado.
+ * @param {string} containerId - ID do div container
+ * @param {Array} banco - banco de perguntas com .lvl 1/2/3
+ * @param {number} totalPerguntas - quantas perguntas (4 ou 12)
+ * @param {Object} cfg - {cor, corFundo, nome, emoji}
+ * @param {Function} onComplete - callback(acertos, total)
+ */
+function criarQuiz(containerId, banco, totalPerguntas, cfg, onComplete) {
+  const container = document.getElementById(containerId);
+  if(!container) return;
+
+  // Separar por dificuldade e embaralhar
+  const pool = {
+    1: shuffle(banco.filter(q=>q.lvl===1)),
+    2: shuffle(banco.filter(q=>q.lvl===2)),
+    3: shuffle(banco.filter(q=>q.lvl===3))
+  };
+  // Índices de consumo por nível
+  const idx = {1:0, 2:0, 3:0};
+
+  // Selecionar perguntas de forma adaptativa
+  // Começamos com lvl 1 e sorteamos o resto proporcionalmente
+  // Para 4 perguntas: tentamos pegar pelo menos 1 de cada nível
+  // Para 12: equilibrado
+  let perguntas = [];
+  // Estratégia: montar pool inicial balanceado
+  const alvos = totalPerguntas === 4
+    ? [1,2,2,3] // 4 perguntas: 1 fácil, 2 médias, 1 difícil (adaptado em runtime)
+    : [1,1,2,2,2,3,3,3,1,2,3,3]; // 12: misturado
+
+  for(let nv of alvos){
+    // Tenta o nível alvo, senão pega de qualquer outro disponível
+    if(pool[nv] && idx[nv] < pool[nv].length){
+      perguntas.push(pool[nv][idx[nv]++]);
+    } else {
+      // Fallback: qualquer pergunta disponível
+      for(let fn of [1,2,3]){
+        if(pool[fn] && idx[fn] < pool[fn].length){
+          perguntas.push(pool[fn][idx[fn]++]);
+          break;
+        }
+      }
+    }
+  }
+  // Limitar ao total
+  perguntas = perguntas.slice(0, totalPerguntas);
+
+  // ── Estado do quiz
+  let qAtual = 0;
   let acertos = 0;
+  let nivelAtual = 1; // começa fácil
+  const resultados = []; // 'certo'|'errado' por pergunta
 
-  // Dots
-  const dots = document.createElement('div');
-  dots.className = 'q-progresso';
-  qs.forEach((_,i)=>{
-    const d=document.createElement('div');
-    d.className='q-dot';
-    d.id=dotPrefix+i;
-    dots.appendChild(d);
-  });
-  wrap.appendChild(dots);
+  // ── Renderizar estrutura
+  container.innerHTML = '';
 
-  qs.forEach((q,qi)=>{
-    const d=document.createElement('div');
-    d.className='card';
-    d.innerHTML=`<p class="qp"><span class="q-num">${qi+1}</span>${q.p}</p><div class="qopts">${q.o.map((o,oi)=>`<button class="qopt" onclick="respBlocoQ(this,'${wrapId}',${qi},${oi})" data-qi="${qi}" data-oi="${oi}">${o}</button>`).join('')}</div><div class="qfb" id="${dotPrefix}fb${qi}"></div>`;
-    wrap.appendChild(d);
-  });
+  // Header: barra de progresso com dots
+  const header = document.createElement('div');
+  header.className = 'quiz-container';
+  header.id = containerId + '-box';
 
-  // Guardar estado no wrapper
-  wrap._resp = resp;
-  wrap._qs = qs;
-  wrap._acertos = ()=>acertos;
-  wrap._addAcerto = ()=>acertos++;
-  wrap._dotPrefix = dotPrefix;
-  wrap._callback = callback;
-  wrap._done = false;
+  header.innerHTML = `
+    <div class="quiz-header">
+      <div class="quiz-nivel-chip" style="background:${cfg.corFundo};color:${cfg.cor}">${cfg.emoji} ${cfg.nome}</div>
+      <div class="quiz-contadores">
+        <div class="quiz-cont-item"><span class="num" id="${containerId}-qnum">1</span>/${totalPerguntas}</div>
+        <div class="quiz-cont-item">✅ <span class="num" id="${containerId}-ac">0</span></div>
+      </div>
+    </div>
+    <div class="quiz-prog-bar-wrap">
+      <div class="quiz-prog-dots" id="${containerId}-dots"></div>
+    </div>
+    <div class="dif-wrap">
+      <span class="dif-label">Dificuldade:</span>
+      <span class="dif-star" id="${containerId}-s1">⭐</span>
+      <span class="dif-star" id="${containerId}-s2">⭐</span>
+      <span class="dif-star" id="${containerId}-s3">⭐</span>
+    </div>
+    <div id="${containerId}-qwrap" class="quiz-q-wrap"></div>
+    <button class="quiz-btn-next" id="${containerId}-next" onclick="proximaQ('${containerId}')">Próxima pergunta →</button>
+  `;
 
-  const btnR = document.createElement('button');
-  btnR.className='btn-ok';
-  btnR.id=dotPrefix+'btnR';
-  btnR.style.display='none';
-  btnR.textContent='📊 Ver resultado deste bloco';
-  btnR.onclick=()=>verResultBloco(wrapId);
-  wrap.appendChild(btnR);
+  container.appendChild(header);
+
+  // Inicializar dots
+  const dotsEl = document.getElementById(containerId+'-dots');
+  for(let i=0;i<totalPerguntas;i++){
+    const d = document.createElement('div');
+    d.className = 'qd' + (i===0?' atual':'');
+    d.id = containerId+'-dot-'+i;
+    dotsEl.appendChild(d);
+  }
+
+  // Guardar estado no container via objeto global
+  window._quizState = window._quizState || {};
+  window._quizState[containerId] = {
+    perguntas, qAtual, acertos, nivelAtual, resultados, totalPerguntas, cfg, onComplete,
+    pool, idx
+  };
+
+  renderPergunta(containerId);
 }
 
-// Resposta de pergunta de bloco
-window.respBlocoQ = function(btnEl, wrapId, qi, oi){
-  const wrap = document.getElementById(wrapId);
-  if(!wrap||wrap._resp[qi]!==null) return;
-  const q = wrap._qs[qi];
-  wrap._resp[qi]=oi;
-  const acertou = oi===q.c;
-  if(acertou) wrap._addAcerto();
+function renderPergunta(containerId) {
+  const st = window._quizState[containerId];
+  if(!st) return;
+  const {perguntas, qAtual, nivelAtual, totalPerguntas, cfg} = st;
+  const q = perguntas[qAtual];
 
-  const dot=document.getElementById(wrap._dotPrefix+qi);
-  if(dot) dot.classList.add(acertou?'feita':'errada-d');
+  // Atualizar dificuldade visual
+  for(let i=1;i<=3;i++){
+    const s = document.getElementById(containerId+'-s'+i);
+    if(s) s.classList.toggle('on', i<=nivelAtual);
+  }
 
-  // Desabilitar todos do grupo
-  const allBtns = document.querySelectorAll(`[data-qi="${qi}"]`);
-  allBtns.forEach((b,idx)=>{
-    b.disabled=true;
-    const bOi=parseInt(b.getAttribute('data-oi'));
-    if(bOi===q.c) b.classList.add('certa');
-    else if(bOi===oi&&!acertou) b.classList.add('errada');
+  // Atualizar contador
+  const qnum = document.getElementById(containerId+'-qnum');
+  if(qnum) qnum.textContent = qAtual+1;
+
+  // Renderizar pergunta
+  const wrap = document.getElementById(containerId+'-qwrap');
+  if(!wrap) return;
+
+  // Embaralhar opções mantendo rastreio da correta
+  const opcoesOriginais = q.o.map((txt,oi)=>({txt,oi}));
+  const opcoesEmbaralhadas = shuffle([...opcoesOriginais]);
+  const novaPosCorreta = opcoesEmbaralhadas.findIndex(o=>o.oi===q.c);
+
+  wrap.style.animation = 'none';
+  requestAnimationFrame(()=>{
+    wrap.style.animation = '';
+    wrap.innerHTML = `
+      <p class="quiz-q-txt"><span class="quiz-q-num">${qAtual+1}</span>${q.p}</p>
+      <div class="quiz-opts" id="${containerId}-opts">
+        ${opcoesEmbaralhadas.map((op,ni)=>`
+          <button class="qopt" 
+            onclick="responderQ('${containerId}',${ni},${novaPosCorreta})"
+            data-ni="${ni}">
+            ${op.txt}
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="${containerId}-fb"></div>
+    `;
   });
 
-  const fb=document.getElementById(wrap._dotPrefix+'fb'+qi);
-  fb.classList.add('show');
-  fb.className='qfb show '+(acertou?'certo':'errado');
-  fb.textContent=(acertou?'✅ ':'❌ ')+q.fb;
+  // Ocultar botão "próxima"
+  const next = document.getElementById(containerId+'-next');
+  if(next) next.classList.remove('show');
+}
 
-  if(wrap._resp.every(r=>r!==null)){
-    document.getElementById(wrap._dotPrefix+'btnR').style.display='block';
+window.responderQ = function(containerId, escolhida, correta) {
+  const st = window._quizState[containerId];
+  if(!st) return;
+
+  const acertou = escolhida === correta;
+  const {perguntas, qAtual, totalPerguntas} = st;
+  const q = perguntas[qAtual];
+
+  // Atualizar acertos
+  if(acertou) st.acertos++;
+  st.resultados.push(acertou ? 'certo' : 'errado');
+
+  // Atualizar dot
+  const dot = document.getElementById(containerId+'-dot-'+qAtual);
+  if(dot){dot.classList.remove('atual');dot.classList.add(acertou?'certa':'errada');}
+
+  // Atualizar contador acertos
+  const acEl = document.getElementById(containerId+'-ac');
+  if(acEl) acEl.textContent = st.acertos;
+
+  // Desabilitar todos os botões
+  const opts = document.querySelectorAll(`#${containerId}-opts .qopt`);
+  opts.forEach((btn,ni)=>{
+    btn.disabled = true;
+    if(ni===correta) btn.classList.add('certa');
+    else if(ni===escolhida && !acertou) btn.classList.add('errada');
+  });
+
+  // Mostrar feedback
+  const fb = document.getElementById(containerId+'-fb');
+  if(fb){
+    fb.className = 'quiz-feedback show ' + (acertou?'certo':'errado');
+    fb.innerHTML = `<span class="quiz-feedback-emoji">${acertou?'✅':'❌'}</span>${q.fb}`;
+  }
+
+  // Calcular próximo nível (adaptativo)
+  let proxNivel = st.nivelAtual;
+  if(acertou && st.nivelAtual < 3) proxNivel = st.nivelAtual + 1;
+  else if(!acertou && st.nivelAtual > 1) proxNivel = st.nivelAtual - 1;
+  st.nivelAtual = proxNivel;
+
+  // Pré-selecionar próxima pergunta adaptativa (se ainda há)
+  if(qAtual + 1 < totalPerguntas){
+    // Tentar pegar uma pergunta do nível ajustado que ainda não foi usada
+    const {pool, idx, perguntas:pArr} = st;
+    const usado = new Set(pArr.map(p=>p.p));
+    // Busca uma do novo nível
+    let substituiu = false;
+    for(let tentativa=idx[proxNivel]||0; tentativa < (pool[proxNivel]||[]).length; tentativa++){
+      const candidata = pool[proxNivel][tentativa];
+      if(!usado.has(candidata.p)){
+        // Substituir a próxima pergunta pelo candidato
+        st.perguntas[qAtual+1] = candidata;
+        if(!st.idx) st.idx = {};
+        st.idx[proxNivel] = tentativa+1;
+        substituiu = true;
+        break;
+      }
+    }
+    // (Se não encontrou candidata, mantém a pergunta original)
+  }
+
+  // Botão próxima ou finalizar
+  const next = document.getElementById(containerId+'-next');
+  if(next){
+    if(qAtual + 1 >= totalPerguntas){
+      next.textContent = '📊 Ver resultado →';
+    } else {
+      next.textContent = 'Próxima pergunta →';
+      // Badge adaptativo
+      const adaptMsg = acertou && proxNivel > st.nivelAtual-1 ? '⬆️ Subindo dificuldade!'
+        : !acertou && proxNivel < st.nivelAtual+1 ? '⬇️ Ajustando para você...'
+        : '';
+      if(adaptMsg){
+        const badge = document.createElement('div');
+        badge.style.textAlign='center';badge.style.marginTop='.4rem';
+        badge.innerHTML=`<span class="adapt-badge ${acertou?'adapt-harder':'adapt-easier'}">${adaptMsg}</span>`;
+        fb && fb.appendChild ? fb.parentNode.insertBefore(badge, fb.nextSibling) : null;
+      }
+    }
+    next.classList.add('show');
+  }
+
+  st.qAtual++;
+};
+
+window.proximaQ = function(containerId) {
+  const st = window._quizState[containerId];
+  if(!st) return;
+  if(st.qAtual >= st.totalPerguntas){
+    mostrarResultado(containerId);
+  } else {
+    renderPergunta(containerId);
   }
 };
 
-function verResultBloco(wrapId){
-  const wrap = document.getElementById(wrapId);
-  if(!wrap||wrap._done) return;
-  wrap._done=true;
-  const total=wrap._qs.length;
-  const ac=wrap._acertos();
-  const pct=ac/total;
+function mostrarResultado(containerId){
+  const st = window._quizState[containerId];
+  if(!st) return;
+  const {acertos, totalPerguntas, cfg, onComplete} = st;
+  const pct = acertos/totalPerguntas;
 
-  // Ocultar botão
-  document.getElementById(wrap._dotPrefix+'btnR').style.display='none';
+  const box = document.getElementById(containerId+'-box');
+  if(!box) return;
 
-  let bg, msg, em;
-  if(pct===1){em='🏆';msg='Perfeito! '+total+'/'+total+'! Aprovada!';}
-  else if(pct>=.75){em='🎉';msg='Excelente! '+ac+'/'+total+' corretas!';}
-  else if(pct>=.5){em='💪';msg='Bom! '+ac+'/'+total+' corretas. Revise os módulos e você manda bem!';}
-  else{em='📚';msg=ac+'/'+total+' corretas. Releia os módulos deste bloco.';}
+  let em, titulo, msg;
+  if(pct === 1){em='🏆';titulo='Perfeito!';msg=acertos+'/'+totalPerguntas+' corretas — desempenho máximo!';}
+  else if(pct >= .75){em='🎉';titulo='Excelente!';msg=acertos+'/'+totalPerguntas+' corretas — muito bem!';}
+  else if(pct >= .5){em='💪';titulo='Aprovada!';msg=acertos+'/'+totalPerguntas+' corretas — você está no caminho certo.';}
+  else{em='📚';titulo='Quase lá!';msg=acertos+'/'+totalPerguntas+' corretas. Releia os módulos e tente novamente.';}
 
-  const res=document.createElement('div');
-  res.className='card';
-  res.style='text-align:center;padding:1.5rem';
-  const passou = ac >= Math.ceil(total*0.5);
-  const mapaRetry = {qBronzeWrap:'bronze',qPrataWrap:'prata',qOuroWrap:'ouro',qDiaWrap:'dia'};
-  const nivelRetry = mapaRetry[wrapId];
-  const retryHtml = (!passou && nivelRetry) ? `<br><button onclick="retryBloco('${nivelRetry}')" style="margin-top:.75rem;display:inline-flex;align-items:center;gap:7px;padding:.6rem 1.2rem;background:var(--azul-c);color:var(--azul-e);border:none;border-radius:10px;font-family:Sora,sans-serif;font-weight:700;font-size:.85rem;cursor:pointer">🔄 Tentar novamente com novas perguntas</button>` : '';
-  res.innerHTML=`<div style="font-size:2.5rem;margin-bottom:.5rem">${em}</div><div style="font-family:Sora;font-weight:700;font-size:1rem;margin-bottom:.35rem">${ac} de ${total} corretas</div><p style="color:var(--texto-s);font-size:.85rem">${msg}</p>${retryHtml}`;
-  wrap.appendChild(res);
+  const passou = acertos >= Math.ceil(totalPerguntas * 0.5);
+  const precisaMais = totalPerguntas===12 ? acertos < Math.ceil(totalPerguntas*0.7) : !passou;
 
-  // Chamar callback (desbloquear certificado)
-  if(wrap._callback) wrap._callback(ac, total);
-  verificarDiamante();
+  box.innerHTML = `
+    <div class="quiz-resultado">
+      <div class="qr-emoji">${em}</div>
+      <div class="qr-titulo">${titulo}</div>
+      <p class="qr-sub">${msg}</p>
+      <div class="qr-stats">
+        <div class="qrs"><div class="qrs-n" style="color:var(--verde)">${acertos}</div><div class="qrs-l">Corretas</div></div>
+        <div class="qrs"><div class="qrs-n" style="color:#E24B4A">${totalPerguntas-acertos}</div><div class="qrs-l">Erradas</div></div>
+        <div class="qrs"><div class="qrs-n">${Math.round(pct*100)}%</div><div class="qrs-l">Aproveitamento</div></div>
+      </div>
+      ${passou ? `<div style="background:var(--verde-c);color:var(--verde-e);padding:.6rem 1rem;border-radius:8px;font-size:.85rem;font-weight:600">✅ Certificado ${cfg.nome} desbloqueado!</div>` : ''}
+      ${precisaMais ? `<button class="btn-retry" onclick="retryQuiz('${containerId}')">🔄 Tentar novamente com novas perguntas</button>` : ''}
+    </div>
+  `;
+
+  if(onComplete) onComplete(acertos, totalPerguntas);
 }
 
-function retryBloco(nivel){
-  const mapaWrap={bronze:'qBronzeWrap',prata:'qPrataWrap',ouro:'qOuroWrap',dia:'qDiaWrap'};
-  const mapaDP={bronze:'br_',prata:'pt_',ouro:'ou_',dia:'dia_'};
-  const mapaCb={bronze:cbBronze,prata:cbPrata,ouro:cbOuro,dia:cbDia};
-  const wrapId=mapaWrap[nivel],dp=mapaDP[nivel],cb=mapaCb[nivel];
-  let novas;
-  if(nivel==='dia') novas=shuffle([...bancoBronze,...bancoPrata,...bancoOuro]).slice(0,12);
-  else{ const bank={bronze:bancoBronze,prata:bancoPrata,ouro:bancoOuro}[nivel]; novas=sortear4(bank); }
-  renderBloco(novas,wrapId,cb,dp);
-}
+window.retryQuiz = function(containerId){
+  const st = window._quizState[containerId];
+  if(!st) return;
+  const {cfg, totalPerguntas, onComplete} = st;
+  // Determinar banco pelo containerId
+  const banco = containerId==='quiz-bronze' ? bancoBronze
+              : containerId==='quiz-prata'  ? bancoPrata
+              : containerId==='quiz-ouro'   ? bancoOuro
+              : [...bancoBronze,...bancoPrata,...bancoOuro];
+  criarQuiz(containerId, banco, totalPerguntas, cfg, onComplete);
+};
 
 // ════════════════════════════════════════════
-// CERTIFICADOS — DESBLOQUEIO
+// CERTIFICADOS
 // ════════════════════════════════════════════
 function desbloquearCert(nivel){
   if(certStatus[nivel]) return;
   certStatus[nivel]=true;
-
   const card=document.getElementById('card-'+nivel);
   const locked=document.getElementById('locked-'+nivel);
   const btnPrint=document.getElementById('btn-print-'+nivel);
@@ -1438,62 +1552,60 @@ function desbloquearCert(nivel){
   const hb=document.getElementById('hb-'+nivel);
   const cpp=document.getElementById('cpp-'+nivel);
   const cps=document.getElementById('cps-'+nivel);
-
-  if(card){card.classList.remove('locked-card');}
-  if(locked){locked.style.display='none';}
-  if(btnPrint){btnPrint.style.display='inline-flex';}
+  if(card) card.classList.remove('locked-card');
+  if(locked) locked.style.display='none';
+  if(btnPrint) btnPrint.style.display='inline-flex';
   if(stat){stat.className='cnt-status cnt-earned';stat.textContent='✓ Conquistado';}
-  if(hb){hb.classList.add('earned');}
-  if(cpp){cpp.classList.add('active');}
-  if(cps){cps.textContent='✓ Conquistado';}
-
+  if(hb) hb.classList.add('earned');
+  if(cpp) cpp.classList.add('active');
+  if(cps) cps.textContent='✓ Conquistado';
   const nomes={bronze:'🥉 Bronze',prata:'🥈 Prata',ouro:'🥇 Ouro',dia:'💎 Diamante'};
   const cores={bronze:'#7D4C1A',prata:'#4A4A52',ouro:'#8B6914',dia:'#1A3A6E'};
-  showPop('Certificado '+nomes[nivel]+' conquistado!','Vá em Certificados para imprimir!','',cores[nivel]||'var(--verde-e)');
+  showPop('Certificado '+nomes[nivel]+' conquistado!','Vá em Certificados para imprimir!','🏆',cores[nivel]);
   salvarProgresso();
 }
 
 function verificarDiamante(){
-  if(certStatus.bronze&&certStatus.prata&&certStatus.ouro&&!quizStatus.dia){
+  if(certStatus.bronze && certStatus.prata && certStatus.ouro && !quizStatus.dia){
     // Liberar mistão
-    document.getElementById('qDiaLocked').style.display='none';
-    document.getElementById('qDiaWrap').style.display='block';
-    if(!misQ.length){
-      misQ=shuffle(todosQ);
-      renderBloco(misQ,'qDiaWrap', (ac,total)=>{
-        quizStatus.dia=true;
-        if(ac>=Math.ceil(total*0.7)) desbloquearCert('dia');
-        document.getElementById('btnConcluirQuiz').style.display='block';
-      },'dia_');
+    document.getElementById('quiz-diamante-lock').style.display='none';
+    const dia = document.getElementById('quiz-diamante');
+    dia.style.display='block';
+    if(!window._quizState || !window._quizState['quiz-diamante']){
+      criarQuiz('quiz-diamante',
+        [...bancoBronze,...bancoPrata,...bancoOuro],
+        12,
+        {cor:'var(--diamante-e)',corFundo:'var(--diamante-c)',nome:'Mistão Diamante',emoji:'💎'},
+        (ac,total)=>{
+          quizStatus.dia=true;
+          if(ac>=Math.ceil(total*0.7)) desbloquearCert('dia');
+          checarBtnConcluir();
+        }
+      );
     }
   }
 }
 
-// Callbacks dos blocos
+function checarBtnConcluir(){
+  if(quizStatus.bronze && quizStatus.prata && quizStatus.ouro)
+    document.getElementById('btnConcluirQuiz').style.display='block';
+}
+
+// ── Callbacks de conclusão de cada bloco
 function cbBronze(ac,total){
   quizStatus.bronze=true;
   if(ac>=Math.ceil(total*0.5)) desbloquearCert('bronze');
-  // verificar se prata e ouro também estão
-  verificarDiamante();
-  // Mostrar botão concluir se todos feitos
-  checarMostrarBtnConcluir();
+  verificarDiamante(); checarBtnConcluir(); salvarProgresso();
 }
 function cbPrata(ac,total){
   quizStatus.prata=true;
   if(ac>=Math.ceil(total*0.5)) desbloquearCert('prata');
-  verificarDiamante();
-  checarMostrarBtnConcluir();
+  verificarDiamante(); checarBtnConcluir(); salvarProgresso();
 }
 function cbOuro(ac,total){
   quizStatus.ouro=true;
   if(ac>=Math.ceil(total*0.5)) desbloquearCert('ouro');
-  verificarDiamante();
-  checarMostrarBtnConcluir();
-}
-function checarMostrarBtnConcluir(){
-  if(quizStatus.bronze&&quizStatus.prata&&quizStatus.ouro){
-    document.getElementById('btnConcluirQuiz').style.display='block';
-  }
+  verificarDiamante(); checarBtnConcluir(); salvarProgresso();
 }
 
 // ════════════════════════════════════════════
@@ -1506,11 +1618,7 @@ function atualizarTodosNomes(v){
     if(el) el.textContent=nome;
   });
 }
-
-// ════════════════════════════════════════════
-// IMPRESSÃO DE CERTIFICADO INDIVIDUAL
-// ════════════════════════════════════════════
-function imprimirCert(nivel){
+function imprimirCert(){
   const nome=document.getElementById('nomeInput').value.trim();
   if(!nome){alert('Por favor, insira seu nome completo antes de imprimir.');document.getElementById('nomeInput').focus();return;}
   window.print();
@@ -1557,7 +1665,6 @@ function renderGlossario(){
     c.appendChild(d);
   });
 }
-
 function filtrarGls(v){
   const q=v.toLowerCase().trim();
   glossario.forEach((_,i)=>{
@@ -1569,55 +1676,52 @@ function filtrarGls(v){
 }
 
 // ════════════════════════════════════════════
-// LOCALSTORAGE — PERSISTÊNCIA DE PROGRESSO
+// LOCALSTORAGE
 // ════════════════════════════════════════════
-const STORE_KEY = 'dol247_v2';
+const STORE_KEY = 'dol247_v3';
 function salvarProgresso(){
   try{
     localStorage.setItem(STORE_KEY, JSON.stringify({
-      xp, concl,
-      concArr:[...concSet],
-      certStatus, quizStatus
+      xp, concl, concArr:[...concSet], certStatus, quizStatus
     }));
   }catch(e){}
 }
 function restaurarProgresso(){
   try{
-    const s = JSON.parse(localStorage.getItem(STORE_KEY)||'{}');
+    const s=JSON.parse(localStorage.getItem(STORE_KEY)||'{}');
     if(!s.concArr) return;
-    xp = s.xp||0; concl = s.concl||0;
+    xp=s.xp||0; concl=s.concl||0;
     (s.concArr||[]).forEach(id=>{
       concSet.add(id);
       const pc=document.getElementById(id);
       if(pc){pc.classList.add('done');pc.querySelector('.ps').textContent='✓ Feito';}
     });
-    if(s.certStatus) Object.assign(certStatus, s.certStatus);
-    if(s.quizStatus) Object.assign(quizStatus, s.quizStatus);
-    // Restaurar checks visuais de certificados
+    if(s.certStatus) Object.assign(certStatus,s.certStatus);
+    if(s.quizStatus) Object.assign(quizStatus,s.quizStatus);
     Object.keys(certStatus).forEach(n=>{if(certStatus[n]) desbloquearCert(n);});
-    // Restaurar ok da nav
     const nbs=navEl.querySelectorAll('.nb');
     [...concSet].forEach(id=>{
       const idx=parseInt(id.replace('pc',''));
       if(idx>=1&&idx<=12) nbs[idx]?.classList.add('ok');
     });
     atualizarXP();
-    if(quizStatus.bronze&&quizStatus.prata&&quizStatus.ouro) document.getElementById('btnConcluirQuiz').style.display='block';
-    verificarDiamante();
+    if(quizStatus.bronze&&quizStatus.prata&&quizStatus.ouro)
+      document.getElementById('btnConcluirQuiz').style.display='block';
   }catch(e){}
 }
-
-// Hook salvar em ok()
-const _okOrig = ok;
-// Patch: salvar após ok
-const _salvarAposOk = (secIdx, pcId) => { _okOrig(secIdx, pcId); if(pcId) salvarProgresso(); };
 
 // ════════════════════════════════════════════
 // INIT
 // ════════════════════════════════════════════
-renderBloco(sortear4(bancoBronze),'qBronzeWrap',cbBronze,'br_');
-renderBloco(sortear4(bancoPrata),'qPrataWrap',cbPrata,'pt_');
-renderBloco(sortear4(bancoOuro),'qOuroWrap',cbOuro,'ou_');
+criarQuiz('quiz-bronze', bancoBronze, 4,
+  {cor:'var(--bronze-e)',corFundo:'var(--bronze-c)',nome:'Bronze',emoji:'🥉'}, cbBronze);
+
+criarQuiz('quiz-prata', bancoPrata, 4,
+  {cor:'var(--prata-e)',corFundo:'var(--prata-c)',nome:'Prata',emoji:'🥈'}, cbPrata);
+
+criarQuiz('quiz-ouro', bancoOuro, 4,
+  {cor:'var(--ouro-e)',corFundo:'var(--ouro-c)',nome:'Ouro',emoji:'🥇'}, cbOuro);
+
 renderGlossario();
 restaurarProgresso();
 atualizarXP();
